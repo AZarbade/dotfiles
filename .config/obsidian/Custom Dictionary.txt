@@ -1,0 +1,3 @@
+Bollinger
+intraday
+checksum_v1 = 9baee3310c290a67be58994f18d4c5cd
