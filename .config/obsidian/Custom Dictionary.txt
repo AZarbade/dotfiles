@@ -1,3 +1,5 @@
 Bollinger
+Golang
+HTMX
 intraday
-checksum_v1 = 9baee3310c290a67be58994f18d4c5cd
+checksum_v1 = d215f080764831c49afe1b3fe23e2a85
