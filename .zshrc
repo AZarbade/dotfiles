@@ -15,13 +15,11 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 # alias
-alias ll='tree -L 1'
-alias ll2='tree -L 2'
+alias ll='tree -L 1 -a'
+alias ll2='tree -L 2 -a'
 alias v='nvim'
+alias vz='nvim ~/dotfiles/.zshrc'
 alias btop='btop --utf-force'
-# *deprecated* alias downmedia='cd ~/personal/mediaServer && docker-compose down && cd ~'
-# *deprecated* alias upmedia='cd ~/personal/mediaServer && docker-compose up -d && cd ~'
-# *deprecated* alias conedit='cd .config/ && nvim . && cd ~'
 
 # Function to stop and remove containers
 downmedia() {
