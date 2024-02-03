@@ -14,12 +14,21 @@ source $ZSH/oh-my-zsh.sh
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-# alias
+# general aliases
 alias ll='tree -L 1 -a'
 alias ll2='tree -L 2 -a'
+
+# nvim aliases
 alias v='nvim'
 alias vz='nvim ~/dotfiles/.zshrc'
 alias btop='btop --utf-force'
+
+# git aliases
+alias gst='git status'
+alias gco='git checkout'
+alias gcm='git commit -m'
+alias ga='git add'
+alias gg='git-graph'
 
 # Function to stop and remove containers
 downmedia() {
