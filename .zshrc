@@ -15,6 +15,7 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 # general aliases
+alias z='cd ~'
 alias ll='tree -L 1 -a'
 alias ll2='tree -L 2 -a'
 
@@ -36,12 +37,16 @@ downmedia() {
     cd ~/personal/mediaServer || return
     echo "Stopping Server"
     docker-compose down
+    echo "Unmounting mediaServer..."
+    sudo umount /mnt/share || return
     echo "Changing directory back to ~..."
     cd ~
 }
 
 # Function to start containers in the background
 upmedia() {
+    echo "Mounting mediaServer..."
+    sudo mount -a || return
     echo "Changing directory to ~/personal/mediaServer..."
     cd ~/personal/mediaServer || return
     echo "Starting"
@@ -58,9 +63,6 @@ ce() {
   cd ~
 }
 
-
 # rust source
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# zoxide init
-eval "$(zoxide init zsh)"
