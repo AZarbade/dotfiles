@@ -13,6 +13,7 @@ source $ZSH/oh-my-zsh.sh
 # binds for ctrl - < & >
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey 
 
 # general aliases
 alias z='cd ~'
