@@ -41,5 +41,9 @@ local plugins = {
       vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
     end
   },
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
 }
 return plugins
