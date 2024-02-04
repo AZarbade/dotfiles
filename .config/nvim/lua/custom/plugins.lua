@@ -5,7 +5,7 @@ local plugins = {
       ensure_installed = {
         "lua",
         "python",
-        -- "rust",
+        "rust",
         "json",
       },
     },
