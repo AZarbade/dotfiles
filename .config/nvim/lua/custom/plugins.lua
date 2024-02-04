@@ -5,25 +5,16 @@ local plugins = {
       ensure_installed = {
         "lua",
         "python",
-        "rust",
+        -- "rust",
         "json",
       },
     },
   },
   {
-    "nvimtools/none-ls.nvim",
-    ft = {"python"},
-    opts = function ()
-      return require "custom.configs.null-ls"
-    end,
-  },
-  {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "black",
-        "mypy",
-        "ruff",
+        "lua-language-server",
         "pyright",
       },
     },
@@ -34,6 +25,10 @@ local plugins = {
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
     end,
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {},
   },
   {
   'Exafunction/codeium.vim',
