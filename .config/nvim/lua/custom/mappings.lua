@@ -9,5 +9,15 @@ M.general = {
   }
 }
 
+M.crates = {
+  n = {
+    ["<leader>rcu"] = {
+      function()
+        require("crates").upgrade_all_crates()
+      end,
+      "Upgrade all crates",
+    }
+  }
+}
 
 return M
