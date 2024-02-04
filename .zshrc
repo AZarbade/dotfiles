@@ -18,6 +18,7 @@ bindkey "^[[1;5D" backward-word
 alias z='cd ~'
 alias ll='tree -L 1 -a'
 alias ll2='tree -L 2 -a'
+alias tm='tmux'
 
 # nvim aliases
 alias v='nvim'
