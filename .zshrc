@@ -16,7 +16,8 @@ bindkey "^[[1;5D" backward-word
 
 # general aliases
 alias z='cd ~'
-alias ll='exa -T -a'
+alias ll='tree -L 1'
+alias ll2='tree -L 2'
 alias tm='tmux -u'
 alias spd='speedtest-rs'
 
