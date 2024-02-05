@@ -16,8 +16,7 @@ bindkey "^[[1;5D" backward-word
 
 # general aliases
 alias z='cd ~'
-alias ll='tree -L 1 -a'
-alias ll2='tree -L 2 -a'
+alias ll='exa -T -a'
 alias tm='tmux -u'
 
 # nvim aliases
@@ -67,3 +66,5 @@ ce() {
 # rust source
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# starship init (cargo install starship)
+# eval "$(starship init zsh)"
