@@ -1,0 +1,14 @@
+[package]
+name = "sha1-asm"
+version = "0.5.2"
+authors = ["RustCrypto Developers"]
+license = "MIT"
+description = "Assembly implementation of SHA-1 compression function"
+documentation = "https://docs.rs/sha1-asm"
+repository = "https://github.com/RustCrypto/asm-hashes"
+keywords = ["crypto", "sha1", "asm"]
+categories = ["cryptography", "no-std"]
+edition = "2018"
+
+[build-dependencies]
+cc = "1.0"

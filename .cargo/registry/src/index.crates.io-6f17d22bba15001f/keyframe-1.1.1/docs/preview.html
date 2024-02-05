@@ -1,0 +1,181 @@
+<!-- Preview for easing functions in docs.rs -->
+
+<style>
+	.function-preview {
+		position: relative;
+		display: inline-block;
+
+		width: 260px;
+		height: 110px;
+
+		margin: 30px 40px 50px 20px;
+
+		/* Workaround for rustdoc overriding overflow-x */
+		overflow: initial !important;
+	}
+
+	.function-preview-ball {
+		width: 10px;
+		height: 10px;
+		background-color: #F44336;
+		border-radius: 50%;
+
+		position: absolute;
+		right: -20px;
+
+		/* Shift to start of graph, then compensate for line width, then for ball height */
+		bottom: calc(5px - 1px - 5px);
+	}
+
+	.function-preview-x, .function-preview-y, .function-preview-title {
+		user-select: none;
+
+		position: absolute;
+		margin: 0px;
+
+		text-align: center;
+		vertical-align: middle;
+
+		font-family: monospace;
+		font-size: 13px;
+		font-weight: bold;
+		font-style: italic;
+
+		color: #F44336;
+	}
+
+	.function-preview-x {
+		width: 250px;
+		left: 5px;
+		bottom: -25px;
+	}
+
+	.function-preview-y {
+		line-height: 100px;
+		height: 100px;
+		left: -25px;
+		top: 5px;
+	}
+
+	.function-preview-title {
+		font-style: normal;
+		width: auto;
+		left: 0px;
+		bottom: -50px;
+	}
+</style>
+
+<script>
+	"use strict";
+	var ballsToAnimate = [];
+	var lastScaleFactor = devicePixelRatio;
+	var lastTick = performance.now();
+
+	function redrawPreviews() {
+		document.querySelectorAll(".function-preview").forEach(function(val) {
+			console.log((val.hasChildNodes() ? "Redrawn " : "Drawn ") + "preview " + val.getAttribute("data-function"));
+			var canvas = val.hasChildNodes() ? val.getElementsByTagName("canvas")[0] : document.createElement("canvas");
+
+			canvas.style.width = "260px";
+			canvas.style.height = "110px";
+			canvas.width = 260 * devicePixelRatio;
+			canvas.height = 110 * devicePixelRatio;
+
+			var bounds = [5, 5, 250 + 5, 100 + 5];
+			for(var i = 0; i < bounds.length; i++)
+				bounds[i] = bounds[i] * devicePixelRatio;
+
+			var easingFunction;
+			eval("easingFunction = function(t) { return " + val.getAttribute("data-function") + " };");
+
+			var ctx = canvas.getContext("2d");
+			ctx.clearRect(bounds[0], bounds[1], bounds[2] - bounds[0], bounds[3] - bounds[1]);
+
+			ctx.beginPath();
+			ctx.strokeStyle = "#F44336";
+			ctx.lineWidth = 2 * devicePixelRatio;
+
+			ctx.moveTo(bounds[0], bounds[3]);
+			for(var x = 0; x <= 250; x += 5) {
+				var value = easingFunction(x / 250.0);
+				var targetX = bounds[0] + (x * devicePixelRatio);
+				var targetY = bounds[3] - (easingFunction(x / 250.0) * 100.0) * devicePixelRatio;
+				var diff = Math.abs(value - easingFunction((x - 1) / 250.0));
+
+				// Approximate discontinuous functions like Math.round(t)
+				if(diff < 0.5) {
+					ctx.lineTo(targetX, targetY);
+				}
+				else {
+					ctx.moveTo(targetX, targetY);
+				}
+			}
+
+			ctx.stroke();
+
+			if(!val.hasChildNodes()) {
+				val.appendChild(canvas);
+
+				var ball = document.createElement("div");
+				ball.className = "function-preview-ball";
+				ball.reverse = false;
+				ball.progress = 0.0;
+				ball.easingFunction = easingFunction;
+
+				ballsToAnimate[ballsToAnimate.length] = ball;
+
+				val.appendChild(ball);
+
+				var x = document.createElement("p");
+				x.innerText = "t";
+				x.className = "function-preview-x";
+				val.appendChild(x);
+
+				var y = document.createElement("p");
+				y.innerText = "y(t)";
+				y.className = "function-preview-y";
+				val.appendChild(y);
+
+				if(val.getAttribute("data-struct") != null) {
+					var title = document.createElement("a");
+					title.innerText = "ease(" + val.getAttribute("data-struct") + ", ...)";
+					title.className = "function-preview-title";
+					title.href = window.location.href.replace("index.html", "struct." + val.getAttribute("data-struct") + ".html");
+					val.appendChild(title);
+				}
+			}
+		});
+
+	}
+
+	document.addEventListener("DOMContentLoaded", redrawPreviews);
+	window.addEventListener("resize", function() {
+		if(devicePixelRatio != lastScaleFactor) {
+			redrawPreviews();
+			lastScaleFactor = devicePixelRatio;
+		}
+	}, true);
+
+	function tick(now) {
+		var delta = (now - lastTick) / 1000.0;
+		lastTick = now;
+
+		ballsToAnimate.forEach(function(val) {
+			var oldProgress = val.progress;
+			val.progress += delta * 1.5;
+
+			if(oldProgress < 1 && val.progress >= 1) {
+				val.reverse = !val.reverse;
+				val.progress = 0;
+			}
+
+			var position = -102 * (val.reverse ? val.easingFunction(1 - val.progress) : val.easingFunction(val.progress));
+
+			val.style.transform = "translateY(" + position + "px)";
+		});
+
+		window.requestAnimationFrame(tick);
+	}
+
+	window.requestAnimationFrame(tick);
+</script>

@@ -1,0 +1,28 @@
+[package]
+name = "extend"
+version = "0.1.2"
+authors = ["David Pedersen <david.pdrsn@gmail.com>"]
+edition = "2018"
+categories = ["rust-patterns"]
+description = "Create extensions for types you don't own with extension traits but without the boilerplate."
+homepage = "https://github.com/davidpdrsn/ext"
+documentation = "https://docs.rs/ext"
+keywords = ["extension", "trait"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/davidpdrsn/ext.git"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+syn = { version = "1", features = ["full", "extra-traits"] }
+quote = "1"
+proc-macro2 = "1"
+proc-macro-error = "1"
+
+[dev_dependencies]
+trybuild = "1.0.17"
+
+[lib]
+proc-macro = true
+path = "src/lib.rs"

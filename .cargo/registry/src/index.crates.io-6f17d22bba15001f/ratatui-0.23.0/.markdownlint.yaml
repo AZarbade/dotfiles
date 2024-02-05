@@ -1,0 +1,12 @@
+# configuration for https://github.com/DavidAnson/markdownlint
+
+no-inline-html:
+  allowed_elements:
+    - img
+    - details
+    - summary
+line-length:
+  line_length: 100
+
+# to support repeated headers in the changelog
+no-duplicate-heading: false
