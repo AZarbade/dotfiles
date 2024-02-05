@@ -18,6 +18,7 @@ bindkey "^[[1;5D" backward-word
 alias z='cd ~'
 alias ll='exa -T -a'
 alias tm='tmux -u'
+alias spd='speedtest-rs'
 
 # nvim aliases
 alias v='nvim'
