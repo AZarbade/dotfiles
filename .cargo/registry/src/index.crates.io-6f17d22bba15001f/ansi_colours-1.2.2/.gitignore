@@ -1,4 +1,0 @@
-*.o
-/target
-/tools/target
-Cargo.lock

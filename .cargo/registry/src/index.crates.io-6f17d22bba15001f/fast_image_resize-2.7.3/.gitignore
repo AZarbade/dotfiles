@@ -1,5 +1,0 @@
-/target
-.*
-!/.gitignore
-data/result
-/glassbench_v1.db
