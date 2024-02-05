@@ -27,6 +27,7 @@ alias vz='nvim ~/dotfiles/.zshrc'
 alias btop='btop --utf-force'
 
 # git aliases
+alias gui='gitui'
 alias gst='git status'
 alias gco='git checkout'
 alias gcm='git commit -m'
