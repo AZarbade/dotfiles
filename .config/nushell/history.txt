@@ -25,3 +25,38 @@ git status
 gitui
 git-graph
 yay zoxide
+gitui
+git push origin main
+yay github
+github
+gh
+cd ~
+gh
+gh auth
+gh auth setup-git
+gh auth login
+gh auth setup-git
+cd dotfiles/.config/
+git push origin main
+nvim .
+tmux -u
+exit
+tm
+cd dotfiles/.config/
+nvim .
+ls personal/
+cd dotfiles/.config/
+nvim .
+cd dotfiles/.config/
+nvim .
+downmedia
+exeit
+exit
+tm
+tm ls
+ce
+echo $SHELL
+tm
+exit
+ce
+cd dotfiles/

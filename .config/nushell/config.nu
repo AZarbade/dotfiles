@@ -761,4 +761,52 @@ $env.config = {
     ]
 }
 
+# starship source
 use ~/.cache/starship/init.nu
+
+# personal aliases
+alias v = nvim
+alias tm = tmux -u
+alias spd = speedtest-rs
+alias ya = yazi
+alias btop = btop --utf-force
+
+# git aliases
+alias gui = gitui
+alias gst = git status
+alias gco = git checkout
+alias gcm = git commit -m
+alias ga = git add
+alias gg = git-graph
+
+# Function to stop and remove containers
+def downmedia [] {
+    echo "Changing directory to ~/personal/mediaServer..."
+    cd ~/personal/mediaServer
+    echo "Stopping Server"
+    docker-compose down
+    echo "Unmounting mediaServer..."
+    sudo umount /mnt/media/
+    echo "Changing directory back to ~..."
+    cd ~
+}
+
+# Function to start containers in the background
+def upmedia [] {
+    echo "Mounting mediaServer..."
+    sudo mount -a
+    echo "Changing directory to ~/personal/mediaServer..."
+    cd ~/personal/mediaServer
+    echo "Starting"
+    docker-compose up -d
+    echo "Changing directory back to ~..."
+    cd ~
+}
+
+# Function to get .config editing setup
+def ce [] {
+  echo "Editing config files"
+  cd ~/dotfiles
+  nvim .
+  cd ~
+}
