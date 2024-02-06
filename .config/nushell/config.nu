@@ -766,7 +766,7 @@ use ~/.cache/starship/init.nu
 
 # personal aliases
 alias v = nvim
-alias tm = tmux -u
+alias zl = zellij
 alias spd = speedtest-rs
 alias ya = yazi
 alias btop = btop --utf-force

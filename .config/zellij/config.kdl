@@ -1,0 +1,8 @@
+
+default_shell "nu" // Set the default shell
+theme "catppuccin-mocha" // Set the theme
+simplifies_ui false // Disable the
+// default_layout "compact" // Set the default layout
+mouse_mode false // Disable mouse mode
+scrollback_editor "/usr/bin/nvim" // Set the scrollback editor
+
