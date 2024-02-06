@@ -1,0 +1,4 @@
+
+default_shell "nu"
+theme "catppuccin-mocha"
+
