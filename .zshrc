@@ -15,7 +15,6 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 # general aliases
-alias z='cd ~'
 alias ll='tree -L 1'
 alias ll2='tree -L 2'
 alias tm='tmux -u'
