@@ -6,3 +6,7 @@ simplifies_ui false // Disable the
 mouse_mode false // Disable mouse mode
 scrollback_editor "/usr/bin/nvim" // Set the scrollback editor
 
+keybinds {
+    unbind "Ctrl g" "Ctrl n" "Ctrl h" "Ctrl p" "Ctrl q" "Ctrl t"
+}
+

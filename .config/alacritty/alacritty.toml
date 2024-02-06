@@ -1,5 +1,5 @@
 # define defualt shell
-shell = "nu"
+shell = "/usr/bin/nu"
 
 # imports IMP: Don't move this line anywhere else, or don't put anything above this.
 import = [ 
