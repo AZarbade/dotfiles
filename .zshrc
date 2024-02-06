@@ -69,4 +69,7 @@ ce() {
 # rust source
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# zoxide init
+eval "$(zoxide init zsh)"
+
 #
