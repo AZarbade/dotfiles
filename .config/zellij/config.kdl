@@ -1,4 +1,6 @@
 
-default_shell "nu"
-theme "catppuccin-mocha"
+default_shell "nu" // Set the default shell
+theme "catppuccin-mocha" // Set the theme
+simplifies_ui false // Disable the
+// default_layout "compact" // Set the default layout
 
