@@ -19,6 +19,7 @@ alias ll='tree -L 1'
 alias ll2='tree -L 2'
 alias tm='tmux -u'
 alias spd='speedtest-rs'
+alias ya='yazi'
 
 # nvim aliases
 alias v='nvim'
@@ -67,15 +68,5 @@ ce() {
 
 # rust source
 export PATH="$HOME/.cargo/bin:$PATH"
-
-# yazi file manager source
-function ya() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
 
 #
