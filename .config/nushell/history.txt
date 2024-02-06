@@ -60,3 +60,7 @@ tm
 exit
 ce
 cd dotfiles/
+gui
+git merge BUG_FIX_zellij_copyPaste
+gui
+git rm --cached .config/nushell/history.txt
