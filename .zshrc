@@ -6,6 +6,7 @@ ZSH_THEME="typewritten/typewritten" # set by `omz`
 # plugins
 plugins=(
   git
+  fzf-zsh-plugin
 )
 
 source $ZSH/oh-my-zsh.sh
