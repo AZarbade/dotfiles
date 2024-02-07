@@ -811,3 +811,6 @@ def ce [] {
   nvim .
   cd ~
 }
+
+$env.ASDF_DIR = ($env.HOME | path join '.asdf')
+ source /home/wrongcolor/.asdf/asdf.nu
