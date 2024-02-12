@@ -771,6 +771,7 @@ alias zl = zellij
 alias spd = speedtest-rs
 alias ya = yazi
 alias btop = btop --utf-force
+alias sd = fzf
 
 # git aliases
 alias gui = gitui
