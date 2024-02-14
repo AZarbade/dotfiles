@@ -1,8 +1,8 @@
 {
   "extras": [
     "lazyvim.plugins.extras.coding.codeium",
-    "lazyvim.plugins.extras.lang.rust",
-    "lazyvim.plugins.extras.ui.mini-animate"
+    "lazyvim.plugins.extras.lang.go",
+    "lazyvim.plugins.extras.lang.rust"
   ],
   "news": {
     "NEWS.md": "2123"

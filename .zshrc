@@ -14,15 +14,26 @@ compinit
 # starship source
 eval "$(starship init zsh)"
 
+# asdf config
+. "$HOME/.asdf/asdf.sh"
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
+
 # aliases
 alias ls='exa'
 alias ll='exa -a'
+alias tree='exa --tree'
 alias v='nvim .'
 alias tm='tmux -u'
 alias spd='speedtest-rs'
 alias ya='yazi'
 alias btop='btop --utf-force'
 alias sd='cd $(find * -type d | fzf)'
+
+bindkey -s '^p' 'cd $(find * -type d | fzf)\n'
+bindkey -s '^e' 'nvim $(fzf)\n'
 
 # git aliases
 alias ga='git add'
