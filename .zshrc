@@ -32,8 +32,11 @@ alias ya='yazi'
 alias btop='btop --utf-force'
 alias sd='cd $(find * -type d | fzf)'
 
+# bindkeys
 bindkey -s '^p' 'cd $(find * -type d | fzf)\n'
 bindkey -s '^e' 'nvim $(fzf)\n'
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 # git aliases
 alias ga='git add'
@@ -75,3 +78,5 @@ ce() {
     cd ~
 }
 
+# startup commands
+echo "( |_| )"
