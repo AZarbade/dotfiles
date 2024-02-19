@@ -1,4 +1,4 @@
 # Font config
 [font]
 normal = { family = "JetBrainsMono" }
-size = 12
+size = 14
