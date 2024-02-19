@@ -39,10 +39,6 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 # git aliases
-alias ga='git add'
-alias gcm='git commit -m'
-alias gco='git checkout'
-alias gst='git status'
 alias gui='gitui'
 alias gg='git-graph'
 
