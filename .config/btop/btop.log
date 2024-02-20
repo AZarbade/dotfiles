@@ -84,3 +84,11 @@ Use --utf-force argument to force start if you're sure your terminal can handle 
 2024/02/20 (11:37:14) | ===> btop++ v.1.3.2
 2024/02/20 (11:37:14) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
 2024/02/20 (11:37:14) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/20 (11:50:16) | ===> btop++ v.1.3.2
+2024/02/20 (11:50:16) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/20 (11:50:16) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/20 (11:52:20) | ===> btop++ v.1.3.2
+2024/02/20 (11:52:20) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/20 (11:52:20) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported

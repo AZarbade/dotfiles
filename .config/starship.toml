@@ -1,14 +1,22 @@
-format = """
-$username\
-$hostname\
-$directory\
-$git_branch\
-$git_state\
-$git_status\
-$cmd_duration\
-$line_break\
-$python\
-$character"""
+add_newline = true
+# A minimal left prompt
+format = """$directory$character"""
+palette = "catppuccin_mocha"
+# move the rest of the prompt to the right
+right_format = """$all"""
+
+[custom.zsh]
+command = "echo 🚀"
+when = true
+
+[[battery.display]]
+threshold = 30
+style = 'bold red'
+
+[[battery.display]]
+threshold = 70
+style = 'bold yellow'
+discharging_symbol = '💦'
 
 [directory]
 style = "blue"
@@ -19,19 +27,23 @@ error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](green)"
 
 [git_branch]
-format = "[$branch]($style)"
+format = "[$branch]($style) "
 style = "bright-black"
+symbol = "🍣 "
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-style = "cyan"
-conflicted = "​"
-untracked = "​"
-modified = "​"
-staged = "​"
-renamed = "​"
-deleted = "​"
-stashed = "≡"
+conflicted = "⚔️ "
+ahead = ""
+behind = ""
+diverged = ""
+untracked = ""
+stashed = "📦 "
+modified = " * "
+staged = ""
+renamed = ""
+deleted = ""
+style = "bright-white"
+format = "$all_status$ahead_behind"
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
@@ -41,6 +53,53 @@ style = "bright-black"
 format = "[$duration]($style) "
 style = "yellow"
 
+[custom.docker]
+format = '🐳 '
+style = "blue bold"
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+
 [python]
-format = "[$virtualenv]($style) "
-style = "bright-black"
+format = "[$symbol$version]($style) "
+style = "bold green"
+detect_files = [
+  "requirements.txt",
+  ".python-version",
+  "pyproject.toml",
+  "Pipfile",
+  "tox.ini",
+  "setup.py",
+  "__init__.py",
+]
+
+[rust]
+format = "[$symbol$version]($style) "
+style = "bold green"
+detect_files = ["Cargo.toml", "Cargo.lock"]
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
