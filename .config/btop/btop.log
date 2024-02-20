@@ -1,0 +1,86 @@
+
+2024/02/06 (19:25:00) | ===> btop++ v.1.3.0
+2024/02/06 (19:25:00) | ERROR: No UTF-8 locale detected!
+Use --utf-force argument to force start if you're sure your terminal can handle it.
+
+2024/02/06 (19:25:08) | ===> btop++ v.1.3.0
+2024/02/06 (19:25:08) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+
+2024/02/06 (19:35:38) | ===> btop++ v.1.3.0
+2024/02/06 (19:35:38) | ERROR: No UTF-8 locale detected!
+Use --utf-force argument to force start if you're sure your terminal can handle it.
+
+2024/02/06 (23:52:38) | ===> btop++ v.1.3.0
+2024/02/06 (23:52:38) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+
+2024/02/07 (09:34:25) | ===> btop++ v.1.3.0
+2024/02/07 (09:34:25) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+
+2024/02/07 (09:55:36) | ===> btop++ v.1.3.0
+2024/02/07 (09:55:36) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/07 (09:56:41) | ERROR: Couldn't determine terminal size of "STDOUT_FILENO"!
+2024/02/07 (09:56:41) | ERROR: Couldn't determine terminal size of "/dev/tty"!
+
+2024/02/08 (10:56:03) | ===> btop++ v.1.3.0
+2024/02/08 (10:56:03) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+
+2024/02/08 (18:57:22) | ===> btop++ v.1.3.0
+2024/02/08 (18:57:22) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+
+2024/02/09 (20:20:39) | ===> btop++ v.1.3.0
+2024/02/09 (20:20:39) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+
+2024/02/09 (20:40:44) | ===> btop++ v.1.3.0
+2024/02/09 (20:40:44) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+
+2024/02/11 (14:34:31) | ===> btop++ v.1.3.0
+2024/02/11 (14:34:31) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+
+2024/02/12 (11:48:01) | ===> btop++ v.1.3.1
+2024/02/12 (11:48:01) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/12 (11:48:01) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/12 (22:57:04) | ===> btop++ v.1.3.1
+2024/02/12 (22:57:04) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/12 (22:57:04) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/12 (22:57:10) | ===> btop++ v.1.3.1
+2024/02/12 (22:57:10) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/12 (22:57:10) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/12 (22:57:19) | ===> btop++ v.1.3.1
+2024/02/12 (22:57:19) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/12 (22:57:19) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/14 (10:33:44) | ===> btop++ v.1.3.2
+2024/02/14 (10:33:44) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/14 (10:33:46) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/14 (10:54:08) | ===> btop++ v.1.3.2
+2024/02/14 (10:54:08) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/14 (10:54:09) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/14 (11:00:19) | ===> btop++ v.1.3.2
+2024/02/14 (11:00:19) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/14 (11:00:19) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/16 (16:53:52) | ===> btop++ v.1.3.2
+2024/02/16 (16:53:52) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/16 (16:53:53) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/20 (10:30:40) | ===> btop++ v.1.3.2
+2024/02/20 (10:30:40) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/20 (10:30:41) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/20 (11:22:36) | ===> btop++ v.1.3.2
+2024/02/20 (11:22:36) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/20 (11:22:37) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+
+2024/02/20 (11:33:52) | ===> btop++ v.1.3.2
+2024/02/20 (11:33:52) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/20 (11:33:52) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
+2024/02/20 (11:35:37) | INFO: Logger set to INFO
+
+2024/02/20 (11:37:14) | ===> btop++ v.1.3.2
+2024/02/20 (11:37:14) | WARNING: No UTF-8 locale detected! Forcing start with --utf-force argument.
+2024/02/20 (11:37:14) | WARNING: NVML: Failed to get maximum GPU power draw, defaulting to 225W: Not Supported
