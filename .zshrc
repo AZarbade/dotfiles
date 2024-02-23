@@ -2,10 +2,15 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-bindkey -v
+# bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/wrongcolor/.zshrc'
+
+plugins=(
+  starship
+  zsh-autosuggestions
+)
 
 autoload -Uz compinit
 compinit
@@ -22,7 +27,8 @@ fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit && compinit
 
 # aliases
-alias ls='exa'
+alias ls='exa -l'
+alias lsl='exa -la'
 alias ll='exa -a'
 alias tree='exa --tree'
 alias v='nvim .'
