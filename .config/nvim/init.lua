@@ -189,7 +189,7 @@ vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { silent = true, desc = 'Move line 
 vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { silent = true, desc = 'Move line up by 1' })
 
 -- Keybinds for neo-tree plugin
-vim.keymap.set('n', '<C-b>', '<Cmd>Neotree toggle<CR>')
+vim.keymap.set('n', '<C-b>', '<Cmd>NvimTreeToggle<CR>')
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -352,6 +352,11 @@ require('lazy').setup({
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
+        pickers = {
+          find_files = {
+            hidden = true,
+          }
+        },
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
@@ -688,7 +693,7 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<C-o>'] = cmp.mapping.confirm { select = true },
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display

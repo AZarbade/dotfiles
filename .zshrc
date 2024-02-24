@@ -76,7 +76,7 @@ upmedia() {
 ce() {
     echo "Editing config files"
     cd ~/dotfiles || return
-    nvim .
+    nvim 
     cd ~
 }
 
