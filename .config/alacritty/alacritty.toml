@@ -16,3 +16,5 @@ lines = 20
 
 [window]
 dynamic_padding = true
+decorations = "None"
+opacity = 0.8
