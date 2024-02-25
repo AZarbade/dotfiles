@@ -150,6 +150,9 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Gitsigns bindings
+vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>', {})
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -355,7 +358,7 @@ require('lazy').setup({
         pickers = {
           find_files = {
             hidden = true,
-          }
+          },
         },
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
