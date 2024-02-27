@@ -37,6 +37,7 @@ alias spd='speedtest-rs'
 alias ya='yazi'
 alias btop='btop --utf-force'
 alias sd='cd $(find * -type d | fzf)'
+alias notes='cd ~/personal/avalore && nvim'
 
 # bindkeys
 bindkey -s '^p' 'cd $(find * -type d | fzf)\n'
