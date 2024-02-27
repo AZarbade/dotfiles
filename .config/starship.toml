@@ -49,6 +49,9 @@ format = "$all_status$ahead_behind"
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "bright-black"
 
+[nodejs]
+disabled = true
+
 [cmd_duration]
 format = "[$duration]($style) "
 style = "yellow"
