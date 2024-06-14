@@ -1,0 +1,15 @@
+# define defualt shell
+shell = "/usr/bin/fish"
+
+[env]
+TERM = "tmux-256color"
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font" }
+size = 14
+
+[window]
+padding = { x = 2, y = 2 }
+dynamic_padding = true
+decorations = "None"
+startup_mode = "Fullscreen"
