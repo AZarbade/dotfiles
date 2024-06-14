@@ -12,4 +12,3 @@ size = 14
 padding = { x = 2, y = 2 }
 dynamic_padding = true
 decorations = "None"
-startup_mode = "Fullscreen"
