@@ -1,12 +1,15 @@
 # define defualt shell
 shell = "/usr/bin/fish"
 
+import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+
 [env]
 TERM = "tmux-256color"
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font" }
 size = 14
+
 
 [window]
 padding = { x = 2, y = 2 }
