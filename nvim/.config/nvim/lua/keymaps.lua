@@ -22,6 +22,10 @@ vim.keymap.set('n', 'Q', '<nop>', { desc = 'NEVER PRESS "Q"!!' })
 
 vim.keymap.set('n', '<leader>S', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>', { desc = 'Replace current word over entire file' })
 
+-- convert note to template and remove leading white space
+vim.keymap.set('n', '<leader>on', ':ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<CR>')
+vim.keymap.set('n', '<leader>of', ':s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<CR>')
+
 -- Diagnostic keymaps
 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })

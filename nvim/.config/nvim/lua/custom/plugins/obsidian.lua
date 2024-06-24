@@ -12,8 +12,14 @@ return {
         name = 'avalore',
         path = '~/personal/avalore/',
       },
-      notes_subdir = 'inbox',
-      new_notes_location = 'notes_subdir',
+    },
+    disable_frontmatter = true,
+    notes_subdir = 'inbox',
+    new_notes_location = 'notes_subdir',
+    templates = {
+      subdir = 'templates',
+      date_format = '%d-%m-%Y',
+      time_format = '%H:%M:%S',
     },
     mappings = {
       -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
@@ -30,6 +36,7 @@ return {
         end,
         opts = { buffer = true },
       },
+      -- NOTE: more keymaps are in keymaps.lua
     },
   },
 }

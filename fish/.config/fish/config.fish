@@ -14,6 +14,7 @@ abbr -a btop btop --utf-force
 
 # Obsidian abbreviations
 abbr -a oo cd $HOME/personal/avalore/
+abbr -a on $HOME/dotfiles/scripts/new_note.fish
 # abbr -a or nvim $HOME/personal/avalore/inbox/*.md
 
 # Git abbreviations
