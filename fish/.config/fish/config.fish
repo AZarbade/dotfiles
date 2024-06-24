@@ -11,6 +11,10 @@ abbr -a lsl exa -la
 abbr -a tree exa --tree
 abbr -a tm tmux -u
 abbr -a btop btop --utf-force
+
+# Git abbreviations
+abbr -a gs git status
+abbr -a gc git commit
 abbr -a gg git-graph
 
 # SSH abbreviations
