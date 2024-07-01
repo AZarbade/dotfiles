@@ -24,6 +24,7 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        c = { 'clangd-format' },
         cpp = { 'clangd-format' },
         rust = { 'rustfmt' },
         python = { 'isort', 'black' },

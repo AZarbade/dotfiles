@@ -7,6 +7,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>U', vim.cmd.UndotreeToggle)
 
 -- Personal keymaps
+vim.keymap.set('n', '<leader>cc', ':w<CR>:!gcc %:r.c -o %:r -g && ./%:r<CR>', { desc = 'Simple compile and run .c file', noremap = true, silent = false })
+
 vim.keymap.set('v', '<M-j>', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
 vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Copy and Paste over' })
@@ -21,10 +23,6 @@ vim.keymap.set('v', '<leader>d', '"_d', { desc = 'Delete to void' })
 vim.keymap.set('n', 'Q', '<nop>', { desc = 'NEVER PRESS "Q"!!' })
 
 vim.keymap.set('n', '<leader>S', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>', { desc = 'Replace current word over entire file' })
-
--- convert note to template and remove leading white space
-vim.keymap.set('n', '<leader>on', ':ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<CR>')
-vim.keymap.set('n', '<leader>of', ':s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<CR>')
 
 -- Diagnostic keymaps
 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })

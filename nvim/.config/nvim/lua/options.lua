@@ -28,4 +28,8 @@ vim.g.netrw_hide = 0
 
 -- vim.g.netrw_preview = 1
 
+-- Concel options for org-mode
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = 'nc'
+
 -- vim: ts=2 sts=2 sw=2 et
