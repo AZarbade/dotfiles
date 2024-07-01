@@ -40,6 +40,7 @@ return {
       vim.keymap.set('n', '<leader>s/', builtin.live_grep, { desc = ':Telescope live_grep' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = ':Telescope search_buffers' })
       vim.keymap.set('n', '<leader>sg', builtin.git_files, { desc = ':Telescope git_files' })
+      vim.keymap.set('n', '<leader>sc', builtin.colorscheme, { desc = ':Telescope colorscheme' })
       -- vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       -- vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
