@@ -21,17 +21,6 @@ return {
         ensure_installed = {
           "prettier", -- prettier formatter
           "stylua", -- lua formatter
-          "eslint_d", -- js linter
-          -- "golangci_lint", -- go linter
-          "terraform_fmt", -- terraform formatter
-          "terraform_validate", -- terraform linter
-          "shellcheck", -- shell linter
-          "yamllint", -- yaml linter
-          "buf", -- buf formatter
-          "shfmt", -- shell formatter
-          -- "gofumpt", -- go formatter
-          "yamlfmt", -- yaml formatter
-          -- "spell", -- spell checker
           "black", -- python formatter
         },
       })
@@ -48,26 +37,11 @@ return {
         sources = {
           formatting.stylua,
           formatting.prettier,
-          -- formatting.gofumpt,
-          formatting.terraform_fmt,
-          formatting.buf,
-          formatting.shfmt,
-          formatting.yamlfmt,
           formatting.black,
-
-          -- diagnostics.eslint_d,
-          -- diagnosticsueslint_d.with({ -- js/ts linter
-          --   condition = function(utils)
-          --     return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" }) -- only enable if root has .eslintrc.js or .eslintrc.cjs
-          --   end,
-          -- }),
-          -- diagnostics.golangci_lint,
-          diagnostics.terraform_validate,
-          -- diagnostics.shellcheck,
-          diagnostics.yamllint,
+          formatting.clangd,
 
           code_actions.gitsigns,
-          -- code_actions.refactoring,
+          code_actions.refactoring,
         },
         -- configure format on save
         -- on_attach = function(current_client, bufnr)
