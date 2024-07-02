@@ -38,7 +38,6 @@ return {
           formatting.stylua,
           formatting.prettier,
           formatting.black,
-          formatting.clangd,
 
           code_actions.gitsigns,
           code_actions.refactoring,

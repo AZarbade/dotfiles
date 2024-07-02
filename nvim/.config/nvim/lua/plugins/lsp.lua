@@ -91,15 +91,6 @@ return {
       end,
     })
 
-    -- Gleam LSP
-    -- For some reason mason doesn't work with gleam lsp
-    require("lspconfig").gleam.setup({
-      cmd = { "gleam", "lsp" },
-      filetypes = { "gleam" },
-      root_dir = require("lspconfig").util.root_pattern("gleam.toml", ".git"),
-      capabilities = capabilities,
-    })
-
     vim.diagnostic.config({
       title = false,
       underline = true,

@@ -1,10 +1,4 @@
 return {
-  -- Autotags
-  {
-    "windwp/nvim-ts-autotag",
-    opts = {},
-  },
-
   -- delete buffer
   {
     "famiu/bufdelete.nvim",
@@ -25,8 +19,6 @@ return {
     opts = {},
     lazy = false,
   },
-  -- useful when there are embedded languages in certain types of files (e.g. Vue or React)
-  { "joosepalviste/nvim-ts-context-commentstring", lazy = true },
 
   -- Neovim plugin to improve the default vim.ui interfaces
   {
@@ -63,166 +55,10 @@ return {
     end,
   },
 
-  -- find and replace
-  {
-    "windwp/nvim-spectre",
-    event = "BufRead",
-  },
-
-  -- Add/change/delete surrounding delimiter pairs with ease
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup()
-    end,
-  },
-
   -- Heuristically set buffer options
   {
     "tpope/vim-sleuth",
   },
-
-  -- {
-  --   {
-  --     "folke/lazydev.nvim",
-  --     ft = "lua", -- only load on lua files
-  --     opts = {
-  --       library = {
-  --         -- See the configuration section for more details
-  --         -- Load luvit types when the `vim.uv` word is found
-  --         { path = "luvit-meta/library", words = { "vim%.uv" } },
-  --       },
-  --     },
-  --   },
-  --   { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-  --   {                                      -- optional completion source for require statements and module annotations
-  --     "hrsh7th/nvim-cmp",
-  --     opts = function(_, opts)
-  --       opts.sources = opts.sources or {}
-  --       table.insert(opts.sources, {
-  --         name = "lazydev",
-  --         group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-  --       })
-  --     end,
-  --   },
-  -- },
-
-  -- Neovim Lua plugin to automatically manage character pairs. Part of 'mini.nvim' library.
-  -- {
-  --   "echasnovski/mini.pairs",
-  --   event = "VeryLazy",
-  --   config = function(_, opts)
-  --     require("mini.pairs").setup(opts)
-  --   end,
-  -- },
-
-  -- Indent guide for Neovim
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    enabled = false,
-    version = "2.1.0",
-    opts = {
-      char = "┊",
-      -- char = "│",
-      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
-    },
-  },
-
-  -- editor config support
-  {
-    "editorconfig/editorconfig-vim",
-  },
-
-  -- Enhanced f/t motions for Leap
-  {
-    "ggandor/flit.nvim",
-    keys = function()
-      ---@type LazyKeys[]
-      local ret = {}
-      for _, key in ipairs({ "f", "F", "t", "T" }) do
-        ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
-      end
-      return ret
-    end,
-    opts = { labeled_modes = "nx" },
-  },
-  -- mouse replacement
-  {
-    "ggandor/leap.nvim",
-    keys = {
-      { "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
-      { "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
-      { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
-    },
-    config = function(_, opts)
-      local leap = require("leap")
-      for k, v in pairs(opts) do
-        leap.opts[k] = v
-      end
-      leap.add_default_mappings(true)
-      vim.keymap.del({ "x", "o" }, "x")
-      vim.keymap.del({ "x", "o" }, "X")
-    end,
-  },
-
-  -- breadcrumbs
-  -- {
-  --   "LunarVim/breadcrumbs.nvim",
-  --   config = function()
-  --     require("breadcrumbs").setup()
-  --   end,
-  -- },
-  -- Simple winbar/statusline plugin that shows your current code context
-  -- {
-  --   "SmiteshP/nvim-navic",
-  --   config = function()
-  --     local icons = require("config.icons")
-  --     require("nvim-navic").setup({
-  --       highlight = true,
-  --       lsp = {
-  --         auto_attach = true,
-  --         preference = { "typescript-tools" },
-  --       },
-  --       click = true,
-  --       separator = " " .. icons.ui.ChevronRight .. " ",
-  --       depth_limit = 0,
-  --       depth_limit_indicator = "..",
-  --       icons = {
-  --         File = " ",
-  --         Module = " ",
-  --         Namespace = " ",
-  --         Package = " ",
-  --         Class = " ",
-  --         Method = " ",
-  --         Property = " ",
-  --         Field = " ",
-  --         Constructor = " ",
-  --         Enum = " ",
-  --         Interface = " ",
-  --         Function = " ",
-  --         Variable = " ",
-  --         Constant = " ",
-  --         String = " ",
-  --         Number = " ",
-  --         Boolean = " ",
-  --         Array = " ",
-  --         Object = " ",
-  --         Key = " ",
-  --         Null = " ",
-  --         EnumMember = " ",
-  --         Struct = " ",
-  --         Event = " ",
-  --         Operator = " ",
-  --         TypeParameter = " ",
-  --       },
-  --     })
-  --   end,
-  -- },
 
   {
     "utilyre/barbecue.nvim",
@@ -261,35 +97,6 @@ return {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
     opts = {},
-  },
-
-  -- better code annotation
-  {
-    "danymat/neogen",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "L3MON4D3/LuaSnip",
-    },
-    config = function()
-      local neogen = require("neogen")
-
-      neogen.setup({
-        snippet_engine = "luasnip",
-      })
-    end,
-    -- version = "*"
-  },
-
-  {
-    "ThePrimeagen/refactoring.nvim",
-    enabled = false,
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-treesitter/nvim-treesitter" },
-    },
-    config = function()
-      require("refactoring").setup({})
-    end,
   },
 
   {
