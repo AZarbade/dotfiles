@@ -113,7 +113,7 @@ return {
       f = { "<cmd>Telescope dap frames<cr>", "Dap Frames" },
     },
     N = {
-      function ()
+      function()
         require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
       end,
       "Search Neovim Config",
@@ -149,5 +149,5 @@ return {
   },
   x = {
     name = "+Trouble",
-  }
+  },
 }

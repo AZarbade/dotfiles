@@ -12,6 +12,9 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 -- Cut full line
 map("n", "<C-x>", "dd", opts)
 
+-- paste over currently selected text without yanking it
+map("v", "p", '"_dp')
+
 -- Fast saving and quitting
 map("n", "<Leader>w", ":write!<CR>", opts)
 map("n", "<Leader>q", ":q!<CR>", opts)
@@ -39,6 +42,3 @@ map("n", "<C-a>", "ggVG", opts)
 
 -- Clear search highlighting
 map("n", "<Esc>", ":nohlsearch<CR>", opts)
-
--- Toggle Go test
-map("n", "<C-P>", ':lua require("config.utils").toggle_go_test()<CR>', opts)
