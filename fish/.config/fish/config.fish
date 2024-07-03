@@ -12,11 +12,6 @@ abbr -a tree exa --tree
 abbr -a tm tmux -u
 abbr -a btop btop --utf-force
 
-# Obsidian abbreviations
-abbr -a oo cd $HOME/personal/avalore/
-abbr -a on $HOME/dotfiles/scripts/new_note.fish
-# abbr -a or nvim $HOME/personal/avalore/inbox/*.md
-
 # Git abbreviations
 abbr -a gs git status
 abbr -a gc git commit
