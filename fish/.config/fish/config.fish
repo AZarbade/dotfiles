@@ -32,13 +32,7 @@ abbr -a pos poetry shell
 abbr -a por poetry run python
 
 # fzf binds
-bind \ce tmux_sess
 bind \cp fzf_tmux
-
-# Tmux sessionizer function
-function tmux_sess
-    tmux_session.fish
-end
 
 # Greetings function
 function fish_greeting
