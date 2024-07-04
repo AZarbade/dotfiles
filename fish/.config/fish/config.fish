@@ -50,20 +50,15 @@ function fzf_tmux
     if test -z "$selected"
         return
     end
-    set -l selected_name (basename "$selected" | tr . _)   
 
-    if test -z "$TMUX"
-        if test (pgrep tmux | wc -l) -eq 0
-            tmux new-session -s $selected_name -c $selected
-            return
-        end
-    end
-    if not tmux has-session -t=$selected_name 2>/dev/null
-        tmux new-session -ds $selected_name -c $selected
-    end
+    set -l selected_name (basename "$selected" | tr . _)
+
     if test -n "$TMUX"
+        # If inside tmux, create a new session and switch to it
+        tmux new-session -d -s $selected_name -c "$selected"
         tmux switch-client -t $selected_name
     else
-        tmux attach-session -t $selected_name
+        # If not in tmux, create new session and attach to it
+        tmux new-session -s $selected_name -c "$selected"
     end
 end
