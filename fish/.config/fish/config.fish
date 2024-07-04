@@ -1,6 +1,7 @@
 set -g fish_greeting
 set -g fish_vi_key_bindings
 
+set -x PATH $HOME/.local/bin $PATH
 fish_add_path /opt/nvim-linux64/bin
 source "$HOME/.asdf/asdf.fish"
 atuin init fish | source
@@ -31,27 +32,44 @@ abbr -a pos poetry shell
 abbr -a por poetry run python
 
 # fzf binds
-bind \cp fzf_cd
-bind \ce fzf_nvim
+bind \ce tmux_sess
+bind \cp fzf_tmux
+
+# Tmux sessionizer function
+function tmux_sess
+    tmux_session.fish
+end
 
 # Greetings function
 function fish_greeting
     neofetch
 end
 
-# Function for fzf (directory)
-function fzf_cd
-    set -l dir (find ~/personal/ -type d | fzf --preview "ls -lha {}")
-    if test -n "$dir"
-        cd "$dir"
-        commandline -f repaint
+# Function for fzf (directory in tmux session)
+function fzf_tmux
+    set -l dirs ~/personal ~/dotfiles # Add more directories as needed
+    set -l selected (begin
+        printf "%s\n" $dirs
+        fdfind --hidden --type d . $dirs
+    end | sort | uniq | fzf --preview "ls -lha {}")
+    
+    if test -z "$selected"
+        return
     end
-end
+    set -l selected_name (basename "$selected" | tr . _)   
 
-# Function for fzf (files)
-function fzf_nvim
-    set -l file (find ~/personal/ -type f | fzf --preview "bat --style=numbers --color=always --line-range :500 {}")
-    if test -n "$file"
-        nvim "$file"
+    if test -z "$TMUX"
+        if test (pgrep tmux | wc -l) -eq 0
+            tmux new-session -s $selected_name -c $selected
+            return
+        end
+    end
+    if not tmux has-session -t=$selected_name 2>/dev/null
+        tmux new-session -ds $selected_name -c $selected
+    end
+    if test -n "$TMUX"
+        tmux switch-client -t $selected_name
+    else
+        tmux attach-session -t $selected_name
     end
 end
