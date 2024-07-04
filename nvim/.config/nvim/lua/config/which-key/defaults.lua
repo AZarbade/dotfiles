@@ -12,26 +12,6 @@ return {
   A = "Swap previous param",
   o = { require("telescope.builtin").buffers, "Open Buffer" },
   W = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
-  b = {
-    r = { "<cmd>Git status<CR>", "Git Status" },
-  },
-  u = {
-    name = "UI",
-    v = { require("config.utils").toggle_set_color_column, "Toggle Color Line" },
-    c = { require("config.utils").toggle_cursor_line, "Toggle Cursor Line" },
-  },
-  i = {
-    name = "Sessions",
-    s = { "<cmd>lua require('persistence').load()<cr>", "Load Session" },
-    l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Load Last Session" },
-    d = { "<cmd>lua require('persistence').stop()<cr>", "Stop Persistence" },
-  },
-  r = {
-    name = "Replace (Spectre)",
-    r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
-    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
-    f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
-  },
   G = {
     name = "+Git",
     k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
@@ -137,17 +117,5 @@ return {
     l = { require("dap").run_last, "Last" },
     u = { require("dapui").toggle, "UI" },
     x = { require("dap").terminate, "Exit" },
-  },
-  n = {
-    name = "+Neogen",
-    g = { "<cmd>lua require('neogen').generate()<cr>", "Generate Annotatin" },
-    f = { "<cmd>lua require('neogen').generate({ type = 'func' })<cr>", "Generate Function Annotation" },
-    t = { "<cmd>lua require('neogen').generate({ type = 'type' })<cr>", "Generate Type Annotation" },
-  },
-  t = {
-    name = "+Tests",
-  },
-  x = {
-    name = "+Trouble",
   },
 }
