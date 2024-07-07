@@ -42,6 +42,3 @@ map("n", "<C-a>", "ggVG", opts)
 
 -- Clear search highlighting
 map("n", "<Esc>", ":nohlsearch<CR>", opts)
-
--- C Compile
--- map("n", "<F5>", ':lua require("config.utils").compile_c_file()<CR>', opts)

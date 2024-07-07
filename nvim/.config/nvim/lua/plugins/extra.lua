@@ -60,6 +60,7 @@ return {
     "tpope/vim-sleuth",
   },
 
+  -- Context bar (look at the top)
   {
     "utilyre/barbecue.nvim",
     name = "barbecue",
@@ -92,11 +93,21 @@ return {
       })
     end,
   },
+
   -- persist sessions
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
     opts = {},
+  },
+
+  -- mini.nvim stuff
+  {
+    "echasnovski/mini.nvim",
+    config = function()
+      require("mini.ai").setup({ n_lines = 500 })
+      -- require("mini.surround").setup()
+    end,
   },
 
   {

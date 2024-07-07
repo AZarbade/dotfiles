@@ -3,9 +3,6 @@ return {
   [";"] = { ":Alpha<CR>", "Dashboard" },
   w = { ":w!<CR>", "Save" },
   q = { ":confirm q<CR>", "Quit" },
-  -- h = { ":nohlsearch<CR>", "No Highlight" },
-  -- p = { require("telescope.builtin").lsp_document_symbols, "Document Symbols" },
-  -- P = { require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols" },
   f = { require("config.utils").telescope_git_or_file, "Find Files (Root)" },
   v = "Go to definition in a split",
   a = "Swap next param",
@@ -99,13 +96,6 @@ return {
       "Search Neovim Config",
     },
   },
-  -- T = {
-  --   name = "+Todo",
-  --   t = { "<cmd>TodoTelescope<cr>", "Todo" },
-  --   T = { "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", "Todo/Fix/Fixme" },
-  --   x = { "<cmd>TodoTrouble<cr>", "Todo (Trouble)" },
-  --   X = { "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr><cr>", "Todo/Fix/Fixme (Trouble)" },
-  -- },
   d = {
     name = "Debug",
     b = { require("dap").toggle_breakpoint, "Breakpoint" },
