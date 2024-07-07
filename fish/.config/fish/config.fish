@@ -16,6 +16,7 @@ abbr -a btop btop --utf-force
 # Git abbreviations
 abbr -a gs git status
 abbr -a gc git commit
+abbr -a gm git merge --no-ff
 abbr -a gg git-graph
 
 # SSH abbreviations
