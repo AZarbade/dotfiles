@@ -19,6 +19,14 @@ abbr -a gc git commit
 abbr -a gm git merge --no-ff
 abbr -a gg git-graph
 
+# Obsidian setup
+abbr -a oo obsidian_notes
+
+function obsidian_notes
+    cd ~/personal/notes
+    nvim
+end
+
 # SSH abbreviations
 abbr -a homelab ssh onyx@homelab.local
 abbr -a broker ssh noir@broker.local
