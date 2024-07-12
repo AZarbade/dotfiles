@@ -17,7 +17,6 @@ map("v", "p", '"_dp')
 
 -- Fast saving and quitting
 map("n", "<Leader>w", ":write!<CR>", opts)
-map("n", "<Leader>q", ":q!<CR>", opts)
 
 -- Remap for dealing with visual line wraps
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
@@ -31,14 +30,11 @@ map("v", ">", ">gv")
 map("n", "<Right>", ":bnext<CR>", opts)
 map("n", "<Left>", ":bprevious<CR>", opts)
 
--- Keep search results centered
-map("n", "n", "nzzv", opts)
-map("n", "N", "Nzzv", opts)
-map("n", "*", "*zzv", opts)
-map("n", "#", "#zzv", opts)
-
 -- Select all
 map("n", "<C-a>", "ggVG", opts)
 
 -- Clear search highlighting
 map("n", "<Esc>", ":nohlsearch<CR>", opts)
+
+-- Substitution
+map("n", "<C-s>", ":%s/\\<<C-r><C-w>\\>//g<left><left>", opts)

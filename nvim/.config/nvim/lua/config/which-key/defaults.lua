@@ -1,4 +1,5 @@
 return {
+  -- General mappings
   mode = { "n", "v" },
   [";"] = { ":Alpha<CR>", "Dashboard" },
   w = { ":w!<CR>", "Save" },
@@ -9,6 +10,8 @@ return {
   A = "Swap previous param",
   o = { require("telescope.builtin").buffers, "Open Buffer" },
   W = { "<cmd>noautocmd w<cr>", "Save without formatting (noautocmd)" },
+
+  -- Git mappings
   G = {
     name = "+Git",
     k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
@@ -18,23 +21,16 @@ return {
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
     j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-    u = {
-      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-      "Undo Stage Hunk",
-    },
+    u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
     o = { require("telescope.builtin").git_status, "Open changed file" },
     b = { require("telescope.builtin").git_branches, "Checkout branch" },
     c = { require("telescope.builtin").git_commits, "Checkout commit" },
-    C = {
-      require("telescope.builtin").git_bcommits,
-      "Checkout commit(for current file)",
-    },
-    d = {
-      "<cmd>Gitsigns diffthis HEAD<cr>",
-      "Git Diff",
-    },
+    C = { require("telescope.builtin").git_bcommits, "Checkout commit(for current file)" },
+    d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff" },
     U = { ":UndotreeToggle<CR>", "Toggle UndoTree" },
   },
+
+  -- LSP mappings
   l = {
     name = "+LSP",
     a = { vim.lsp.buf.code_action, "Code Action" },
@@ -43,13 +39,8 @@ return {
     r = { vim.lsp.buf.rename, "Rename all references" },
     f = { vim.lsp.buf.format, "Format" },
     i = { require("telescope.builtin").lsp_implementations, "Implementation" },
-    -- h = { vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()), "Inlay Hints" },
-    -- l = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics (Trouble)" },
-    -- L = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics (Trouble)" },
     w = { require("telescope.builtin").diagnostics, "Diagnostics" },
-    -- t = { require("telescope").extensions.refactoring.refactors, "Refactor" },
     c = { require("config.utils").copyFilePathAndLineNumber, "Copy File Path and Line Number" },
-
     W = {
       name = "+Workspace",
       a = { vim.lsp.buf.add_workspace_folder, "Add Folder" },
@@ -62,6 +53,8 @@ return {
       },
     },
   },
+
+  -- Search mappings
   s = {
     name = "+Search",
     f = { "<cmd>Telescope find_files<cr>", "Find File (CWD)" },
@@ -96,8 +89,10 @@ return {
       "Search Neovim Config",
     },
   },
+
+  -- Debug mappings
   d = {
-    name = "Debug",
+    name = "+Debug",
     b = { require("dap").toggle_breakpoint, "Breakpoint" },
     c = { require("dap").continue, "Continue" },
     i = { require("dap").step_into, "Into" },
@@ -107,5 +102,11 @@ return {
     l = { require("dap").run_last, "Last" },
     u = { require("dapui").toggle, "UI" },
     x = { require("dap").terminate, "Exit" },
+  },
+
+  -- cmc.nvim mappings
+  c = {
+    name = "+CompileC",
+    c = { require("cmc").CompileC, "Compile Code" },
   },
 }
