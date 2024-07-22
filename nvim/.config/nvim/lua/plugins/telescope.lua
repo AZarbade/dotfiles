@@ -13,6 +13,127 @@ return {
       "kkharji/sqlite.lua",
       -- "nvim-telescope/telescope-frecency.nvim",
     },
+    keys = {
+      {
+        "<leader>sf",
+        function()
+          require("telescope.builtin").find_files()
+        end,
+        desc = "Find File (CWD)",
+      },
+      {
+        "<leader>sg",
+        function()
+          require("telescope.builtin").git_files()
+        end,
+        desc = "Search Git Files",
+      },
+      {
+        "<leader>sh",
+        function()
+          require("telescope.builtin").help_tags()
+        end,
+        desc = "Find Help",
+      },
+      {
+        "<leader>sH",
+        function()
+          require("telescope.builtin").highlights()
+        end,
+        desc = "Find highlight groups",
+      },
+      {
+        "<leader>sM",
+        function()
+          require("telescope.builtin").man_pages()
+        end,
+        desc = "Map Pages",
+      },
+      {
+        "<leader>so",
+        function()
+          require("telescope.builtin").oldfiles()
+        end,
+        desc = "Open Recent File",
+      },
+      {
+        "<leader>sR",
+        function()
+          require("telescope.builtin").registers()
+        end,
+        desc = "Registers",
+      },
+      {
+        "<leader>st",
+        function()
+          require("telescope.builtin").live_grep()
+        end,
+        desc = "Live Grep",
+      },
+      {
+        "<leader>sT",
+        function()
+          require("telescope.builtin").grep_string()
+        end,
+        desc = "Grep String",
+      },
+      {
+        "<leader>sk",
+        function()
+          require("telescope.builtin").keymaps()
+        end,
+        desc = "Keymaps",
+      },
+      {
+        "<leader>sC",
+        function()
+          require("telescope.builtin").commands()
+        end,
+        desc = "Commands",
+      },
+      {
+        "<leader>sl",
+        function()
+          require("telescope.builtin").resume()
+        end,
+        desc = "Resume last search",
+      },
+      {
+        "<leader>sc",
+        function()
+          require("telescope.builtin").git_commits()
+        end,
+        desc = "Git commits",
+      },
+      {
+        "<leader>sB",
+        function()
+          require("telescope.builtin").git_branches()
+        end,
+        desc = "Git branches",
+      },
+      {
+        "<leader>sm",
+        function()
+          require("telescope.builtin").git_status()
+        end,
+        desc = "Git status",
+      },
+      {
+        "<leader>sS",
+        function()
+          require("telescope.builtin").git_stash()
+        end,
+        desc = "Git stash",
+      },
+      {
+        "<leader>sb",
+        function()
+          require("telescope.builtin").buffers()
+        end,
+        desc = "Buffers",
+      },
+    },
     config = function()
       local telescope = require("telescope")
       local actions = require("telescope.actions")
@@ -28,15 +149,6 @@ return {
           end)
         end,
       })
-
-      -- local function formattedName(_, path)
-      --   local tail = vim.fs.basename(path)
-      --   local parent = vim.fs.dirname(path)
-      --   if parent == "." then
-      --     return tail
-      --   end
-      --   return string.format("%s\t\t%s", tail, parent)
-      -- end
 
       telescope.setup({
         file_ignore_patterns = { "%.git/." },
@@ -166,30 +278,13 @@ return {
               },
             }),
           },
-          package_info = {
-            -- Optional theme (the extension doesn't set a default theme)
-            -- theme = "ivy",
-          },
-          -- frecency = {
-          --   default_workspace = "CWD",
-          --   show_scores = true,
-          --   show_unindexed = true,
-          --   disable_devicons = false,
-          --   ignore_patterns = {
-          --     "*.git/*",
-          --     "*/tmp/*",
-          --     "*/lua-language-server/*",
-          --   },
-          -- },
+          package_info = {},
         },
       })
       telescope.load_extension("fzf")
       telescope.load_extension("ui-select")
-      -- telescope.load_extension("refactoring")
       telescope.load_extension("dap")
-      -- telescope.load_extension("frecency")
       telescope.load_extension("notify")
-      -- telescope.load_extension("package_info")
     end,
   },
 }
