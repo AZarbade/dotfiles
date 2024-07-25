@@ -13,11 +13,11 @@ return {
     spec = {
       {
         mode = { "n", "v" },
-        { "<leader>G", group = "Git" },
-        { "<leader>l", group = "LSP" },
-        { "<leader>d", group = "DAP" },
-        { "<leader>c", group = "Compiler" },
         { "<leader>s", group = "Search" },
+        { "<leader>d", group = "DAP" },
+        { "<leader>l", group = "LSP" },
+        { "<leader>G", group = "Git" },
+        { "<leader>c", group = "Compiler" },
         { "<leader>x", group = "diagnostics/quickfix" },
       },
     },
