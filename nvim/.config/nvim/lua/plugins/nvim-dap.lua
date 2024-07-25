@@ -8,6 +8,29 @@ return {
       "nvim-telescope/telescope-dap.nvim",
       "nvim-neotest/nvim-nio",
     },
+    keys = {
+      {
+        "<leader>db",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "Breakpoint",
+      },
+      {
+        "<leader>du",
+        function()
+          require("dapui").toggle()
+        end,
+        desc = "UI",
+      },
+      {
+        "<leader>dx",
+        function()
+          require("dap").terminate()
+        end,
+        desc = "Exit",
+      },
+    },
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")
