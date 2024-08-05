@@ -3,7 +3,6 @@ set -g fish_vi_key_bindings
 
 set -x PATH $HOME/.local/bin $PATH
 fish_add_path /opt/nvim-linux64/bin
-source "$HOME/.asdf/asdf.fish"
 atuin init fish | source
 
 # Abbreviations
