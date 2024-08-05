@@ -12,16 +12,19 @@ apt update && apt upgrade -y
 # Install necessary tools
 apt install -y curl wget build-essential
 
-# Install Alacritty
+# Install terminal (Alacritty)
 add-apt-repository ppa:aslatter/ppa -y
 apt update
 apt install -y alacritty
 
 # Install Rust (required for bat and git-graph)
 su - $SUDO_USER -c 'curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y'
-su - $SUDO_USER -c 'source $HOME/.cargo/env && cargo install bat git-graph exa'
+su - $SUDO_USER -c 'source $HOME/.cargo/env' 
 
-# Install fish
+# Install cargo applications
+su - $SUDO_USER -c 'cargo install bat git-graph exa'
+
+# Install fish (shell)
 add-apt-repository ppa:fish-shell/release-3 -y
 apt update
 apt install -y fish
@@ -29,14 +32,8 @@ apt install -y fish
 # Install neofetch
 apt install -y neofetch
 
-# Ensure coreutils is installed (includes uniq)
-apt install -y coreutils
-
-# Install fzf
-apt install -y fzf
-
-# Install fd-find
-apt install -y fd-find
+# Ensure dependencies are installed
+apt install -y coreutils fzf fd-find
 
 # Install atuin (shell history)
 bash <(curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh)
@@ -59,4 +56,8 @@ unzip JetBrainsMono.zip -d /usr/local/share/fonts/nerd-fonts/JetBrainsMono
 rm JetBrainsMono.zip
 fc-cache -fv
 
+# Install dotfiles using stow
+su - $SUDO_USER -c 'cd $(dirname "$0") && stow -v -R -t ~ alacritty atuin bat btop fish git-graph neofetch nvim tmux'
+
 echo "Installation complete!"
+echo "Dotfiles have also been installed. Please review any conflict messages if they occurred."
