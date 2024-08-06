@@ -1,8 +1,9 @@
 set -g fish_greeting
-set -g fish_vi_key_bindings
+set -g fish_user_key_bindings
 
 set -x PATH $HOME/.local/bin $PATH
 fish_add_path /opt/nvim-linux64/bin
+atuin init fish | source
 
 # Abbreviations
 abbr -a ls exa -l
@@ -37,6 +38,12 @@ bind \cp fzf_tmux
 function fish_greeting
     neofetch
 end
+
+# Vim Mode
+function fish_user_key_bindings
+  fish_vi_key_bindings
+end
+
 
 # Function for fzf (directory in tmux session)
 function fzf_tmux

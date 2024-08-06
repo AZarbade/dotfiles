@@ -6,7 +6,7 @@ TERM = "tmux-256color"
 
 [font]
 normal = { family = "JetBrainsMonoNerdFont" }
-size = 12
+size = 10
 
 [window]
 padding = { x = 5, y = 5 }
