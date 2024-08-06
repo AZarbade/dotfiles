@@ -1,9 +1,8 @@
 set -g fish_greeting
-set -g fish_vi_key_bindings
+set -g fish_user_key_bindings
 
 set -x PATH $HOME/.local/bin $PATH
 fish_add_path /opt/nvim-linux64/bin
-source "$HOME/.asdf/asdf.fish"
 atuin init fish | source
 
 # Abbreviations
@@ -27,18 +26,10 @@ function obsidian_notes
     nvim
 end
 
-# SSH abbreviations
-abbr -a homelab ssh onyx@homelab.local
-abbr -a broker ssh noir@broker.local
-
 # Embedded bindings
 abbr -a get_esprs . $HOME/export-esp.sh
 abbr -a get_idf . $HOME/personal/esp_box/esp-idf/export.fish
 abbr -a idf idf.py
-
-# Poetry (python) helpers
-abbr -a pos poetry shell
-abbr -a por poetry run python
 
 # fzf binds
 bind \cp fzf_tmux
@@ -48,12 +39,18 @@ function fish_greeting
     neofetch
 end
 
+# Vim Mode
+function fish_user_key_bindings
+  fish_vi_key_bindings
+end
+
+
 # Function for fzf (directory in tmux session)
 function fzf_tmux
     set -l dirs ~/personal ~/dotfiles # Add more directories as needed
     set -l selected (begin
         printf "%s\n" $dirs
-        fdfind --hidden --type d . $dirs
+        fd --hidden --type d . $dirs
     end | sort | uniq | fzf --preview "ls -lha {}")
     
     if test -z "$selected"

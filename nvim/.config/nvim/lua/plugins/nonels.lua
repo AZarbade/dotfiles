@@ -19,8 +19,6 @@ return {
 
       mason_null_ls.setup({
         ensure_installed = {
-          "prettier", -- prettier formatter
-          "stylua", -- lua formatter
           "black", -- python formatter
           "clang_format", -- C/C++ formatter
         },
@@ -36,8 +34,6 @@ return {
         root_dir = null_ls_utils.root_pattern(".null-ls-root", "Makefile", ".git", "package.json"),
 
         sources = {
-          formatting.stylua,
-          formatting.prettier,
           formatting.black,
           formatting.clang_format,
 
