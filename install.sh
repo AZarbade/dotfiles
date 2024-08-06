@@ -57,7 +57,7 @@ rm JetBrainsMono.zip
 fc-cache -fv
 
 # Install dotfiles using stow
-su - $SUDO_USER -c 'cd $(dirname "$0") && stow -v -R -t ~ alacritty atuin bat btop fish git-graph neofetch nvim tmux'
+su - $SUDO_USER -c 'stow */'
 
 echo "Installation complete!"
 echo "Dotfiles have also been installed. Please review any conflict messages if they occurred."
