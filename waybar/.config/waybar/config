@@ -1,11 +1,13 @@
 
 {
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 10, // Waybar height (to be removed for auto height)
+    // "position": "top", // Waybar position (top|bottom|left|right)
+    // "height": 10, // Waybar height (to be removed for auto height)
+    "margin": "2 2 0 2",
 
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
-    "modules-right": ["pulseaudio", "network", "backlight", "temperature", "cpu", "memory", "battery", "clock", "tray"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "network", "backlight", "temperature", "cpu", "memory", "battery", "tray"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -59,6 +61,12 @@
             "critical": 15
         },
         "format": "{capacity}% {icon} ",
+        "states": {
+		"warning": 50,
+		"critical": 25
+	},
+        "format-charging": "{capacity}% {icon}  : {time}",
+        "format-full": "Charged {icon} ",
 	"format-icons": ["", "", "", "", ""],
 	"max-length": 25
     },

@@ -3,45 +3,16 @@
     border-radius: 4px;
     font-family: "JetBrainsMono Nerd Font";
     font-size: 14px;
-    min-height: 0;
+    min-height: 2px;
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.9);
-    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
-    color: #ffffff;
-    /* transition-property: background-color; */
-    /* transition-duration: .5s; */
-    /* border-radius: 0; */
+    background-color: rgba(28, 28, 28, 1);
+    color: #1C1C1C;
 }
-
-/* window#waybar.hidden {
-    opacity: 0.2;
-} */
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-/* window#waybar.termite {
-    background-color: #000000;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-} */
 
 #workspaces button {
-    /* padding: 0 0.4em; */
-    /* background-color: transparent; */
     color: #ffffff;
-    /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
 }
 
@@ -80,7 +51,7 @@ window#waybar.chromium {
 #mpd {
     padding: 0 10px;
     margin: 6px 3px; 
-    color: #000000;
+    color: #1C1C1C;
 }
 
 #window,
@@ -99,24 +70,24 @@ window#waybar.chromium {
 }
 
 #clock {
-    background-color: #000000;
+    background-color: #1C1C1C;
     color: white;
 }
 
 #battery {
-    background-color: #000000;
+    background-color: #1C1C1C;
     color: white;
 }
 
 #battery.charging {
     color: #ffffff;
-    background-color: #000000;
+    background-color: #1C1C1C;
 }
 
 @keyframes blink {
     to {
         background-color: #ffffff;
-        color: #000000;
+        color: #1C1C1C;
     }
 }
 
@@ -131,26 +102,26 @@ window#waybar.chromium {
 }
 
 label:focus {
-    background-color: #000000;
+    background-color: #1C1C1C;
 }
 
 #cpu {
-    background-color: #000000;
+    background-color: #1C1C1C;
     color: #ffffff;
 }
 
 #memory {
-    background-color: #000000;
+    background-color: #1C1C1C;
     color: white;
 }
 
 #backlight {
-    background-color: #000000;
+    background-color: #1C1C1C;
     color:white;
 }
 
 #network {
-    background-color: #000000;
+    background-color: #1C1C1C;
     color:white;
 
 }
@@ -160,12 +131,12 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: #000000;
+    background-color: #1C1C1C;
     color: #ffffff;
 }
 
 #pulseaudio.muted {
-    background-color: #000000;
+    background-color: #1C1C1C;
     color: #ffffff;
 }
 

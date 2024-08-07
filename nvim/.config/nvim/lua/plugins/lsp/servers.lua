@@ -1,5 +1,7 @@
 return {
   clangd = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    filetypes = "rust"
+  },
   lua_ls = {},
 }
