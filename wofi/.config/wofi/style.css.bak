@@ -1,0 +1,33 @@
+window {
+    font-size: 14px;
+    font-family: "JetBrainMono Nerd Font";
+    background-color: rgba(0,0,0,0.7);
+}
+
+#input {
+    margin: 2px;
+    border: none;
+    color: #ebdbb2;
+    background-color: #1d2021;
+}
+
+#outer-box {
+margin: 2px;
+border: none;
+background-color: #282828;
+}
+
+#scroll {
+margin: 0px;
+border: none;
+}
+
+#text {
+margin: 2px;
+border: none;
+color: #ebdbb2;
+}
+
+#entry:selected {
+background-color: #1d2021;
+}

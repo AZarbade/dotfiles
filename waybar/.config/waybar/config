@@ -7,51 +7,52 @@
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "backlight", "temperature", "cpu", "memory", "battery", "tray"],
+    "modules-right": ["pulseaudio", "network", "backlight", "temperature", "memory", "battery", "tray"],
 
     // Modules configuration
     "hyprland/workspaces": {
-      "format": "{name}: {icon} ",
-      "on-click": "activate",
+      "format": "{icon}",
+      "persistent-workspaces": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+      },
       "format-icons": {
-        "1": "",
-        "2": "",
-        "3": "",
-        "4": "",
-        "5": "",
-        "urgent": "",
-        "active": "",
-        "default": ""
+          "1": "I",
+          "2": "II",
+          "3": "III",
+          "4": "IV",
+          "5": "V",
+          "6": "VI",
+          "7": "VII",
+          "8": "VIII",
+          "9": "IX"
       },
       "sort-by-number": true
     },
+
     "tray": {
-        // "icon-size": 21,
         "spacing": 10
     },
+
     "clock": {
         "format": "{:%I:%M }",
-        "format-alt": "{:%Y-%m-%d}"
-      
+        "format-alt": "{:%Y-%m-%d}",
     },
-    "cpu": {
-	"interval": 10,
-	"format": "{}% ",
-	"max-length": 10
-    },
+
     "memory": {
 	"interval": 30,
-	"format": "{used:0.1f}G/{total:0.1f}G "
+	"format": "{used:0.1f}G/{total:0.1f}G ",
+        "on-click-right": "alacritty -e btop",
     },
+
     "temperature": {
         "critical-threshold": 80,
         "format": "{temperatureC}°C {icon} ",
         "format-icons": ["", "", ""]
     },
-    "backlight": {
-        "format": "{percent}% {icon} ",
-        "format-icons": [""]
-    },
+
     "battery": {
         "bat": "BAT0",
 	"interval": 60,
@@ -70,6 +71,7 @@
 	"format-icons": ["", "", "", "", ""],
 	"max-length": 25
     },
+    
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
@@ -78,6 +80,7 @@
         "format-disconnected": "Disconnected ",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
+
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}%  {format_source}",

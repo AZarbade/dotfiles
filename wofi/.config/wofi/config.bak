@@ -1,0 +1,16 @@
+xoffset=34
+yoffset=-34
+
+width=40%
+lines=5
+
+hide_scroll = true
+term=alacritty
+allow_images = true
+image_size = 10
+prompt=Search...
+normal_window = false
+
+matching=fuzzy
+insensitive=true
+columns=1
