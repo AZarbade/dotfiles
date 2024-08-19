@@ -75,11 +75,12 @@ vim.keymap.set('n', ';', ':')
 -- Ctrl+h to stop searching
 vim.keymap.set('v', '<C-h>', '<cmd>nohlsearch<cr>')
 vim.keymap.set('n', '<C-h>', '<cmd>nohlsearch<cr>')
--- Neat X clipboard integration
--- <leader>p will paste clipboard into buffer
--- <leader>c will copy entire buffer into clipboard
-vim.keymap.set('n', '<leader>p', '<cmd>read !wl-paste<cr>')
-vim.keymap.set('n', '<leader>c', '<cmd>w !wl-copy<cr><cr>')
+-- Copy to system clipboard
+vim.keymap.set('n', '<leader>y', '"+y', { noremap = true, silent = true })
+vim.keymap.set('v', '<leader>y', '"+y', { noremap = true, silent = true })
+-- Paste from system clipboard
+vim.keymap.set('n', '<leader>p', '"+p', { noremap = true, silent = true })
+vim.keymap.set('v', '<leader>p', '"+p', { noremap = true, silent = true })
 -- <leader><leader> toggles between buffers
 vim.keymap.set('n', '<leader><leader>', '<c-^>')
 -- always center search results
@@ -196,6 +197,10 @@ require("lazy").setup({
 	},
 	-- nice bar at the bottom
 	{
+		'tpope/vim-fugitive',
+		-- just because lightline needs "git branch" function :(
+	},
+	{
 		'itchyny/lightline.vim',
 		lazy = false, -- also load at start since it's UI
 		config = function()
@@ -205,7 +210,7 @@ require("lazy").setup({
 				active = {
 					left = {
 						{ 'mode', 'paste' },
-						{ 'readonly', 'filename', 'modified' }
+						{ 'gitbranch', 'readonly', 'filename', 'modified' }
 					},
 					right = {
 						{ 'lineinfo' },
@@ -214,7 +219,8 @@ require("lazy").setup({
 					},
 				},
 				component_function = {
-					filename = 'LightlineFilename'
+					filename = 'LightlineFilename',
+					gitbranch = 'FugitiveHead',
 				},
 			}
 			function LightlineFilenameInLua(opts)
