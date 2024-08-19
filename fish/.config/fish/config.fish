@@ -12,6 +12,10 @@ abbr -a tree exa --tree
 abbr -a tm tmux -u
 abbr -a btop btop --utf-force
 
+# Media abbreviations
+abbr -a vol pulsemixer
+abbr -a blu bluetui
+
 # Git abbreviations
 abbr -a gs git status
 abbr -a gc git commit
