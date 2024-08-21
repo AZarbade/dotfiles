@@ -429,7 +429,4 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	-- fun stuff (absolutely not needed!)
-	{
-		"folke/drop.nvim",
-	},
 })
