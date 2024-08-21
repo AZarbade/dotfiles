@@ -1,3 +1,9 @@
+-- TODO:
+-- 1. todo comments
+-- 2. nvim split movement
+-- 3. C-p does not work inside opened buffer
+-- 4. learn tpope/fugitive
+
 vim.g.mapleader = " "
 vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
 
@@ -62,10 +68,6 @@ vim.opt.listchars = "tab:^ ,nbsp:¬,extends:»,precedes:«,trail:•"
 -- hotkeys
 --
 -------------------------------------------------------------------------------
--- quick-open
-vim.keymap.set("", "<C-p>", "<cmd>Files<cr>")
--- search buffers
-vim.keymap.set("n", "<leader>;", "<cmd>Buffers<cr>")
 -- quick-save
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
 -- make missing : less annoying
@@ -110,6 +112,9 @@ vim.keymap.set("n", "k", "gk")
 vim.keymap.set("n", "<leader>m", "ct_")
 -- close current buffer
 vim.keymap.set("n", "<leader>Q", ":bd<CR>")
+-- Move selected lines up
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 
 -------------------------------------------------------------------------------
 --
@@ -253,37 +258,16 @@ require("lazy").setup({
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 		end,
 	},
-	-- fzf support for ^p
+	-- telescope for fzf utils
 	{
-		"junegunn/fzf.vim",
-		dependencies = {
-			{ "junegunn/fzf" },
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.8",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{ "<C-p>", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+			{ "<C-g>", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+			{ "<leader>;", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 		},
-		config = function()
-			-- stop putting a giant window over my editor
-			vim.g.fzf_layout = { down = "~20%" }
-			-- when using :Files, pass the file list through
-			--
-			--   https://github.com/jonhoo/proximity-sort
-			--
-			-- to prefer files closer to the current file.
-			function list_cmd()
-				local base = vim.fn.fnamemodify(vim.fn.expand("%"), ":h:.:S")
-				if base == "." then
-					-- if there is no current file,
-					-- proximity-sort can't do its thing
-					return "fd --type file --follow"
-				else
-					return vim.fn.printf(
-						"fd --type file --follow | proximity-sort %s",
-						vim.fn.shellescape(vim.fn.expand("%"))
-					)
-				end
-			end
-			vim.api.nvim_create_user_command("Files", function(arg)
-				vim.fn["fzf#vim#files"](arg.qargs, { source = list_cmd(), options = "--tiebreak=index" }, arg.bang)
-			end, { bang = true, nargs = "?", complete = "dir" })
-		end,
 	},
 	-- LSP
 	{
@@ -421,6 +405,7 @@ require("lazy").setup({
 			})
 		end,
 	},
+	-- code formatting
 	{
 		"stevearc/conform.nvim",
 		opts = {},
@@ -436,5 +421,21 @@ require("lazy").setup({
 				},
 			})
 		end,
+	},
+	-- markdown support
+	{
+		"MeanderingProgrammer/markdown.nvim",
+		main = "render-markdown",
+		opts = {},
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+	},
+	-- comments helper
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	-- fun stuff (absolutely not needed!)
+	{
+		"folke/drop.nvim",
 	},
 })
