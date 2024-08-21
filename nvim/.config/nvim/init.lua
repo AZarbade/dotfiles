@@ -1,9 +1,3 @@
--- TODO:
--- 1. todo comments
--- 2. nvim split movement
--- 3. C-p does not work inside opened buffer
--- 4. learn tpope/fugitive
-
 vim.g.mapleader = " "
 vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
 
