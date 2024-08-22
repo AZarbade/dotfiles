@@ -194,48 +194,70 @@ require("lazy").setup({
 	},
 	-- nice bar at the bottom
 	{
-		"tpope/vim-fugitive",
-		-- just because lightline needs "git branch" function :(
-	},
-	{
-		"itchyny/lightline.vim",
-		lazy = false, -- also load at start since it's UI
+		"nvim-lualine/lualine.nvim",
+		dependencies = {
+			"meuter/lualine-so-fancy.nvim",
+		},
+		enabled = true,
+		lazy = false,
+		event = { "BufReadPost", "BufNewFile", "VeryLazy" },
 		config = function()
-			-- no need to also show mode in cmd line when we have bar
-			vim.o.showmode = false
-			vim.g.lightline = {
-				active = {
-					left = {
-						{ "mode", "paste" },
-						{ "gitbranch", "readonly", "filename", "modified" },
-					},
-					right = {
-						{ "lineinfo" },
-						{ "percent" },
-						{ "fileencoding", "filetype" },
+			-- local icons = require("config.icons")
+			require("lualine").setup({
+				options = {
+					theme = "auto",
+					globalstatus = true,
+					icons_enabled = true,
+					component_separators = { left = "|", right = "|" },
+					section_separators = { left = "", right = "" },
+					disabled_filetypes = {
+						statusline = {
+							"help",
+						},
+						winbar = {},
 					},
 				},
-				component_function = {
-					filename = "LightlineFilename",
-					gitbranch = "FugitiveHead",
+				sections = {
+					lualine_a = {},
+					lualine_b = {
+						"fancy_branch",
+					},
+					lualine_c = {
+						{
+							"filename",
+							path = 2,
+							symbols = {
+								modified = "  ",
+								readonly = "  ",
+								unnamed = "  ",
+							},
+						},
+						{
+							"fancy_diagnostics",
+							sources = { "nvim_lsp" },
+							symbols = { error = " ", warn = " ", info = " " },
+						},
+						{ "fancy_searchcount" },
+					},
+					lualine_x = {
+						"fancy_lsp_servers",
+						"fancy_diff",
+						"progress",
+					},
+					lualine_y = {},
+					lualine_z = {},
 				},
-			}
-			function LightlineFilenameInLua(opts)
-				if vim.fn.expand("%:t") == "" then
-					return "[No Name]"
-				else
-					return vim.fn.getreg("%")
-				end
-			end
-			-- https://github.com/itchyny/lightline.vim/issues/657
-			vim.api.nvim_exec(
-				[[
-				function! g:LightlineFilename()
-					return v:lua.LightlineFilenameInLua()
-				endfunction
-				]],
-				true
-			)
+				inactive_sections = {
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = { "filename" },
+					-- lualine_x = { "location" },
+					lualine_y = {},
+					lualine_z = {},
+				},
+				tabline = {},
+				extensions = { "lazy" },
+			})
 		end,
 	},
 	-- quick navigation
@@ -243,13 +265,6 @@ require("lazy").setup({
 		"ggandor/leap.nvim",
 		config = function()
 			require("leap").create_default_mappings()
-		end,
-	},
-	-- better %
-	{
-		"andymass/vim-matchup",
-		config = function()
-			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 		end,
 	},
 	-- telescope for fzf utils
@@ -265,86 +280,28 @@ require("lazy").setup({
 	},
 	-- LSP
 	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-	},
-	{
 		"neovim/nvim-lspconfig",
-		config = function()
-			-- Setup language servers.
-			local lspconfig = require("lspconfig")
-
-			-- Rust
-			lspconfig.rust_analyzer.setup({})
-
-			-- Clangd
-			lspconfig.clangd.setup({})
-
-			-- Global mappings.
-			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
-			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-			vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-			vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
-
-			-- Use LspAttach autocommand to only map the following keys
-			-- after the language server attaches to the current buffer
-			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-				callback = function(ev)
-					-- Enable completion triggered by <c-x><c-o>
-					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-					-- Buffer local mappings.
-					-- See `:help vim.lsp.*` for documentation on any of the below functions
-					local opts = { buffer = ev.buf }
-					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-					vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-					vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-					vim.keymap.set("n", "<leader>wl", function()
-						print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-					end, opts)
-					--vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-					vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
-					vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts)
-					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-					vim.keymap.set("n", "<leader>f", function()
-						vim.lsp.buf.format({ async = true })
-					end, opts)
-
-					local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
-					-- When https://neovim.io/doc/user/lsp.html#lsp-inlay_hint stabilizes
-					-- *and* there's some way to make it only apply to the current line.
-					-- if client.server_capabilities.inlayHintProvider then
-					--     vim.lsp.inlay_hint(ev.buf, true)
-					-- end
-
-					-- None of this semantics tokens business.
-					-- https://www.reddit.com/r/neovim/comments/143efmd/is_it_possible_to_disable_treesitter_completely/
-					client.server_capabilities.semanticTokensProvider = nil
+		dependencies = {
+			{
+				"williamboman/mason.nvim",
+			},
+			{
+				"williamboman/mason-lspconfig.nvim",
+				config = function()
+					require("mason").setup()
+					require("mason-lspconfig").setup()
 				end,
-			})
+			},
+		},
+		config = function()
+			require("lspconfig").rust_analyzer.setup({})
 		end,
 	},
-	-- LSP-based code-completion
+	-- code completion
 	{
 		"hrsh7th/nvim-cmp",
-		-- load cmp on InsertEnter
 		event = "InsertEnter",
-		-- these dependencies will only be loaded when cmp loads
-		-- dependencies are always lazy-loaded unless specified otherwise
 		dependencies = {
-			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
@@ -384,19 +341,10 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- inline function signatures
 	{
-		"ray-x/lsp_signature.nvim",
-		event = "VeryLazy",
-		opts = {},
-		config = function(_, opts)
-			-- Get signatures (and _only_ signatures) when in argument lists.
-			require("lsp_signature").setup({
-				doc_lines = 0,
-				handler_opts = {
-					border = "none",
-				},
-			})
+		"vigoux/notifier.nvim",
+		config = function()
+			require("notifier").setup({})
 		end,
 	},
 	-- code formatting
@@ -410,7 +358,6 @@ require("lazy").setup({
 					rust = { "rustfmt", lsp_format = "fallback" },
 				},
 				format_on_save = {
-					timeout_ms = 500,
 					lsp_format = "fallback",
 				},
 			})
