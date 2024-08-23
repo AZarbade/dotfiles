@@ -320,8 +320,7 @@ require("lazy").setup({
 					["<C-n>"] = cmp.mapping.scroll_docs(-4),
 					["<C-p>"] = cmp.mapping.scroll_docs(4),
 					["<C-e>"] = cmp.mapping.abort(),
-					-- Accept currently selected item.
-					-- Set `select` to `false` to only confirm explicitly selected items.
+					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-y>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
@@ -342,6 +341,7 @@ require("lazy").setup({
 			})
 		end,
 	},
+	-- what the lsp doing!
 	{
 		"vigoux/notifier.nvim",
 		config = function()
