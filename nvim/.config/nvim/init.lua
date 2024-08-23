@@ -219,14 +219,13 @@ require("lazy").setup({
 					},
 				},
 				sections = {
-					lualine_a = {},
-					lualine_b = {
-						"fancy_branch",
+					lualine_a = {
+						{ "fancy_branch" },
 					},
-					lualine_c = {
+					lualine_b = {
 						{
 							"filename",
-							path = 2,
+							path = 1,
 							symbols = {
 								modified = "  ",
 								readonly = "  ",
@@ -240,23 +239,15 @@ require("lazy").setup({
 						},
 						{ "fancy_searchcount" },
 					},
+					lualine_c = {},
 					lualine_x = {
 						"fancy_lsp_servers",
-						"fancy_diff",
-						"progress",
 					},
-					lualine_y = {},
+					lualine_y = {
+						{ "fancy_filetype", ts_icon = "" },
+					},
 					lualine_z = {},
 				},
-				inactive_sections = {
-					lualine_a = {},
-					lualine_b = {},
-					lualine_c = { "filename" },
-					-- lualine_x = { "location" },
-					lualine_y = {},
-					lualine_z = {},
-				},
-				tabline = {},
 				extensions = { "lazy" },
 			})
 		end,
@@ -316,13 +307,13 @@ require("lazy").setup({
 						vim.fn["vsnip#anonymous"](args.body)
 					end,
 				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-n>"] = cmp.mapping.scroll_docs(-4),
-					["<C-p>"] = cmp.mapping.scroll_docs(4),
-					["<C-e>"] = cmp.mapping.abort(),
+				mapping = {
+					["<C-n>"] = cmp.mapping.select_next_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
 					["<C-Space>"] = cmp.mapping.complete(),
+					["<C-e>"] = cmp.mapping.abort(),
 					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-				}),
+				},
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 				}, {
