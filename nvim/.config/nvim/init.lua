@@ -66,6 +66,8 @@ vim.opt.listchars = "tab:^ ,nbsp:¬,extends:»,precedes:«,trail:•"
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
 -- make missing : less annoying
 vim.keymap.set("n", ";", ":")
+-- disable macro thingy
+vim.keymap.set("n", "q", "<Nop>")
 -- Ctrl+h to stop searching
 vim.keymap.set("v", "<C-h>", "<cmd>nohlsearch<cr>")
 vim.keymap.set("n", "<C-h>", "<cmd>nohlsearch<cr>")
@@ -214,7 +216,6 @@ require("lazy").setup({
 						statusline = {
 							"help",
 						},
-						winbar = {},
 					},
 				},
 				sections = {
