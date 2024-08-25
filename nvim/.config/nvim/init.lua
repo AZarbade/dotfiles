@@ -90,7 +90,7 @@ vim.keymap.set("n", "?", "?\\v")
 vim.keymap.set("n", "/", "/\\v")
 vim.keymap.set("c", "%s/", "%sm/")
 -- open new file adjacent to current file
-vim.keymap.set("n", "<leader>o", ':e <C-R>=expand("%:p:h") . "/" <cr>')
+vim.keymap.set("n", "<C-o>", ':e <C-R>=expand("%:p:h") . "/" <cr>')
 -- no arrow keys --- force yourself to use the home row
 vim.keymap.set("n", "<up>", "<nop>")
 vim.keymap.set("n", "<down>", "<nop>")
@@ -111,6 +111,14 @@ vim.keymap.set("n", "<leader>Q", ":bd<CR>")
 -- Move selected lines up
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+-- open netRW
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- never open that mode
+vim.keymap.set("n", "Q", "<nop>")
+-- manual format
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+-- substitute word under cursor (current buffer)
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -------------------------------------------------------------------------------
 --
@@ -244,7 +252,7 @@ require("lazy").setup({
 						"fancy_lsp_servers",
 					},
 					lualine_y = {
-						{ "fancy_filetype", ts_icon = "" },
+						{ "fancy_filetype" },
 					},
 					lualine_z = {},
 				},
@@ -280,23 +288,39 @@ require("lazy").setup({
 			{
 				"williamboman/mason-lspconfig.nvim",
 				config = function()
-					require("mason").setup()
+					require("mason").setup({
+						ui = {
+							icons = {
+								package_installed = "",
+								package_pending = "",
+								package_uninstalled = "",
+							},
+						},
+					})
 					require("mason-lspconfig").setup()
 				end,
 			},
 		},
 		config = function()
-			require("lspconfig").rust_analyzer.setup({})
+			-- require("lspconfig").rust_analyzer.setup({}) -- enable rust_analyzer
+			-- require("lspconfig").clangd.setup({}) -- enable clangd
 		end,
+	},
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^5", -- Recommended
+		lazy = false, -- This plugin is already lazy
 	},
 	-- code completion
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
+			"hrsh7th/vim-vsnip",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -312,18 +336,38 @@ require("lazy").setup({
 					["<C-p>"] = cmp.mapping.select_prev_item(),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
+					["<C-y>"] = cmp.mapping.confirm({
+						behavior = cmp.ConfirmBehavior.Insert,
+						select = true,
+					}),
 				},
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-				}, {
-					{ name = "path" },
-				}),
+				-- Installed sources:
+				sources = {
+					{ name = "path" }, -- file paths
+					{ name = "nvim_lsp", keyword_length = 3 }, -- from language server
+					{ name = "nvim_lsp_signature_help" }, -- display function signatures with current parameter emphasized
+					{ name = "buffer", keyword_length = 2 }, -- source current buffer
+				},
+				-- window = {
+				-- 	completion = cmp.config.window.bordered(),
+				-- 	documentation = cmp.config.window.bordered(),
+				-- },
+				formatting = {
+					fields = { "menu", "abbr", "kind" },
+					format = function(entry, item)
+						local menu_icon = {
+							nvim_lsp = "λ",
+							buffer = "Ω",
+							path = "🖫",
+						}
+						item.menu = menu_icon[entry.source.name]
+						return item
+					end,
+				},
 				experimental = {
-					ghost_text = true,
+					ghost_text = false,
 				},
 			})
-
 			-- Enable completing paths in :
 			cmp.setup.cmdline(":", {
 				sources = cmp.config.sources({
