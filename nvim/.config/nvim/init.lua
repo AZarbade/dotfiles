@@ -303,7 +303,7 @@ require("lazy").setup({
 		},
 		config = function()
 			-- require("lspconfig").rust_analyzer.setup({}) -- enable rust_analyzer
-			-- require("lspconfig").clangd.setup({}) -- enable clangd
+			require("lspconfig").clangd.setup({}) -- enable clangd
 		end,
 	},
 	{
