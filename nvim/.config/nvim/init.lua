@@ -119,6 +119,8 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- substitute word under cursor (current buffer)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- RustLsp keybinds (need "mrcjkb/rustaceanvim")
+vim.keymap.set("n", "<leader>ro", ":RustLsp openDocs<CR>")
 
 -------------------------------------------------------------------------------
 --
@@ -183,8 +185,6 @@ require("lazy").setup({
 		priority = 1000, -- load first
 		config = function()
 			vim.cmd([[colorscheme base16-gruvbox-dark-hard]])
-			vim.o.background = "dark"
-			-- XXX: hi Normal ctermbg=NONE
 			-- Make comments more prominent -- they are important.
 			local bools = vim.api.nvim_get_hl(0, { name = "Boolean" })
 			vim.api.nvim_set_hl(0, "Comment", bools)
@@ -195,11 +195,6 @@ require("lazy").setup({
 				"LspSignatureActiveParameter",
 				{ fg = marked.fg, bg = marked.bg, ctermfg = marked.ctermfg, ctermbg = marked.ctermbg, bold = true }
 			)
-			-- XXX
-			-- Would be nice to customize the highlighting of warnings and the like to make
-			-- them less glaring. But alas
-			-- https://github.com/nvim-lua/lsp_extensions.nvim/issues/21
-			-- call Base16hi("CocHintSign", g:base16_gui03, "", g:base16_cterm03, "", "", "")
 		end,
 	},
 	-- nice bar at the bottom
