@@ -69,8 +69,8 @@ vim.keymap.set("n", ";", ":")
 -- disable macro thingy
 vim.keymap.set("n", "q", "<Nop>")
 -- Ctrl+h to stop searching
-vim.keymap.set("v", "<C-h>", "<cmd>nohlsearch<cr>")
-vim.keymap.set("n", "<C-h>", "<cmd>nohlsearch<cr>")
+vim.keymap.set("v", "<C-q>", "<cmd>nohlsearch<cr>")
+vim.keymap.set("n", "<C-q>", "<cmd>nohlsearch<cr>")
 -- Copy to system clipboard
 vim.keymap.set("n", "<leader>y", '"+y', { noremap = true, silent = true })
 vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
@@ -120,7 +120,12 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- substitute word under cursor (current buffer)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- RustLsp keybinds (need "mrcjkb/rustaceanvim")
-vim.keymap.set("n", "<leader>ro", ":RustLsp openDocs<CR>")
+vim.keymap.set("n", "<leader>do", ":RustLsp openDocs<CR>")
+-- Switch between panels using Ctrl + hjkl
+vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 
 -------------------------------------------------------------------------------
 --
@@ -195,6 +200,8 @@ require("lazy").setup({
 				"LspSignatureActiveParameter",
 				{ fg = marked.fg, bg = marked.bg, ctermfg = marked.ctermfg, ctermbg = marked.ctermbg, bold = true }
 			)
+			-- Add missing color to signatures
+			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#3A3A3A" })
 		end,
 	},
 	-- nice bar at the bottom
@@ -274,33 +281,51 @@ require("lazy").setup({
 		},
 	},
 	-- LSP
+	-- NOTE: for LSP servers, using system installed binaries.
+	-- This is because esp-idf requires a custom "clangd", which mason does not have.
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{
-				"williamboman/mason.nvim",
-			},
-			{
-				"williamboman/mason-lspconfig.nvim",
-				config = function()
-					require("mason").setup({
-						ui = {
-							icons = {
-								package_installed = "",
-								package_pending = "",
-								package_uninstalled = "",
-							},
-						},
-					})
-					require("mason-lspconfig").setup()
-				end,
-			},
 		},
 		config = function()
-			-- require("lspconfig").rust_analyzer.setup({}) -- enable rust_analyzer
 			require("lspconfig").clangd.setup({}) -- enable clangd
+
+			-- Global mappings.
+			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+			vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+			vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+
+			-- Use LspAttach autocommand to only map the following keys
+			-- after the language server attaches to the current buffer
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+				callback = function(ev)
+					-- Enable completion triggered by <c-x><c-o>
+					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+					-- Buffer local mappings.
+					-- See `:help vim.lsp.*` for documentation on any of the below functions
+					local opts = { buffer = ev.buf }
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+					vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
+					vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts)
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+
+					local client = vim.lsp.get_client_by_id(ev.data.client_id)
+					client.server_capabilities.semanticTokensProvider = nil
+				end,
+			})
 		end,
 	},
+	-- Rust support
+	-- rust_analyzer is installed manually to the system.
+	-- (https://rust-analyzer.github.io/manual.html#installation)
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^5", -- Recommended
@@ -311,11 +336,10 @@ require("lazy").setup({
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			"hrsh7th/vim-vsnip",
+			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -340,20 +364,15 @@ require("lazy").setup({
 				sources = {
 					{ name = "path" }, -- file paths
 					{ name = "nvim_lsp", keyword_length = 3 }, -- from language server
-					{ name = "nvim_lsp_signature_help" }, -- display function signatures with current parameter emphasized
+					-- { name = "nvim_lsp_signature_help" }, -- display function signatures with current parameter emphasized
 					{ name = "buffer", keyword_length = 2 }, -- source current buffer
 				},
-				-- window = {
-				-- 	completion = cmp.config.window.bordered(),
-				-- 	documentation = cmp.config.window.bordered(),
-				-- },
 				formatting = {
 					fields = { "menu", "abbr", "kind" },
 					format = function(entry, item)
 						local menu_icon = {
 							nvim_lsp = "λ",
 							buffer = "Ω",
-							path = "🖫",
 						}
 						item.menu = menu_icon[entry.source.name]
 						return item

@@ -6,8 +6,8 @@
 
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "backlight", "temperature", "memory", "battery", "tray"],
+	"modules-center": ["hyprland/window"],
+    "modules-right": ["clock", "pulseaudio", "network", "temperature", "memory", "battery", "tray"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -31,6 +31,11 @@
       },
       "sort-by-number": true
     },
+
+	"hyprland/window": {
+		"format": "{initialTitle}",
+		"separate-outputs": true
+	},
 
     "tray": {
         "spacing": 10
