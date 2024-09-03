@@ -66,8 +66,6 @@ vim.opt.listchars = "tab:^ ,nbsp:¬,extends:»,precedes:«,trail:•"
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
 -- make missing : less annoying
 vim.keymap.set("n", ";", ":")
--- disable macro thingy
-vim.keymap.set("n", "q", "<Nop>")
 -- Ctrl+h to stop searching
 vim.keymap.set("v", "<C-q>", "<cmd>nohlsearch<cr>")
 vim.keymap.set("n", "<C-q>", "<cmd>nohlsearch<cr>")
@@ -337,6 +335,7 @@ require("lazy").setup({
 		event = "InsertEnter",
 		dependencies = {
 			"neovim/nvim-lspconfig",
+			"hrsh7th/vim-vsnip",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
@@ -364,7 +363,7 @@ require("lazy").setup({
 				sources = {
 					{ name = "path" }, -- file paths
 					{ name = "nvim_lsp", keyword_length = 3 }, -- from language server
-					-- { name = "nvim_lsp_signature_help" }, -- display function signatures with current parameter emphasized
+					{ name = "nvim_lsp_signature_help" }, -- display function signatures with current parameter emphasized
 					{ name = "buffer", keyword_length = 2 }, -- source current buffer
 				},
 				formatting = {
