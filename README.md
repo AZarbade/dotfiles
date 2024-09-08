@@ -11,4 +11,8 @@ I disable my primary monitor (laptop screen), change that setting.
 
 ## Screenshots
 
-![user space](./assets/screenshot.png)
+### Dark mode
+![dark](./assets/dark_mode.png)
+
+### Light mode
+![light](./assets/light_mode.png)
