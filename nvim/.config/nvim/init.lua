@@ -185,46 +185,25 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- then, setup!
 require("lazy").setup({
-	-- {
-	-- 	"uZer/pywal16.nvim",
-	-- 	lazy = false, -- load at start
-	-- 	priority = 1000, -- load first
-	-- 	config = function()
-	-- 		local pywal16 = require('pywal16')
-	-- 		pywal16.setup()
-	-- 		-- Make comments more prominent -- they are important.
-	-- 		local bools = vim.api.nvim_get_hl(0, { name = "Boolean" })
-	-- 		vim.api.nvim_set_hl(0, "Comment", bools)
-	-- 		-- Make it clearly visible which argument we're at.
-	-- 		local marked = vim.api.nvim_get_hl(0, { name = "PMenu" })
-	-- 		vim.api.nvim_set_hl(
-	-- 			0,
-	-- 			"LspSignatureActiveParameter",
-	-- 			{ fg = marked.fg, bg = marked.bg, ctermfg = marked.ctermfg, ctermbg = marked.ctermbg, bold = true }
-	-- 		)
-	-- 		-- Add missing color to signatures
-	-- 		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#3A3A3A" })
-	-- 	end
-	-- },
 	-- main color scheme
 	{
-		"wincent/base16-nvim",
+		"uZer/pywal16.nvim",
 		lazy = false, -- load at start
 		priority = 1000, -- load first
 		config = function()
-			vim.cmd([[colorscheme base16-gruvbox-dark-hard]])
+			local pywal16 = require('pywal16')
+			pywal16.setup()
+			local pywal16_core = require('pywal16.core')
+			local colors = pywal16_core.get_colors()
+
 			-- Make comments more prominent -- they are important.
-			local bools = vim.api.nvim_get_hl(0, { name = "Boolean" })
-			vim.api.nvim_set_hl(0, "Comment", bools)
-			-- Make it clearly visible which argument we're at.
-			local marked = vim.api.nvim_get_hl(0, { name = "PMenu" })
-			vim.api.nvim_set_hl(
-				0,
-				"LspSignatureActiveParameter",
-				{ fg = marked.fg, bg = marked.bg, ctermfg = marked.ctermfg, ctermbg = marked.ctermbg, bold = true }
-			)
+			vim.api.nvim_set_hl(0, "Comment", { fg = colors["color12"] })
+			
 			-- Add missing color to signatures
-			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#3A3A3A" })
+			vim.api.nvim_set_hl(0, "NormalFloat", { bg = colors["background"] })
+
+			-- Change relative line number color
+			vim.api.nvim_set_hl(0, "LineNr", { fg = colors["foreground"] })
 		end,
 	},
 	-- nice bar at the bottom
@@ -240,7 +219,7 @@ require("lazy").setup({
 			-- local icons = require("config.icons")
 			require("lualine").setup({
 				options = {
-					theme = "auto",
+					theme = "pywal16-nvim",
 					globalstatus = true,
 					icons_enabled = true,
 					component_separators = { left = "|", right = "|" },
@@ -437,11 +416,6 @@ require("lazy").setup({
 				},
 			})
 		end,
-	},
-	-- comments helper
-	{
-		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	-- Obsidian notes
 	{
