@@ -1,8 +1,5 @@
-xoffset=34
-yoffset=-34
-
 width=40%
-lines=5
+lines=2
 
 hide_scroll = true
 term=alacritty

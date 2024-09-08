@@ -56,6 +56,8 @@ vim.opt.diffopt:append("indent-heuristic")
 -- show more hidden characters
 -- also, show tabs nicer
 vim.opt.listchars = "tab:^ ,nbsp:¬,extends:»,precedes:«,trail:•"
+-- conceal level
+vim.opt.conceallevel = 2
 
 -------------------------------------------------------------------------------
 --
@@ -75,8 +77,10 @@ vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, silent = true })
 -- Paste from system clipboard
 vim.keymap.set("n", "<leader>p", '"+p', { noremap = true, silent = true })
 vim.keymap.set("v", "<leader>p", '"+p', { noremap = true, silent = true })
+-- Delete to void
+vim.keymap.set("n", "<leader>d", '"_d', { noremap = true, silent = true })
 -- <leader><leader> toggles between buffers
-vim.keymap.set("n", "<leader><leader>", "<c-^>")
+vim.keymap.set("n", "<leader>b", "<c-^>")
 -- always center search results
 vim.keymap.set("n", "n", "nzz", { silent = true })
 vim.keymap.set("n", "N", "Nzz", { silent = true })
@@ -276,6 +280,7 @@ require("lazy").setup({
 			{ "<C-p>", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
 			{ "<C-g>", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
 			{ "<leader>;", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+			{ "<leader>tt", "<cmd>Telescope colorscheme<cr>", desc = "Buffers" },
 		},
 	},
 	-- LSP
@@ -322,7 +327,7 @@ require("lazy").setup({
 		end,
 	},
 	-- Rust support
-	-- rust_analyzer is installed manually to the system.
+	-- rust_analyzer should be installed manually to the system.
 	-- (https://rust-analyzer.github.io/manual.html#installation)
 	{
 		"mrcjkb/rustaceanvim",
@@ -404,13 +409,44 @@ require("lazy").setup({
 			require("conform").setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					rust = { "rustfmt", lsp_format = "fallback" },
+					-- rust = { "rustfmt", lsp_format = "fallback" },
 				},
 				format_on_save = {
 					lsp_format = "fallback",
 				},
 			})
 		end,
+	},
+	-- comments helper
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	-- Obsidian notes
+	{
+	  "epwalsh/obsidian.nvim",
+	  version = "*",  -- recommended, use latest release instead of latest commit
+	  lazy = true,
+	  event = {
+	    "BufReadPre " .. vim.fn.expand "~" .. "/personal/notes/*.md",
+	    "BufNewFile " .. vim.fn.expand "~" .. "/personal/notes/*.md",
+	  },
+	  dependencies = {
+		"nvim-lua/plenary.nvim",
+	  },
+	  config = function ()
+		  require("obsidian").setup({
+			  workspaces = {
+				  {
+					  name = "personal",
+					  path = "/home/noir/personal/notes",
+				  },
+			  },
+			  templates = {
+				  folder = "templates",
+			  },
+		  })
+	  end
 	},
 	-- markdown support
 	{
@@ -419,10 +455,11 @@ require("lazy").setup({
 		opts = {},
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 	},
-	-- comments helper
 	{
-		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		build = function() vim.fn["mkdp#util#install"]() end,
 	},
 	-- fun stuff (absolutely not needed!)
 })
