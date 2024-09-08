@@ -10,11 +10,11 @@
 
 window#waybar {
 	background-color: @background;
-    /*color: white;*/
 }
 
 #workspaces button{
-    color: white;
+	background-color: transparent;
+	color: @foreground;
 }
 
 #workspaces button.active {
@@ -26,7 +26,7 @@ window#waybar {
 }
 
 #mode {
-    background-color: @cursor;
+    background-color: @foreground;
 }
 
 #window {
@@ -71,34 +71,34 @@ window#waybar.solo
 
 #clock {
     background-color: transparent;
-    color: white;
+    color: @foreground;
 }
 
 #battery {
     background-color: transparent;
-    color: white;
+    color: @foreground;
 }
 
 #battery.charged {
     background-color: @color12;
-    color: white;
+    color: @foreground;
 }
 
 #battery.charging {
     background-color: transparent;
-    color: white;
+    color: @foreground;
 }
 
 @keyframes blink {
     to {
         background-color: #ffffff;
-		color: white;
+		color: @foreground;
     }
 }
 
 #battery.critical:not(.charging) {
     background-color: @color8;
-    color: white;
+    color: @foreground;
     color: #ffffff;
     animation-name: blink;
     animation-duration: 0.5s;
@@ -109,62 +109,62 @@ window#waybar.solo
 
 label:focus {
     background-color: #1C1C1C;
-    color: white;
+    color: @foreground;
 }
 
 #cpu {
     background-color: transparent;
-    color: white;
+    color: @foreground;
 }
 
 #memory {
     background-color: transparent;
-    color: white;
+    color: @foreground;
 }
 
 #backlight {
     background-color: transparent;
-    color: white;
+    color: @foreground;
 }
 
 #network {
     background-color: transparent;
-    color: white;
+    color: @foreground;
 
 }
 
 #network.disconnected {
     background-color: @color9;
-    color: white;
+    color: @foreground;
 }
 
 #pulseaudio {
     background-color: transparent;
-    color: white;
+    color: @foreground;
 }
 
 #pulseaudio.muted {
     background-color: transparent;
-    color: white;
+    color: @foreground;
 }
 
 #custom-media {
     background-color: transparent;
-    color: white;
+    color: @foreground;
     min-width: 100px;
 }
 
 #temperature {
     background-color: @color12;
-    color: white;
+    color: @foreground;
 }
 
 #temperature.critical {
     background-color: @color8;
-    color: white;
+    color: @foreground;
 }
 
 #tray {
     background-color: @color13; 
-    color: white;
+    color: @foreground;
 }
