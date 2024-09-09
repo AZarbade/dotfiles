@@ -191,14 +191,14 @@ require("lazy").setup({
 		lazy = false, -- load at start
 		priority = 1000, -- load first
 		config = function()
-			local pywal16 = require('pywal16')
+			local pywal16 = require("pywal16")
 			pywal16.setup()
-			local pywal16_core = require('pywal16.core')
+			local pywal16_core = require("pywal16.core")
 			local colors = pywal16_core.get_colors()
 
 			-- Make comments more prominent -- they are important.
 			vim.api.nvim_set_hl(0, "Comment", { fg = colors["color12"] })
-			
+
 			-- Add missing color to signatures
 			vim.api.nvim_set_hl(0, "NormalFloat", { bg = colors["background"] })
 
@@ -288,8 +288,7 @@ require("lazy").setup({
 	-- This is because esp-idf requires a custom "clangd", which mason does not have.
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = {
-		},
+		dependencies = {},
 		config = function()
 			require("lspconfig").clangd.setup({}) -- enable clangd
 
@@ -321,7 +320,6 @@ require("lazy").setup({
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
-					client.server_capabilities.semanticTokensProvider = nil
 				end,
 			})
 		end,
@@ -333,6 +331,31 @@ require("lazy").setup({
 		"mrcjkb/rustaceanvim",
 		version = "^5", -- Recommended
 		lazy = false, -- This plugin is already lazy
+	},
+	-- Lua support
+	{
+		{
+			"folke/lazydev.nvim",
+			ft = "lua", -- only load on lua files
+			opts = {
+				library = {
+					-- See the configuration section for more details
+					-- Load luvit types when the `vim.uv` word is found
+					{ path = "luvit-meta/library", words = { "vim%.uv" } },
+				},
+			},
+		},
+		{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+		{ -- optional completion source for require statements and module annotations
+			"hrsh7th/nvim-cmp",
+			opts = function(_, opts)
+				opts.sources = opts.sources or {}
+				table.insert(opts.sources, {
+					name = "lazydev",
+					group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+				})
+			end,
+		},
 	},
 	-- code completion
 	{
@@ -403,13 +426,18 @@ require("lazy").setup({
 	},
 	-- code formatting
 	{
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup()
+		end,
+	},
+	{
 		"stevearc/conform.nvim",
 		opts = {},
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					-- rust = { "rustfmt", lsp_format = "fallback" },
 				},
 				format_on_save = {
 					lsp_format = "fallback",
@@ -419,29 +447,29 @@ require("lazy").setup({
 	},
 	-- Obsidian notes
 	{
-	  "epwalsh/obsidian.nvim",
-	  version = "*",  -- recommended, use latest release instead of latest commit
-	  lazy = true,
-	  event = {
-	    "BufReadPre " .. vim.fn.expand "~" .. "/personal/notes/*.md",
-	    "BufNewFile " .. vim.fn.expand "~" .. "/personal/notes/*.md",
-	  },
-	  dependencies = {
-		"nvim-lua/plenary.nvim",
-	  },
-	  config = function ()
-		  require("obsidian").setup({
-			  workspaces = {
-				  {
-					  name = "personal",
-					  path = "/home/noir/personal/notes",
-				  },
-			  },
-			  templates = {
-				  folder = "templates",
-			  },
-		  })
-	  end
+		"epwalsh/obsidian.nvim",
+		version = "*", -- recommended, use latest release instead of latest commit
+		lazy = true,
+		event = {
+			"BufReadPre " .. vim.fn.expand("~") .. "/personal/notes/*.md",
+			"BufNewFile " .. vim.fn.expand("~") .. "/personal/notes/*.md",
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("obsidian").setup({
+				workspaces = {
+					{
+						name = "personal",
+						path = "/home/noir/personal/notes",
+					},
+				},
+				templates = {
+					folder = "templates",
+				},
+			})
+		end,
 	},
 	-- markdown support
 	{
@@ -454,7 +482,9 @@ require("lazy").setup({
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
-		build = function() vim.fn["mkdp#util#install"]() end,
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
 	},
 	-- fun stuff (absolutely not needed!)
 })
