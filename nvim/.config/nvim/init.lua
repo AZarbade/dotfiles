@@ -426,17 +426,12 @@ require("lazy").setup({
 	},
 	-- code formatting
 	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-		end,
-	},
-	{
 		"stevearc/conform.nvim",
 		opts = {},
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
+					-- stylua should be installed manually to the system.
 					lua = { "stylua" },
 				},
 				format_on_save = {
