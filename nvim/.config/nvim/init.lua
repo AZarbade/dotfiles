@@ -196,13 +196,10 @@ require("lazy").setup({
 			local pywal16_core = require("pywal16.core")
 			local colors = pywal16_core.get_colors()
 
-			-- Make comments more prominent -- they are important.
-			vim.api.nvim_set_hl(0, "Comment", { fg = colors["color12"] })
-
-			-- Add missing color to signatures
+			-- Color changes
 			vim.api.nvim_set_hl(0, "NormalFloat", { bg = colors["background"] })
-
-			-- Change relative line number color
+			vim.api.nvim_set_hl(0, "Comment", { fg = colors["color9"] })
+			vim.api.nvim_set_hl(0, "Visual", { bg = colors["color1"] })
 			vim.api.nvim_set_hl(0, "LineNr", { fg = colors["foreground"] })
 		end,
 	},
@@ -216,7 +213,6 @@ require("lazy").setup({
 		lazy = false,
 		event = { "BufReadPost", "BufNewFile", "VeryLazy" },
 		config = function()
-			-- local icons = require("config.icons")
 			require("lualine").setup({
 				options = {
 					theme = "pywal16-nvim",
