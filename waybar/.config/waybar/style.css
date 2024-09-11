@@ -85,7 +85,7 @@ window#waybar.solo
 }
 
 #battery.charging {
-    background-color: transparent;
+    background-color: @color13;
     color: @foreground;
 }
 

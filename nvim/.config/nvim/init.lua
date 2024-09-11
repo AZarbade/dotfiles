@@ -286,7 +286,8 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		dependencies = {},
 		config = function()
-			require("lspconfig").clangd.setup({}) -- enable clangd
+			-- require("lspconfig").clangd.setup({}) -- enable clangd (esp-idf)
+			require("lspconfig").ccls.setup({}) -- enable ccls (platformio)
 
 			-- Global mappings.
 			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -478,4 +479,12 @@ require("lazy").setup({
 		end,
 	},
 	-- fun stuff (absolutely not needed!)
+	{
+		"anurag3301/nvim-platformio.lua",
+		dependencies = {
+			{ "akinsho/nvim-toggleterm.lua" },
+			{ "nvim-telescope/telescope.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+		},
+	},
 })
