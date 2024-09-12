@@ -197,10 +197,10 @@ require("lazy").setup({
 			local colors = pywal16_core.get_colors()
 
 			-- Color changes
-			vim.api.nvim_set_hl(0, "NormalFloat", { bg = colors["background"] })
-			vim.api.nvim_set_hl(0, "Comment", { fg = colors["color9"] })
-			vim.api.nvim_set_hl(0, "Visual", { bg = colors["color1"] })
-			vim.api.nvim_set_hl(0, "LineNr", { fg = colors["foreground"] })
+			-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = colors["background"] })
+			-- vim.api.nvim_set_hl(0, "Comment", { fg = colors["color9"] })
+			-- vim.api.nvim_set_hl(0, "Visual", { bg = colors["color1"] })
+			-- vim.api.nvim_set_hl(0, "LineNr", { fg = colors["color1"] })
 		end,
 	},
 	-- nice bar at the bottom
