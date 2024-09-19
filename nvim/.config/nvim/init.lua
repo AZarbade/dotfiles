@@ -479,12 +479,60 @@ require("lazy").setup({
 		end,
 	},
 	-- fun stuff (absolutely not needed!)
+	------
+	-- json colors, usefull for color-scheme tweaks
 	{
-		"anurag3301/nvim-platformio.lua",
-		dependencies = {
-			{ "akinsho/nvim-toggleterm.lua" },
-			{ "nvim-telescope/telescope.nvim" },
-			{ "nvim-lua/plenary.nvim" },
-		},
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({
+				"json",
+			})
+		end,
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup({
+				on_attach = function(bufnr)
+					local gitsigns = require("gitsigns")
+
+					local function map(mode, l, r, opts)
+						opts = opts or {}
+						opts.buffer = bufnr
+						vim.keymap.set(mode, l, r, opts)
+					end
+
+					-- Navigation
+					map("n", "]c", function()
+						if vim.wo.diff then
+							vim.cmd.normal({ "]c", bang = true })
+						else
+							gitsigns.nav_hunk("next")
+						end
+					end)
+
+					map("n", "[c", function()
+						if vim.wo.diff then
+							vim.cmd.normal({ "[c", bang = true })
+						else
+							gitsigns.nav_hunk("prev")
+						end
+					end)
+
+					-- Actions
+					map("n", "<leader>hs", gitsigns.stage_hunk)
+					map("n", "<leader>hr", gitsigns.reset_hunk)
+					map("v", "<leader>hs", function()
+						gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+					end)
+					map("v", "<leader>hr", function()
+						gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+					end)
+					map("n", "<leader>hp", gitsigns.preview_hunk)
+					map("n", "<leader>hd", gitsigns.diffthis)
+					map("n", "<leader>td", gitsigns.toggle_deleted)
+				end,
+			})
+		end,
 	},
 })
