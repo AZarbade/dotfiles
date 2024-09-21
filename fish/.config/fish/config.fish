@@ -26,21 +26,23 @@ setenv LESS_TERMCAP_ue \e'[0m'           # end underline
 setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
 # Abbreviations
-abbr -a ls exa -l
-abbr -a lsl exa -la
-abbr -a tree exa --tree
-abbr -a tm tmux -u
-abbr -a btop btop --utf-force
+abbr -a ls 'exa -l'
+abbr -a lsl 'exa -la'
+abbr -a tree 'exa --tree'
+abbr -a tm 'tmux -u'
+abbr -a btop 'btop --utf-force'
+abbr -a p 'sudo pacman'
+abbr -a up 'sudo pacman -Syu'
 
 # Media abbreviations
 abbr -a vol pulsemixer
 abbr -a blue bluetui
 
 # Git abbreviations
-abbr -a gs git status
-abbr -a gc git commit
-abbr -a gm git merge --no-ff
-abbr -a gg git-graph
+abbr -a gs 'git status'
+abbr -a gc 'git commit'
+abbr -a gm 'git merge --no-ff'
+abbr -a gg 'git-graph'
 
 # Obsidian setup
 abbr -a oo obsidian_notes

@@ -286,8 +286,8 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		dependencies = {},
 		config = function()
-			-- require("lspconfig").clangd.setup({}) -- enable clangd (esp-idf)
-			require("lspconfig").ccls.setup({}) -- enable ccls (platformio)
+			require("lspconfig").clangd.setup({}) -- enable clangd (esp-idf)
+			-- require("lspconfig").ccls.setup({}) -- enable ccls (platformio)
 
 			-- Global mappings.
 			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -463,24 +463,28 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- markdown support
+	-- obsidian support
 	{
-		"MeanderingProgrammer/markdown.nvim",
-		main = "render-markdown",
-		opts = {},
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		"epwalsh/obsidian.nvim",
+		version = "*",
+		lazy = true,
+		event = {
+			"BufReadPre home/noir/personal/notes/*.md",
+			"BufNewFile home/noir/personal/notes/*.md",
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		opts = {
+			workspaces = {
+				{
+					name = "personal",
+					path = "~/personal/notes",
+				},
+			},
+		},
 	},
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-	},
-	-- fun stuff (absolutely not needed!)
-	------
-	-- json colors, usefull for color-scheme tweaks
+	-- enables colors in json files. usefull for colorscheme tweaks
 	{
 		"norcalli/nvim-colorizer.lua",
 		config = function()
@@ -489,6 +493,7 @@ require("lazy").setup({
 			})
 		end,
 	},
+	-- Git changes besides number column
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
