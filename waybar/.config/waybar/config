@@ -2,7 +2,7 @@
 {
     // "position": "top", // Waybar position (top|bottom|left|right)
     // "height": 10, // Waybar height (to be removed for auto height)
-    "margin": "4 4 0 4",
+    "margin": "8 8 0 8",
 
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],

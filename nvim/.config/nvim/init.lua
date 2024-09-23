@@ -80,7 +80,7 @@ vim.keymap.set("v", "<leader>p", '"+p', { noremap = true, silent = true })
 -- Delete to void
 vim.keymap.set("n", "<leader>d", '"_d', { noremap = true, silent = true })
 -- <leader><leader> toggles between buffers
-vim.keymap.set("n", "<leader>b", "<c-^>")
+vim.keymap.set("n", "<leader><leader>", "<c-^>")
 -- always center search results
 vim.keymap.set("n", "n", "nzz", { silent = true })
 vim.keymap.set("n", "N", "Nzz", { silent = true })
@@ -106,10 +106,8 @@ vim.keymap.set("n", "<right>", ":bn<cr>")
 -- make j and k move by visual line, not actual line, when text is soft-wrapped
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
--- handy keymap for replacing up to next _ (like in variable names)
-vim.keymap.set("n", "<leader>m", "ct_")
 -- close current buffer
-vim.keymap.set("n", "<leader>Q", ":bd<CR>")
+vim.keymap.set("n", "Q", ":bd<CR>")
 -- Move selected lines up
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
