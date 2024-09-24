@@ -35,8 +35,8 @@ abbr -a p 'sudo pacman'
 abbr -a up 'sudo pacman -Syu'
 
 # Media abbreviations
-abbr -a vol pulsemixer
-abbr -a blue bluetui
+abbr -a vol 'pulsemixer'
+abbr -a blue 'bluetui'
 
 # Git abbreviations
 abbr -a gs 'git status'
@@ -46,19 +46,18 @@ abbr -a gg 'git-graph'
 
 # Obsidian setup
 abbr -a oo obsidian_notes
-
 function obsidian_notes
     cd ~/personal/notes
     nvim
 end
 
 # Embedded bindings
-abbr -a get_esprs . $HOME/export-esp.sh
-abbr -a get_idf . $HOME/personal/esp_box/esp-idf/export.fish
-abbr -a idf idf.py
+abbr -a get_esprs '. $HOME/export-esp.sh'
+abbr -a get_idf '. $HOME/personal/esp_box/esp-idf/export.fish'
+abbr -a idf 'idf.py'
 
 # fzf binds
-bind \cp fzf_tmux
+bind -M insert \cp fzf_tmux
 
 # Greetings function
 function fish_greeting
