@@ -44,6 +44,13 @@ abbr -a gc 'git commit'
 abbr -a gm 'git merge --no-ff'
 abbr -a gg 'git-graph'
 
+# Tor browser
+abbr -a tor start_tor
+function start_tor
+	cd ~/Documents/tor-browser
+	./start-tor-browser.desktop
+end
+
 # Obsidian setup
 abbr -a oo obsidian_notes
 function obsidian_notes
