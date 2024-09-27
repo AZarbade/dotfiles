@@ -11,7 +11,7 @@ vim.opt.foldenable = false
 vim.opt.foldmethod = "manual"
 vim.opt.foldlevelstart = 99
 -- keep more context on screen while scrolling
-vim.opt.scrolloff = 2
+vim.opt.scrolloff = 5
 -- never show me line breaks if they're not there
 vim.opt.wrap = false
 -- always draw sign column. prevents buffer moving when adding/deleting sign
@@ -64,11 +64,10 @@ vim.opt.conceallevel = 2
 -- hotkeys
 --
 -------------------------------------------------------------------------------
--- quick-save
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
+
 -- make missing : less annoying
 vim.keymap.set("n", ";", ":")
--- Ctrl+h to stop searching
+-- Ctrl+q to stop searching
 vim.keymap.set("v", "<C-q>", "<cmd>nohlsearch<cr>")
 vim.keymap.set("n", "<C-q>", "<cmd>nohlsearch<cr>")
 -- Copy to system clipboard
@@ -111,21 +110,19 @@ vim.keymap.set("n", "Q", ":bd<CR>")
 -- Move selected lines up
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
--- open netRW
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 -- never open that mode
 vim.keymap.set("n", "Q", "<nop>")
 -- manual format
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- substitute word under cursor (current buffer)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
--- RustLsp keybinds (need "mrcjkb/rustaceanvim")
-vim.keymap.set("n", "<leader>do", ":RustLsp openDocs<CR>")
 -- Switch between panels using Ctrl + hjkl
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
+-- RustLsp keybinds (need "mrcjkb/rustaceanvim")
+vim.keymap.set("n", "<leader>do", ":RustLsp openDocs<CR>")
 
 -------------------------------------------------------------------------------
 --
@@ -193,12 +190,6 @@ require("lazy").setup({
 			pywal16.setup()
 			local pywal16_core = require("pywal16.core")
 			local colors = pywal16_core.get_colors()
-
-			-- Color changes
-			-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = colors["background"] })
-			-- vim.api.nvim_set_hl(0, "Comment", { fg = colors["color9"] })
-			-- vim.api.nvim_set_hl(0, "Visual", { bg = colors["color1"] })
-			-- vim.api.nvim_set_hl(0, "LineNr", { fg = colors["color1"] })
 		end,
 	},
 	-- nice bar at the bottom
@@ -274,7 +265,6 @@ require("lazy").setup({
 			{ "<C-p>", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
 			{ "<C-g>", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
 			{ "<leader>;", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-			{ "<leader>tt", "<cmd>Telescope colorscheme<cr>", desc = "Buffers" },
 		},
 	},
 	-- LSP
@@ -482,53 +472,6 @@ require("lazy").setup({
 				},
 			})
 		end,
-	},
-	-- Obsidian notes
-	{
-		"epwalsh/obsidian.nvim",
-		version = "*", -- recommended, use latest release instead of latest commit
-		lazy = true,
-		event = {
-			"BufReadPre " .. vim.fn.expand("~") .. "/personal/notes/*.md",
-			"BufNewFile " .. vim.fn.expand("~") .. "/personal/notes/*.md",
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			require("obsidian").setup({
-				workspaces = {
-					{
-						name = "personal",
-						path = "/home/noir/personal/notes",
-					},
-				},
-				templates = {
-					folder = "templates",
-				},
-			})
-		end,
-	},
-	-- obsidian support
-	{
-		"epwalsh/obsidian.nvim",
-		version = "*",
-		lazy = true,
-		event = {
-			"BufReadPre home/noir/personal/notes/*.md",
-			"BufNewFile home/noir/personal/notes/*.md",
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		opts = {
-			workspaces = {
-				{
-					name = "personal",
-					path = "~/personal/notes",
-				},
-			},
-		},
 	},
 	-- enables colors in json files. usefull for colorscheme tweaks
 	{
