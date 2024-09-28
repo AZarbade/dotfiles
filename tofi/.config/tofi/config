@@ -15,11 +15,11 @@ prompt-text = "run: "
 
 # Window Style
 anchor = top-left
-margin-top = 3
-margin-left = 3
-margin-right = 3
+margin-top = 8
+margin-left = 8
+margin-right = 8
 corner-radius = 4
-width = 1914
+width = 1904
 height = 30
 horizontal = true
 background-color = #1D2021
@@ -31,7 +31,7 @@ outline-width = 0
 border-width = 0
 min-input-width = 120
 result-spacing = 15
-padding-top = 3
+padding-top = 5
 padding-bottom = 0
-padding-left = 6
-padding-right = 6
+padding-left = 8
+padding-right = 8
