@@ -4,7 +4,7 @@ set -e
 
 # Function to show usage
 usage() {
-    echo "Usage: $0 [-v] [-k] [-p password] <file>"
+    echo "Usage: upfile [-v] [-k] [-p password] <file>"
     echo "  -v: Verbose mode"
     echo "  -k: Keep zip file after upload"
     echo "  -p: Specify password for encryption"
