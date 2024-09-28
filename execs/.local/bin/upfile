@@ -1,0 +1,93 @@
+#!/bin/bash
+
+set -e
+
+# Function to show usage
+usage() {
+    echo "Usage: $0 [-v] [-k] [-p password] <file>"
+    echo "  -v: Verbose mode"
+    echo "  -k: Keep zip file after upload"
+    echo "  -p: Specify password for encryption"
+    exit 1
+}
+
+# Parse options
+verbose=0
+keep_zip=0
+password=""
+
+while getopts "vkp:" opt; do
+    case $opt in
+        v) verbose=1 ;;
+        k) keep_zip=1 ;;
+        p) password=$OPTARG ;;
+        \?) usage ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+# Check if an input file is provided
+if [ $# -eq 0 ]; then
+    echo "Error: Please provide an input file."
+    usage
+fi
+
+# Check if the input file exists
+if [ ! -f "$1" ]; then
+    echo "Error: File '$1' not found."
+    exit 1
+fi
+
+# Create temporary directory using mktemp
+tmp_dir=$(mktemp -d)
+zip_file="${tmp_dir}/archive.zip"
+
+# Copy input file to temporary directory
+cp "$1" "$tmp_dir"
+
+# Create zip file
+if [ $verbose -eq 1 ]; then
+    zip -r "$zip_file" "$tmp_dir"
+else
+    zip -r -q "$zip_file" "$tmp_dir"
+fi
+
+# Encrypt zip file
+if [ -n "$password" ]; then
+    echo "$password" | zipcloak -q "$zip_file"
+else
+    zipcloak "$zip_file"
+fi
+
+# Function to upload file with retries
+upload_with_retry() {
+    local max_attempts=3
+    local attempt=1
+    while [ $attempt -le $max_attempts ]; do
+        url=$(curl -s -F "file=@$zip_file" https://0x0.st)
+        if [ -n "$url" ]; then
+            echo "File uploaded successfully."
+            echo "URL:"
+            echo "$url"
+            return 0
+        fi
+        echo "Upload attempt $attempt failed. Retrying..."
+        attempt=$((attempt+1))
+        sleep 2
+    done
+    echo "Error: Failed to upload file after $max_attempts attempts."
+    return 1
+}
+
+# Upload file
+upload_with_retry
+
+# Cleanup
+if [ $keep_zip -eq 0 ]; then
+    rm -rf "$tmp_dir"
+else
+    mv "$zip_file" .
+    rm -rf "$tmp_dir"
+    echo "Encrypted zip file kept: $(basename "$zip_file")"
+fi
