@@ -105,4 +105,7 @@ update_motd
 # Setting fish as default user shell
 chsh -s /usr/bin/fish $USER
 
+# stow everything
+stow server
+
 echo "Setup completed successfully!"
