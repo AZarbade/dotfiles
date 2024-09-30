@@ -71,7 +71,7 @@ update_motd() {
     # Install figlet and figlet-fonts if not already installed
     if ! command -v figlet &> /dev/null; then
         echo "figlet is not installed. Installing now..."
-        install_packages figlet figlet-fonts
+        install_packages figlet
     fi
 
     # Generate ASCII art of hostname with ANSI Shadow font
@@ -103,6 +103,6 @@ install_nerd_font
 update_motd
 
 # Setting fish as default user shell
-chsh -s /usr/bin/fish hol
+chsh -s /usr/bin/fish $USER
 
 echo "Setup completed successfully!"
