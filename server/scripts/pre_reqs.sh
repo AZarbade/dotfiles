@@ -35,13 +35,6 @@ install_fish() {
     check_status "Fish shell installation"
 }
 
-# Function to install Atuin
-install_atuin() {
-    echo "Installing Atuin..."
-    bash <(curl https://raw.githubusercontent.com/ellie/atuin/main/install.sh)
-    check_status "Atuin installation"
-}
-
 # Function to install Nerd Font
 install_nerd_font() {
     local font_name="JetBrainsMono"
@@ -83,9 +76,6 @@ check_status "basic utilities installation"
 
 # Install Fish shell
 install_fish
-
-# Install Atuin
-install_atuin
 
 # Install Nerd Font
 install_nerd_font
