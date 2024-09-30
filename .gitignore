@@ -1,3 +1,6 @@
 avalore/.config/fish/fish_variables
 avalore/.config/nvim/lazy-lock.json
 avalore/.config/btop/btop.log
+
+server/.config/fish/fish_variables
+server/.config/atuin
