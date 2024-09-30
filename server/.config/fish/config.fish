@@ -4,8 +4,6 @@ set -g fish_greeting
 set -g fish_user_key_bindings
 
 set -x PATH $HOME/.local/bin $PATH
-fish_add_path /opt/nvim-linux64/bin
-atuin init fish | source
 
 # Fish git prompt
 set __fish_git_prompt_showuntrackedfiles 'yes'
