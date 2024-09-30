@@ -90,13 +90,4 @@ install_atuin
 # Install Nerd Font
 install_nerd_font
 
-# Run additional font installation script if it exists
-if [ -f "./font_install.sh" ]; then
-    echo "Running additional font installation script..."
-    bash "./font_install.sh"
-    check_status "additional font installation"
-else
-    echo "Additional font installation script not found. Skipping."
-fi
-
 echo "Setup completed successfully!"
