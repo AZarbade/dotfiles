@@ -28,7 +28,7 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 check_status "Atuin"
 
 # Run font_install.sh if it exists
-FONT_SCRIPT="font_install.sh"
+FONT_SCRIPT="./font_install.sh"
 
 if [ -f "$FONT_SCRIPT" ]; then
   echo "Running font installation script..."
