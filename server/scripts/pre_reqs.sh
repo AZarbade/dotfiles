@@ -71,7 +71,7 @@ echo "Starting setup..."
 
 # Install basic utilities
 echo "Installing basic utilities..."
-install_packages htop git curl wget unzip tmux fzf
+install_packages htop git curl wget unzip tmux fzf stow
 check_status "basic utilities installation"
 
 # Install Fish shell
