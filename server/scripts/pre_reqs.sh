@@ -74,14 +74,8 @@ update_motd() {
         install_packages figlet figlet-fonts
     fi
 
-    # Check if ANSI Shadow font is available
-    if ! figlet -f "pagga" "test" &> /dev/null; then
-        echo "pagga font is not available. Please ensure figlet-fonts is installed."
-        exit 1
-    fi
-
     # Generate ASCII art of hostname with ANSI Shadow font
-    ascii_hostname=$(figlet -f "pagga" "$hostname")
+    ascii_hostname=$(figlet "$hostname")
 
     # Edit /etc/motd directly
     sudo tee /etc/motd > /dev/null << EOF
