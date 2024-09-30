@@ -4,7 +4,6 @@ set -g fish_greeting
 set -g fish_user_key_bindings
 
 set -x PATH $HOME/.local/bin $PATH
-set -x PATH $HOME/.platformio/penv/bin $PATH
 fish_add_path /opt/nvim-linux64/bin
 atuin init fish | source
 
@@ -26,42 +25,12 @@ setenv LESS_TERMCAP_ue \e'[0m'           # end underline
 setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
 # Abbreviations
-abbr -a ls 'exa -l'
-abbr -a lsl 'exa -la'
-abbr -a tree 'exa --tree'
 abbr -a tm 'tmux -u'
-abbr -a btop 'btop --utf-force'
-abbr -a p 'sudo pacman'
-abbr -a up 'sudo pacman -Syu'
-
-# Media abbreviations
-abbr -a vol 'pulsemixer'
-abbr -a blue 'bluetui'
 
 # Git abbreviations
 abbr -a gs 'git status'
 abbr -a gc 'git commit'
 abbr -a gm 'git merge --no-ff'
-abbr -a gg 'git-graph'
-
-# Tor browser
-abbr -a tor start_tor
-function start_tor
-	cd ~/Documents/tor-browser
-	./start-tor-browser.desktop
-end
-
-# Obsidian setup
-abbr -a oo obsidian_notes
-function obsidian_notes
-    cd ~/personal/notes
-    nvim
-end
-
-# Embedded bindings
-abbr -a get_esprs '. $HOME/export-esp.sh'
-abbr -a get_idf '. $HOME/personal/esp_box/esp-idf/export.fish'
-abbr -a idf 'idf.py'
 
 # fzf binds
 bind -M insert \cp fzf_tmux
