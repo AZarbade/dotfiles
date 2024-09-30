@@ -80,4 +80,7 @@ install_fish
 # Install Nerd Font
 install_nerd_font
 
+# Setting fish as default user shell
+chsh -s /usr/bin/fish hol
+
 echo "Setup completed successfully!"
