@@ -114,25 +114,28 @@ end
 
 # Fish prompt
 function fish_prompt
-	set_color brblack
+	# Ensure pywal colors are loaded
+    if test -e ~/.cache/wal/colors.fish
+        source ~/.cache/wal/colors.fish
+    end
+
+	set_color $color1
 	echo -n "["(date "+%H:%M")"] "
-	set_color yellow
+	set_color $color4
 	echo -n (whoami)
-	set_color yellow
 	echo -n  "@"
-	set_color yellow
 	echo -n (hostnamectl hostname)
 	if [ $PWD != $HOME ]
-		set_color brblack
+		set_color $color4
 		echo -n ':'
-		set_color blue
+		set_color $color15
 		echo -n (basename $PWD)
 	end
-	set_color green
+	set_color $color11
 	printf '%s ' (__fish_git_prompt)
-	set_color red
+	set_color $color8
 	echo -n '| '
-	set_color normal
+	set_color $color7
 end
 
 # Fish git prompt
