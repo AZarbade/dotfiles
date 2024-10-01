@@ -93,7 +93,7 @@ function fzf_tmux
     set -l dirs ~/personal ~/dotfiles # Add more directories as needed
     set -l selected (begin
         printf "%s\n" $dirs
-        fd --hidden --type d . $dirs
+        find --hidden --type d . $dirs
     end | sort | uniq | fzf --preview "ls -lha {}")
     
     if test -z "$selected"
