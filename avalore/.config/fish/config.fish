@@ -26,6 +26,7 @@ abbr -a tm 'tmux -u'
 abbr -a btop 'btop --utf-force'
 abbr -a p 'sudo pacman'
 abbr -a up 'sudo pacman -Syu'
+abbr -a bkms 'nvim $HOME/dotfiles/bookmarks'
 
 # Media abbreviations
 abbr -a vol 'pulsemixer'
