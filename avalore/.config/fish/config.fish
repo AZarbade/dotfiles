@@ -37,6 +37,7 @@ abbr -a gs 'git status'
 abbr -a gc 'git commit'
 abbr -a gm 'git merge --no-ff'
 abbr -a gg 'git-graph'
+abbr -a gp 'git push github main && git push gitea main'
 
 # Obsidian setup
 abbr -a oo obsidian_notes
