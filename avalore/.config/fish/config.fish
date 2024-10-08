@@ -52,7 +52,7 @@ abbr -a get_idf '. $HOME/personal/esp_box/esp-idf/export.fish'
 abbr -a idf 'idf.py'
 
 # fzf binds
-bind -M insert \cp fzf_tmux
+bind -M insert \cp '$HOME/dotfiles/avalore/.local/bin/fzf_tmux.sh'
 
 # Greetings function
 function fish_greeting
@@ -104,47 +104,6 @@ end
 # Vim Mode
 function fish_user_key_bindings
   fish_vi_key_bindings
-end
-
-# Function for fzf (directory in tmux session)
-function fzf_tmux
-    set -l dirs ~/personal ~/dotfiles # Add more directories as needed
-    set -l selected (begin
-        printf "%s\n" $dirs
-        fd --hidden --type d --max-depth 3 . $dirs
-    end | sort | uniq | fzf \
-        --preview 'exa --tree {} | head -200' \
-        --preview-window right:50%:wrap \
-        --prompt "Select directory: " \
-        --header "↑↓:Navigate │ Enter:Select │ Ctrl-C:Cancel " \
-        --border rounded \
-        --height 40% \
-		--color 'bg:#1d2021,fg:#fbf1c7,hl:#fabd2f'\
-        --color 'fg+:#fbf1c7,bg+:#3c3836,hl+:#fabd2f'\
-        --color 'info:#83a598,prompt:#bdae93,pointer:#fb4934'\
-        --color 'marker:#fb4934,spinner:#fabd2f,header:#665c54'\
-        --color 'border:#504945,preview-bg:#1d2021')
-    
-    if test -z "$selected"
-        return
-    end
-    set -l selected_name (basename "$selected" | tr . _)
-    set -l session_exists (tmux list-sessions | grep $selected_name)
-    
-    if test -n "$TMUX"
-        if test -n "$session_exists"
-            tmux switch-client -t $selected_name
-        else
-            tmux new-session -d -s $selected_name -c "$selected"
-            tmux switch-client -t $selected_name
-        end
-    else
-        if test -n "$session_exists"
-            tmux attach-session -t $selected_name
-        else
-            tmux new-session -s $selected_name -c "$selected"
-        end
-    end
 end
 
 # Fish prompt
