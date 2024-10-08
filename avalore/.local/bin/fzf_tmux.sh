@@ -2,7 +2,7 @@
 
 # Define search lists
 dirs=("$HOME/personal" "$HOME/dotfiles")
-dir_list=$(fd --hidden --type d . "${dirs[@]}" 2>/dev/null | sort | uniq)
+dir_list=$(printf "%s\n" "${dirs[@]}" && fd --hidden --type d . "${dirs[@]}" 2>/dev/null | sort | uniq)
  
 # Use fzf to select from the combined list
 selected=$(echo "$dir_list" | fzf \
@@ -11,7 +11,6 @@ selected=$(echo "$dir_list" | fzf \
 	   --prompt "Select directory or session: " \
 	   --header "↑↓:Navigate │ Enter:Select │ Ctrl-C:Cancel " \
 	   --border rounded \
-	   --height 40% \
 	   --color "bg:#1d2021,fg:#fbf1c7,hl:#fabd2f"\
 	   --color "fg+:#fbf1c7,bg+:#3c3836,hl+:#fabd2f"\
 	   --color "info:#83a598,prompt:#bdae93,pointer:#fb4934"\
