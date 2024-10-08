@@ -1,13 +1,19 @@
 # Personal Dotfiles
 
-This repository serves as a .git mirror for my personal dotfiles.
-This entire repository is a giant mess, don't use it.
+This repository serves as a `.git` mirror for my personal dotfiles. Please note that this repository is a work in progress and may contain configurations that are not suitable for general use.
 
-> [!WARNING]
-> If, you do decide to use this **make** sure to change the hyprland monitor config.
-> I disable my primary monitor (laptop screen), change that setting.
+> **Warning:**  
+> If you decide to use this repository, make sure to **update the Hyprland monitor configuration**. I have disabled my primary monitor (the laptop screen), so you'll need to adjust that setting for your own setup.
+
+## Notable Scripts
+
+- **`avalore/.local/bin/fzf_tmux`**  
+  A global tmux sessionizer that provides fuzzy search capabilities over selected directories, allowing you to create tmux sessions quickly.
+
+- **`avalore/.local/bin/bookmarks`**  
+  Coming soon...
 
 ## Screenshots
 
-### Dark mode
-![dark](./assets/dark_mode.png)
+### Dark Mode
+![Dark Mode](./assets/dark_mode.png)
