@@ -105,27 +105,28 @@ function fish_user_key_bindings
   fish_vi_key_bindings
 end
 
-
 # Function for fzf (directory in tmux session)
 function fzf_tmux
     set -l dirs ~/personal ~/dotfiles # Add more directories as needed
     set -l selected (begin
         printf "%s\n" $dirs
         fd --hidden --type d . $dirs
-    end | sort | uniq | fzf --preview "ls -lha {}")
+    end | sort | uniq | fzf \
+        --preview 'tree -C {} | head -200' \
+        --preview-window right:50%:wrap \
+        --prompt "Select directory: " \
+        --header "↑↓:Navigate │ Enter:Select │ Ctrl-C:Cancel" \
+        --border rounded \
+        --height 40%)
     
     if test -z "$selected"
         return
     end
-
     set -l selected_name (basename "$selected" | tr . _)
-
     if test -n "$TMUX"
-        # If inside tmux, create a new session and switch to it
         tmux new-session -d -s $selected_name -c "$selected"
         tmux switch-client -t $selected_name
     else
-        # If not in tmux, create new session and attach to it
         tmux new-session -s $selected_name -c "$selected"
     end
 end
