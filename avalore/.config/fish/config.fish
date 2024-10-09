@@ -24,7 +24,7 @@ abbr -a lsl 'exa -la'
 abbr -a tree 'exa --tree'
 abbr -a tm 'tmux -u'
 abbr -a btop 'btop --utf-force'
-abbr -a p 'sudo pacman'
+abbr -a p 'sudo pacman -S'
 abbr -a up 'sudo pacman -Syu'
 abbr -a bkms 'nvim $HOME/dotfiles/bookmarks'
 
