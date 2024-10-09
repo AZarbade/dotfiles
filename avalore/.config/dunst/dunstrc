@@ -7,7 +7,7 @@
     alignment = "left"
     vertical_alignment = "center"
     ellipsize = "middle"
-    offset = "2x2"
+    offset = "20x20"
     padding = 10
     horizontal_padding = 15
     text_icon_padding = 15
@@ -53,21 +53,20 @@
 [experimental]
     per_monitor_dpi = false
 
-
 [urgency_low]
-    background = "#d8a657"
-    foreground = "#cdd6f4"
+    background = "#b8bb26"
+    foreground = "#fbf1c7"
     highlight = "#cba6f7"
     timeout = 4
 
 [urgency_normal]
-    background = "#595959"
-    foreground = "#cdd6f4"
+    background = "#fe8019"
+    foreground = "#fbf1c7"
     highlight = "#cba6f7"
     timeout = 6
 
 [urgency_critical]
-    background = "#ea6962"
+    background = "#fb4934"
     foreground = "#cdd6f4"
     highlight = "#cba6f7"
     timeout = 0
