@@ -19,9 +19,9 @@ setenv LESS_TERMCAP_ue \e'[0m'           # end underline
 setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
 # Abbreviations
-abbr -a ls 'exa -l'
-abbr -a lsl 'exa -la'
-abbr -a tree 'exa --tree'
+abbr -a ls 'eza -l'
+abbr -a lsl 'eza -la'
+abbr -a tree 'eza --tree'
 abbr -a tm 'tmux -u'
 abbr -a btop 'btop --utf-force'
 abbr -a p 'sudo pacman -S'

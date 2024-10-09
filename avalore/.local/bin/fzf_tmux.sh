@@ -6,7 +6,7 @@ dir_list=$(printf "%s\n" "${dirs[@]}" && fd --hidden --type d . "${dirs[@]}" 2>/
  
 # Use fzf to select from the combined list
 selected=$(echo "$dir_list" | fzf \
-	--preview "exa --tree -L 2 {}" \
+	--preview "eza --tree -L 2 {}" \
 	   --preview-window right:50%:wrap \
 	   --prompt "Select directory or session: " \
 	   --header "↑↓:Navigate │ Enter:Select │ Ctrl-C:Cancel " \
