@@ -1,39 +1,50 @@
 #!/bin/bash
 
-# Define search lists
-dirs=("$HOME/personal" "$HOME/dotfiles")
-dir_list=$(printf "%s\n" "${dirs[@]}" && fd --hidden --type d . "${dirs[@]}" 2>/dev/null | sort | uniq)
- 
-# Use fzf to select from the combined list
-selected=$(echo "$dir_list" | fzf \
-	--preview "eza --tree -L 2 {}" \
-	   --preview-window right:50%:wrap \
-	   --prompt "Select directory or session: " \
-	   --header "↑↓:Navigate │ Enter:Select │ Ctrl-C:Cancel " \
-	   --border rounded \
-	   --color "bg:#1d2021,fg:#fbf1c7,hl:#fabd2f"\
-	   --color "fg+:#fbf1c7,bg+:#3c3836,hl+:#fabd2f"\
-	   --color "info:#83a598,prompt:#bdae93,pointer:#fb4934"\
-	   --color "marker:#fb4934,spinner:#fabd2f,header:#665c54"\
-	   --color "border:#504945,preview-bg:#1d2021")
+dirs=("$HOME/personal" "$HOME/dotfiles") # Add more if needed
+cache_file="$HOME/.dir_cache"
+
+update_cache() {
+    printf "%s\n" "${dirs[@]}" > "$cache_file"
+    fd --hidden --type d . "${dirs[@]}" 2>/dev/null | sort -u >> "$cache_file"
+	echo "Cache updated."
+}
+
+# Force update
+if [[ "$1" == "--update" ]]; then
+    update_cache
+    exit 0
+fi
+
+# Check if cache exists and is less than 1 hour old
+if [[ ! -f "$cache_file" ]] || [[ $(find "$cache_file" -mmin +60) ]]; then
+    update_cache
+fi
+
+# Use fzf to select from the cached list
+selected=$(cat "$cache_file" | fzf \
+    --preview "eza --tree -L 2 {}" \
+    --preview-window right:50%:wrap \
+    --prompt "Select directory or session: " \
+    --header "↑↓:Navigate │ Enter:Select │ Ctrl-C:Cancel " \
+    --border rounded \
+    --color "bg:#1d2021,fg:#fbf1c7,hl:#fabd2f,fg+:#fbf1c7,bg+:#3c3836,hl+:#fabd2f,info:#83a598,prompt:#bdae93,pointer:#fb4934,marker:#fb4934,spinner:#fabd2f,header:#665c54,border:#504945,preview-bg:#1d2021")
 
 # Exit if nothing was selected
 [ -z "$selected" ] && exit 0
 
 selected_name=$(basename "$selected" | tr . _)
+
 if [ -n "$TMUX" ]; then
-	# Inside tmux
-	if tmux has-session -t "$selected_name" 2>/dev/null; then
-		tmux switch-client -t "$selected_name"
-	else
-		tmux new-session -d -s "$selected_name" -c "$selected"
-		tmux switch-client -t "$selected_name"
-	fi
+    # Inside tmux
+    tmux has-session -t "$selected_name" 2>/dev/null && \
+        exec tmux switch-client -t "$selected_name"
+    
+    tmux new-session -d -s "$selected_name" -c "$selected"
+    exec tmux switch-client -t "$selected_name"
 else
-	# Outside tmux
-	if tmux has-session -t "$selected_name" 2>/dev/null; then
-		tmux attach-session -t "$selected_name"
-	else
-		tmux new-session -s "$selected_name" -c "$selected"
-	fi
+    # Outside tmux
+    tmux has-session -t "$selected_name" 2>/dev/null && \
+        exec tmux attach-session -t "$selected_name"
+    
+    exec tmux new-session -s "$selected_name" -c "$selected"
 fi
