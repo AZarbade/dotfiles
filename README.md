@@ -24,9 +24,14 @@ A global tmux sessionizer that provides fuzzy search capabilities over selected 
 
 Integration of [tofi](https://github.com/philj56/tofi) for bookmark management.
   
+> **Warning**:
+> Work In Progress
+
 - Location: `avalore/.local/bin/tofi_bookmarks`
 - Global storage of links, or anything text.
 - Default store: `$HOME/.bookmarks`
+- Prerequisites:
+    - [tofi](https://github.com/philj56/tofi)
 - Usage:
     - Run `tofi_bookmarks`.
 
