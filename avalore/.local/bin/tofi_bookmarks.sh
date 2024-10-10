@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to your URL file
-url_file="$HOME/dotfiles/bookmarks"
+url_file="$HOME/.bookmarks"
 
 # Check if the file exists
 if [ ! -f "$url_file" ]; then
