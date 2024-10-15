@@ -5,7 +5,7 @@
     "margin": "8 8 0 8",
 
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
 	"modules-center": ["clock"],
     "modules-right": ["pulseaudio", "network", "temperature", "memory", "battery", "tray"],
 
@@ -72,7 +72,7 @@
 		"warning": 50,
 		"critical": 25
 	},
-        "format-charging": "{capacity}% {icon}  : {time}",
+        "format-charging": "{capacity}% {icon} ",
         "format-full": "Charged {icon} ",
 	"format-icons": ["", "", "", "", ""],
 	"max-length": 25
@@ -95,6 +95,6 @@
         "format-muted": " {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
-        "on-click": "pavucontrol"
+        "on-click": "GDK_DISABLE=vulkan pwvucontrol"
     },
 }
