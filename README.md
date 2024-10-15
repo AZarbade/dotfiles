@@ -43,4 +43,4 @@ Integration of [tofi](https://github.com/philj56/tofi) for bookmark management.
 
 ## License
 
-Just yoink it.
+![LICENSE](./LICENSE)
