@@ -94,5 +94,5 @@
 		"on-click": "~/.local/bin/waybar_scratchpad.sh",
 		    "tooltip": "Toggle Scratchpad",
 		"return-type": "json"
-	}	
+	},
 }
