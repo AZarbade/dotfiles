@@ -1,11 +1,11 @@
 {
     "margin": "8 8 0 8",
-	"spacing": 4,
+	"spacing": 0,
 	"reload_style_on_change": true,
 
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["clock", "hyprland/workspaces"],
 	"modules-center": ["hyprland/window"],
-    "modules-right": ["pulseaudio", "network", "temperature", "memory", "battery", "clock", "tray"],
+    "modules-right": ["pulseaudio", "network", "temperature", "memory", "battery", "tray", "custom/scratchpad"],
 
     "hyprland/workspaces": {
       "format": "{icon}",
@@ -40,8 +40,8 @@
 	"clock": {
 		"interval": 60,
 		"tooltip": true,
-		"format": "{:%H.%M} ",
-		"tooltip-format": "{:%d-%m-%Y} ",
+		"format": "  {:%H.%M}",
+		"tooltip-format": "{:%Y-%m-%d}",
 	},
 
     "memory": {
@@ -51,7 +51,7 @@
     },
 
     "temperature": {
-        "critical-threshold": 80,
+        "critical-threshold": 90,
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
     },
@@ -64,11 +64,12 @@
             "warning": 50,
             "critical": 25
         },
-        "format": "{capacity}% {icon} ",
-        "format-charging": "{capacity}% {icon} ",
-        "format-full": "Charged {icon} ",
+        "format": " : {time}",
+        "format-charging": " {capacity}%",
+        "format-full": "{icon}",
 		"format-icons": ["", "", "", "", ""],
-		"max-length": 25
+		"tooltip-format": "{timeTo} | {capacity}% | {power} watts",
+		"tooltip": true,
     },
     
     "network": {
@@ -79,12 +80,19 @@
 
 	"pulseaudio": {
 		"format": "{volume}% {icon}",
-		"format-bluetooth": "{volume}% {icon}",
+		"format-bluetooth": "{volume}% {icon} ",
         "format-muted": " ",
 		"format-icons": {
 			"headphone": "",
 			"default": ["", ""]
 		},
         "on-click": "GDK_DISABLE=vulkan pwvucontrol"
-	}
+	},
+
+	"custom/scratchpad": {
+		"format": "",
+		"on-click": "~/.local/bin/waybar_scratchpad.sh",
+		    "tooltip": "Toggle Scratchpad",
+		"return-type": "json"
+	}	
 }

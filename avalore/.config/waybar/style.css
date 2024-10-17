@@ -9,12 +9,12 @@
 }
 
 window#waybar {
-	background-color: @background;
+    background-color: @background;
 }
 
-#workspaces button{
-	background-color: transparent;
-	color: @foreground;
+#workspaces button {
+    background-color: transparent;
+    color: @foreground;
 }
 
 #workspaces button.active {
@@ -32,13 +32,14 @@ window#waybar {
 #window {
     color: #fba922;
     border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0 10px;
 }
 
-window#waybar.solo
+#clock {
+    color: @foreground;
+    padding: 0 10px;
+}
 
-#clock,
 #battery,
 #cpu,
 #memory,
@@ -52,119 +53,67 @@ window#waybar.solo
 #idle_inhibitor,
 #mpd {
     padding: 0 10px;
-    margin: 6px 3px; 
+    margin: 6px 3px;
     color: #ffffff;
 }
+
 #workspaces {
     margin: 0 4px;
 }
 
-/* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
     margin-left: 0;
 }
 
-/* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
     margin-right: 0;
 }
 
-#clock {
-    background-color: transparent;
-    color: @foreground;
-}
-
-#battery {
+#battery,
+#cpu,
+#memory,
+#backlight,
+#network,
+#pulseaudio {
     background-color: transparent;
     color: @foreground;
 }
 
 #battery.charged {
     background-color: @color12;
-    color: @foreground;
 }
 
 #battery.charging {
     background-color: @color13;
-    color: @foreground;
+}
+
+#battery.critical:not(.charging) {
+    background-color: @color8;
+    color: #ffffff;
+    animation: blink 0.5s linear infinite alternate;
 }
 
 @keyframes blink {
     to {
         background-color: #ffffff;
-		color: @foreground;
+        color: @foreground;
     }
-}
-
-#battery.critical:not(.charging) {
-    background-color: @color8;
-    color: @foreground;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-label:focus {
-    background-color: #1C1C1C;
-    color: @foreground;
-}
-
-#cpu {
-    background-color: transparent;
-    color: @foreground;
-}
-
-#memory {
-    background-color: transparent;
-    color: @foreground;
-}
-
-#backlight {
-    background-color: transparent;
-    color: @foreground;
-}
-
-#network {
-    background-color: transparent;
-    color: @foreground;
-
-}
-
-#network.disconnected {
-    background-color: @color9;
-    color: @foreground;
-}
-
-#pulseaudio {
-    background-color: transparent;
-    color: @foreground;
-}
-
-#pulseaudio.muted {
-    background-color: transparent;
-    color: @foreground;
-}
-
-#custom-media {
-    background-color: transparent;
-    color: @foreground;
-    min-width: 100px;
 }
 
 #temperature {
     background-color: @color12;
-    color: @foreground;
 }
 
 #temperature.critical {
     background-color: @color8;
-    color: @foreground;
 }
 
 #tray {
-    background-color: @color13; 
+    background-color: @color13;
+}
+
+#custom-scratchpad {
     color: @foreground;
+    padding: 0 10px;
+    margin: 0 5px;
 }
