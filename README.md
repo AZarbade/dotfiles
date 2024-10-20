@@ -39,7 +39,7 @@ Integration of [tofi](https://github.com/philj56/tofi) for bookmark management.
 ## Screenshots
 
 ### Dark Mode
-![Dark Mode](./assets/dark_mode.png)
+![screenshot](./assets/ss.png)
 
 ## License
 
