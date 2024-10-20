@@ -359,7 +359,8 @@ require("lazy").setup({
 	},
 	-- Rust support
 	-- rust_analyzer should be installed manually to the system.
-	-- (https://rust-analyzer.github.io/manual.html#installation)
+	-- use yay, `yay rust-analyzer`
+	-- doc: https://rust-analyzer.github.io/manual.html#installation
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^5", -- Recommended
