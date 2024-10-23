@@ -1,7 +1,7 @@
-# imports
+[general]
 import = ["/home/noir/.cache/wal/colors-alacritty.toml"]
 
-# define defualt shell
+[terminal]
 shell = "/usr/bin/fish"
 
 [env]
