@@ -10,6 +10,20 @@ check_root() {
     fi
 }
 
+# Function to install yay if not already installed
+install_yay() {
+    if ! command -v yay &> /dev/null; then
+        echo "Installing yay..."
+        git clone https://aur.archlinux.org/yay.git /tmp/yay
+        cd /tmp/yay
+        makepkg -si --noconfirm
+        cd -
+        rm -rf /tmp/yay
+    else
+        echo "yay is already installed."
+    fi
+}
+
 # Function to install packages using yay
 install_packages() {
     echo "Updating system and installing packages..."
@@ -84,6 +98,7 @@ rebuild_initramfs() {
 
 # Main script execution
 check_root
+install_yay
 install_packages
 install_rust
 install_atuin
