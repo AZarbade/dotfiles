@@ -68,6 +68,7 @@ install_packages() {
 		grub-btrfs \
 		nautilus \
 		xorg-xhost \
+		networkmanager \
         stow
 }
 
