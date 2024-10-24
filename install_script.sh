@@ -60,6 +60,7 @@ install_packages() {
 		firefox \
         wl-clipboard \
 		tofi \
+		pwvucontrol \
         stow
 }
 
