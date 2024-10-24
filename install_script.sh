@@ -61,6 +61,12 @@ install_packages() {
         wl-clipboard \
 		tofi \
 		pwvucontrol \
+		timeshift \ 
+		timeshift-autosnap \
+		timeshift-systemd-timer \
+		polkit-kde-agent \
+		grub-btrfs \
+		nautilus \
         stow
 }
 
