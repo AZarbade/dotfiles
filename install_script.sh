@@ -73,9 +73,23 @@ install_atuin() {
     curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 }
 
+# Function to install Hyprland
+install_hyprland() {
+	echo "Installing Hyprland"
+	sudo pacman -S hyprland
+}
+
+# Function to link dotfiles
+stow_dotfiles() {
+	echo "Linking dotfiles"
+	stow avalore/
+}
+
 # Main script execution
 check_root
 install_yay
+install_hyprland
+stow_dotfiles
 install_packages
 install_rust
 install_atuin
@@ -87,5 +101,4 @@ yay -Syu --noconfirm
 echo "Running wal with the specified theme..."
 wal --theme $HOME/.config/wal/colorschemes/dark/base16-og-gruvbox-hard.json
 
-echo "Installation and configuration complete. Please reboot your system."
-
+echo "Installation and configuration complete. Please reboot your system and run 'Hyprland'."
