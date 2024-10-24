@@ -47,6 +47,7 @@ install_packages() {
         waybar \
         ttf-jetbrains-mono-nerd \
         ttf-font-awesome \
+		ttf-input-nerd \
         fd \
         fzf \
         hyprpaper \
@@ -58,6 +59,7 @@ install_packages() {
         xdg-desktop-portal-gtk \
 		firefox \
         wl-clipboard \
+		tofi \
         stow
 }
 
