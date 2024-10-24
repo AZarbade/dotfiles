@@ -59,6 +59,7 @@ install_packages() {
         xdg-desktop-portal-gtk \
 		firefox \
         wl-clipboard \
+		wtype \
 		tofi \
 		pwvucontrol \
 		timeshift \ 
