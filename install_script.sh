@@ -4,8 +4,8 @@ set -e
 
 # Function to check for root privileges
 check_root() {
-    if [ "$EUID" -ne 0 ]; then
-        echo "Please run as root"
+    if [ "$EUID" -eq 0 ]; then
+        echo "Please do not run this script as root."
         exit 1
     fi
 }
@@ -28,9 +28,14 @@ install_yay() {
 install_packages() {
     echo "Updating system and installing packages..."
     yay -Syu --noconfirm \
-        firefox \
+		nvidia \
+		nvidia-utils \
+		egl-wayland \
         alacritty \
         fish \
+		cmake \
+		meson \
+		cpio \
         htop \
         nvtop \
         eza \
@@ -40,7 +45,7 @@ install_packages() {
         neovim \
         tmux \
         waybar \
-		ttf-jetbrains-mono-nerd \
+        ttf-jetbrains-mono-nerd \
         ttf-font-awesome \
         fd \
         fzf \
@@ -48,18 +53,12 @@ install_packages() {
         hypridle \
         hyprlock \
         hyprpm \
-        nvidia-dkms \
-        nvidia-utils \
-        egl-wayland \
         lib32-nvidia-utils \
-        hyprpolkitagent \
         xdg-desktop-portal-hyprland \
         xdg-desktop-portal-gtk \
-        cmake \
-        meson \
-        cpio \
-        pwvucontrol \
-        wl-clipboard
+		firefox \
+        wl-clipboard \
+        stow
 }
 
 # Function to install Rust
@@ -74,36 +73,19 @@ install_atuin() {
     curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 }
 
-# Function to modify mkinitcpio configuration
-modify_mkinitcpio() {
-    echo "Modifying /etc/mkinitcpio.conf..."
-    if grep -q '^MODULES=' /etc/mkinitcpio.conf; then
-        sed -i 's/^MODULES=.*/MODULES=(... nvidia nvidia_modeset nvidia_uvm nvidia_drm ...)/' /etc/mkinitcpio.conf
-    else
-        echo 'MODULES=(... nvidia nvidia_modeset nvidia_uvm nvidia_drm ...)' >> /etc/mkinitcpio.conf
-    fi
-}
-
-# Function to set up NVIDIA module options
-setup_nvidia_conf() {
-    echo "Setting up NVIDIA configuration..."
-    echo "options nvidia_drm modeset=1 fbdev=1" > /etc/modprobe.d/nvidia.conf
-}
-
-# Function to rebuild initramfs
-rebuild_initramfs() {
-    echo "Rebuilding initramfs..."
-    mkinitcpio -P
-}
-
 # Main script execution
 check_root
 install_yay
 install_packages
 install_rust
 install_atuin
-modify_mkinitcpio
-setup_nvidia_conf
-rebuild_initramfs
+
+# Final steps: Update full system and run wal command
+echo "Updating the full system..."
+yay -Syu --noconfirm
+
+echo "Running wal with the specified theme..."
+wal --theme $HOME/.config/wal/colorschemes/dark/base16-og-gruvbox-hard.json
 
 echo "Installation and configuration complete. Please reboot your system."
+
