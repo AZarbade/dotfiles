@@ -67,6 +67,7 @@ install_packages() {
 		polkit-kde-agent \
 		grub-btrfs \
 		nautilus \
+		xorg-xhost \
         stow
 }
 
