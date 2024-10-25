@@ -49,6 +49,7 @@ install_packages() {
         ttf-font-awesome \
 		ttf-input-nerd \
         fd \
+		ripgrep \
         fzf \
         hyprpaper \
         hypridle \
