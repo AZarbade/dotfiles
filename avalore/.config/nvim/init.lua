@@ -159,6 +159,16 @@ vim.api.nvim_create_autocmd("Filetype", {
 	command = "setlocal spell tw=80 colorcolumn=81",
 })
 
+-- text wrapping for markdown files
+vim.api.nvim_create_augroup("markdown_settings", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.textwidth = 80
+		vim.opt_local.colorcolumn = "80"
+	end,
+})
+
 -------------------------------------------------------------------------------
 --
 -- plugin configuration
@@ -275,7 +285,6 @@ require("lazy").setup({
 		dependencies = {},
 		config = function()
 			-- UI Customization
-			-- Option #1
 			local border = {
 				{ "╭", "FloatBorder" },
 				{ "─", "FloatBorder" },
@@ -286,18 +295,6 @@ require("lazy").setup({
 				{ "╰", "FloatBorder" },
 				{ "│", "FloatBorder" },
 			}
-
-			-- Option #2
-			-- local border = {
-			-- 	{ "┌", "FloatBorder" },
-			-- 	{ "─", "FloatBorder" },
-			-- 	{ "┐", "FloatBorder" },
-			-- 	{ "│", "FloatBorder" },
-			-- 	{ "┘", "FloatBorder" },
-			-- 	{ "─", "FloatBorder" },
-			-- 	{ "└", "FloatBorder" },
-			-- 	{ "│", "FloatBorder" },
-			-- }
 
 			-- To instead override globally
 			local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -323,7 +320,6 @@ require("lazy").setup({
 
 			-- servers
 			require("lspconfig").clangd.setup({}) -- enable clangd (esp-idf)
-			-- require("lspconfig").ccls.setup({}) -- enable ccls (platformio)
 
 			-- Global mappings.
 			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -530,6 +526,7 @@ require("lazy").setup({
 			})
 		end,
 	},
+	-- Obsidian and Markdown stuff
 	{
 		"epwalsh/obsidian.nvim",
 		version = "*",
@@ -544,6 +541,9 @@ require("lazy").setup({
 					name = "personal",
 					path = "~/personal/notes",
 				},
+			},
+			ui = {
+				enable = true,
 			},
 		},
 	},
