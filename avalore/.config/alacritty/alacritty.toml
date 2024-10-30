@@ -9,9 +9,9 @@ TERM = "tmux-256color"
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font" }
-size = 10
+size = 14
 
 [window]
-padding = { x = 5, y = 5 }
+padding = { x = 25, y = 25 }
 dynamic_padding = false
 decorations = "None"
