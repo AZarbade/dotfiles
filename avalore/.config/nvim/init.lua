@@ -92,6 +92,8 @@ vim.keymap.set("n", "/", "/\\v")
 vim.keymap.set("c", "%s/", "%sm/")
 -- open new file adjacent to current file
 vim.keymap.set("n", "<C-o>", ':e <C-R>=expand("%:p:h") . "/" <cr>')
+-- open file in vertical mode
+vim.keymap.set("n", "<C-i>", ':vsplit <C-R>=expand("%:p:h") . "/" <cr>')
 -- no arrow keys --- force yourself to use the home row
 vim.keymap.set("n", "<up>", "<nop>")
 vim.keymap.set("n", "<down>", "<nop>")
@@ -110,8 +112,8 @@ vim.keymap.set("n", "Q", ":bd<CR>")
 -- Move selected lines up
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
--- never open that mode
-vim.keymap.set("n", "Q", "<nop>")
+-- Unload current buffer
+vim.keymap.set("n", "Q", ":bd<CR>")
 -- manual format
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- substitute word under cursor (current buffer)
@@ -305,7 +307,7 @@ require("lazy").setup({
 			end
 
 			vim.diagnostic.config({
-				virtual_text = true,
+				virtual_text = false,
 				signs = true,
 				underline = true,
 				update_in_insert = false,
