@@ -322,6 +322,7 @@ require("lazy").setup({
 
 			-- servers
 			require("lspconfig").clangd.setup({}) -- enable clangd (esp-idf)
+			require("lspconfig").pyright.setup({}) -- enable pyright (python)
 
 			-- Global mappings.
 			-- See `:help vim.diagnostic.*` for documentation on any of the below functions

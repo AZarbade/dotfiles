@@ -39,13 +39,6 @@ abbr -a gm 'git merge --no-ff'
 abbr -a gg 'git-graph'
 abbr -a gp 'git push github main && git push gitea main'
 
-# Obsidian setup
-abbr -a oo obsidian_notes
-function obsidian_notes
-    cd ~/personal/notes
-    nvim
-end
-
 # Embedded bindings
 abbr -a get_esprs '. $HOME/export-esp.sh'
 abbr -a get_idf '. $HOME/personal/esp_box/esp-idf/export.fish'
@@ -56,7 +49,6 @@ bind -M insert \cp '$HOME/dotfiles/avalore/.local/bin/fzf_tmux.sh'
 
 # Greetings function
 function fish_greeting
-	echo
 	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
