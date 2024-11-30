@@ -104,3 +104,5 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 source /opt/ros/jazzy/setup.bash
+source /usr/share/colcon_cd/function/colcon_cd-argcomplete.bash
+. "$HOME/.local/bin/env"
