@@ -1,6 +1,7 @@
 avalore/.config/fish/fish_variables
 avalore/.config/nvim/lazy-lock.json
 avalore/.config/btop/btop.log
+avalore/.config/tmux/plugins/tmux-yank/
 
 server/.config/fish/fish_variables
 server/.config/atuin
