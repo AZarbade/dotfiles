@@ -192,18 +192,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- then, setup!
 require("lazy").setup({
-	-- main color scheme
-	{
-		"uZer/pywal16.nvim",
-		lazy = false, -- load at start
-		priority = 1000, -- load first
-		config = function()
-			local pywal16 = require("pywal16")
-			pywal16.setup()
-			local pywal16_core = require("pywal16.core")
-			local colors = pywal16_core.get_colors()
-		end,
-	},
 	-- nice bar at the bottom
 	{
 		"nvim-lualine/lualine.nvim",
@@ -357,31 +345,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- Lua support
-	{
-		{
-			"folke/lazydev.nvim",
-			ft = "lua", -- only load on lua files
-			opts = {
-				library = {
-					-- See the configuration section for more details
-					-- Load luvit types when the `vim.uv` word is found
-					{ path = "luvit-meta/library", words = { "vim%.uv" } },
-				},
-			},
-		},
-		{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-		{ -- optional completion source for require statements and module annotations
-			"hrsh7th/nvim-cmp",
-			opts = function(_, opts)
-				opts.sources = opts.sources or {}
-				table.insert(opts.sources, {
-					name = "lazydev",
-					group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-				})
-			end,
-		},
-	},
 	-- code completion
 	{
 		"hrsh7th/nvim-cmp",
@@ -466,15 +429,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- enables colors in json files. usefull for colorscheme tweaks
-	{
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup({
-				"json",
-			})
-		end,
-	},
 	-- Git changes besides number column
 	{
 		"lewis6991/gitsigns.nvim",
@@ -521,26 +475,5 @@ require("lazy").setup({
 				end,
 			})
 		end,
-	},
-	-- Obsidian and Markdown stuff
-	{
-		"epwalsh/obsidian.nvim",
-		version = "*",
-		lazy = true,
-		ft = "markdown",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		opts = {
-			workspaces = {
-				{
-					name = "personal",
-					path = "~/personal/notes",
-				},
-			},
-			ui = {
-				enable = true,
-			},
-		},
 	},
 })
