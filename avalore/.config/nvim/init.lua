@@ -323,6 +323,7 @@ require("lazy").setup({
 			-- servers
 			require("lspconfig").clangd.setup({}) -- enable clangd (esp-idf)
 			require("lspconfig").ruff.setup({}) -- enable ruff (python)
+			require("lspconfig").rust_analyzer.setup({}) -- enable rust analyzer (rust)
 
 			-- Global mappings.
 			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -355,15 +356,6 @@ require("lazy").setup({
 				end,
 			})
 		end,
-	},
-	-- Rust support
-	-- rust_analyzer should be installed manually to the system.
-	-- use yay, `yay rust-analyzer`
-	-- doc: https://rust-analyzer.github.io/manual.html#installation
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^5", -- Recommended
-		lazy = false, -- This plugin is already lazy
 	},
 	-- Lua support
 	{
@@ -466,6 +458,7 @@ require("lazy").setup({
 				formatters_by_ft = {
 					-- stylua should be installed manually to the system.
 					lua = { "stylua" },
+					rust = { "rustfmt" }, -- install rustfmt via `rustup`.
 				},
 				format_on_save = {
 					lsp_format = "fallback",
