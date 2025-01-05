@@ -27,6 +27,7 @@ abbr -a btop 'btop --utf-force'
 abbr -a p 'sudo pacman -S'
 abbr -a up 'sudo pacman -Syu'
 abbr -a bkms 'nvim $HOME/.bookmarks'
+abbr -a sys 'sudo systemctl'
 
 # Media abbreviations
 abbr -a vol 'pulsemixer'
