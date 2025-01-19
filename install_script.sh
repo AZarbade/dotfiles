@@ -10,32 +10,18 @@ check_root() {
     fi
 }
 
-# Function to install yay if not already installed
-install_yay() {
-    if ! command -v yay &> /dev/null; then
-        echo "Installing yay..."
-        git clone https://aur.archlinux.org/yay.git /tmp/yay
-        cd /tmp/yay
-        makepkg -si --noconfirm
-        cd -
-        rm -rf /tmp/yay
-    else
-        echo "yay is already installed."
-    fi
-}
-
-# Function to install packages using yay
+# Function to install packages using pacman
 install_packages() {
     echo "Updating system and installing packages..."
-    yay -Syu --noconfirm \
-		nvidia \
-		nvidia-utils \
-		egl-wayland \
+    sudo pacman -Syu --noconfirm \
+        nvidia \
+        nvidia-utils \
+        egl-wayland \
         alacritty \
         fish \
-		cmake \
-		meson \
-		cpio \
+        cmake \
+        meson \
+        cpio \
         htop \
         nvtop \
         eza \
@@ -47,9 +33,9 @@ install_packages() {
         waybar \
         ttf-jetbrains-mono-nerd \
         ttf-font-awesome \
-		ttf-input-nerd \
+        ttf-input-nerd \
         fd \
-		ripgrep \
+        ripgrep \
         fzf \
         hyprpaper \
         hypridle \
@@ -58,20 +44,31 @@ install_packages() {
         lib32-nvidia-utils \
         xdg-desktop-portal-hyprland \
         xdg-desktop-portal-gtk \
-		firefox \
+        firefox \
         wl-clipboard \
-		wtype \
-		tofi \
-		pwvucontrol \
-		timeshift \ 
-		timeshift-autosnap \
-		timeshift-systemd-timer \
-		polkit-kde-agent \
-		grub-btrfs \
-		nautilus \
-		xorg-xhost \
-		networkmanager \
+        wtype \
+        tofi \
+        pwvucontrol \
+        timeshift \
+        timeshift-autosnap \
+        timeshift-systemd-timer \
+        polkit-kde-agent \
+        grub-btrfs \
+        nautilus \
+        xorg-xhost \
+        networkmanager \
         stow
+}
+
+# Function to install AUR packages manually via git and makepkg
+install_aur_package() {
+    PACKAGE_NAME=$1
+    echo "Installing AUR package: $PACKAGE_NAME..."
+    git clone "https://aur.archlinux.org/$PACKAGE_NAME.git" /tmp/$PACKAGE_NAME
+    cd /tmp/$PACKAGE_NAME
+    makepkg -si --noconfirm
+    cd -
+    rm -rf /tmp/$PACKAGE_NAME
 }
 
 # Function to install Rust
@@ -88,30 +85,29 @@ install_atuin() {
 
 # Function to install Hyprland
 install_hyprland() {
-	echo "Installing Hyprland"
-	sudo pacman -S hyprland
+    echo "Installing Hyprland..."
+    sudo pacman -S --noconfirm hyprland
 }
 
 # Function to link dotfiles
 stow_dotfiles() {
-	echo "Linking dotfiles"
-	stow avalore/
+    echo "Linking dotfiles..."
+    stow avalore/
 }
 
 # Main script execution
 check_root
-install_yay
-install_hyprland
-stow_dotfiles
 install_packages
 install_rust
 install_atuin
+install_hyprland
+stow_dotfiles
 
 # Final steps: Update full system and run wal command
 echo "Updating the full system..."
-yay -Syu --noconfirm
+sudo pacman -Syu --noconfirm
 
 echo "Running wal with the specified theme..."
-wal --theme $HOME/.config/wal/colorschemes/dark/base16-og-gruvbox-hard.json
+wal --theme "$HOME/.config/wal/colorschemes/dark/base16-og-gruvbox-hard.json"
 
 echo "Installation and configuration complete. Please reboot your system and run 'Hyprland'."
