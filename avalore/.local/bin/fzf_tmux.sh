@@ -26,8 +26,8 @@ selected=$(cat "$cache_file" | fzf \
     --preview-window right:50%:wrap \
     --prompt "Select directory or session: " \
     --header "↑↓:Navigate │ Enter:Select │ Ctrl-C:Cancel " \
-    --border rounded \
-    --color "bg:#1d2021,fg:#fbf1c7,hl:#fabd2f,fg+:#fbf1c7,bg+:#3c3836,hl+:#fabd2f,info:#83a598,prompt:#bdae93,pointer:#fb4934,marker:#fb4934,spinner:#fabd2f,header:#665c54,border:#504945,preview-bg:#1d2021")
+	--border rounded
+)
 
 # Exit if nothing was selected
 [ -z "$selected" ] && exit 0

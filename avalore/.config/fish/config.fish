@@ -1,4 +1,4 @@
-# credit: https://github.com/jonhoo/configs/blob/master/shell/.config/fish/config.fish
+# based on: https://github.com/jonhoo/configs/blob/master/shell/.config/fish/config.fish
 
 set -g fish_greeting
 set -g fish_user_key_bindings
@@ -53,13 +53,6 @@ function fish_greeting
 	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
-
-	echo -e " \\e[1mDisk usage:\\e[0m"
-	echo
-	echo -ne (\
-		df -l -h | grep -E '/home|dev/(xvda|sd|mapper)' | \
-		awk '{printf "\\\\t%s\\\\t%4s / %4s  %s\\\\n\n", $6, $3, $2, $5}'
-	)
 	echo
 end
 

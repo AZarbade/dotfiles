@@ -192,16 +192,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- then, setup!
 require("lazy").setup({
-	-- main color scheme
+	-- coloscheme
 	{
-		"uZer/pywal16.nvim",
-		lazy = false, -- load at start
-		priority = 1000, -- load first
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
 		config = function()
-			local pywal16 = require("pywal16")
-			pywal16.setup()
-			local pywal16_core = require("pywal16.core")
-			local colors = pywal16_core.get_colors()
+			require("catppuccin").setup({
+				flavour = "mocha",
+			})
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 	-- nice bar at the bottom
@@ -216,7 +216,6 @@ require("lazy").setup({
 		config = function()
 			require("lualine").setup({
 				options = {
-					theme = "pywal16-nvim",
 					globalstatus = true,
 					icons_enabled = true,
 					component_separators = { left = "|", right = "|" },
@@ -466,15 +465,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- enables colors in json files. usefull for colorscheme tweaks
-	{
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup({
-				"json",
-			})
-		end,
-	},
 	-- Git changes besides number column
 	{
 		"lewis6991/gitsigns.nvim",
@@ -520,33 +510,6 @@ require("lazy").setup({
 					map("n", "<leader>td", gitsigns.toggle_deleted)
 				end,
 			})
-		end,
-	},
-	-- Obsidian and Markdown stuff
-	{
-		"epwalsh/obsidian.nvim",
-		version = "*",
-		lazy = true,
-		ft = "markdown",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		opts = {
-			workspaces = {
-				{
-					name = "personal",
-					path = "~/personal/notes",
-				},
-			},
-			ui = {
-				enable = true,
-			},
-		},
-	},
-	{
-		"letieu/btw.nvim",
-		config = function()
-			require("btw").setup()
 		end,
 	},
 })
