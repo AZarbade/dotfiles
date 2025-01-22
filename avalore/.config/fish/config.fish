@@ -4,41 +4,26 @@ set -g fish_greeting
 set -g fish_user_key_bindings
 
 set -x PATH $HOME/.local/bin $PATH
-set -x PATH $HOME/.platformio/penv/bin $PATH
 fish_add_path /opt/nvim-linux64/bin
+fish_add_path /opt/asdf-vm/asdf.fish
 atuin init fish | source
-
-# colored man output
-# from http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
-setenv LESS_TERMCAP_mb \e'[01;31m'       # begin blinking
-setenv LESS_TERMCAP_md \e'[01;38;5;74m'  # begin bold
-setenv LESS_TERMCAP_me \e'[0m'           # end mode
-setenv LESS_TERMCAP_se \e'[0m'           # end standout-mode
-setenv LESS_TERMCAP_so \e'[38;5;246m'    # begin standout-mode - info box
-setenv LESS_TERMCAP_ue \e'[0m'           # end underline
-setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
 # Abbreviations
 abbr -a ls 'eza -l'
 abbr -a lsl 'eza -la'
 abbr -a tree 'eza --tree'
 abbr -a tm 'tmux -u'
-abbr -a btop 'btop --utf-force'
 abbr -a p 'sudo pacman -S'
 abbr -a up 'sudo pacman -Syu'
 abbr -a bkms 'nvim $HOME/.bookmarks'
 abbr -a sys 'sudo systemctl'
-
-# Media abbreviations
-abbr -a vol 'pulsemixer'
-abbr -a blue 'bluetui'
 
 # Git abbreviations
 abbr -a gs 'git status'
 abbr -a gc 'git commit'
 abbr -a gm 'git merge --no-ff'
 abbr -a gg 'git-graph'
-abbr -a gp 'git push github main && git push gitea main'
+abbr -a gp 'git push'
 
 # Embedded bindings
 abbr -a get_esprs '. $HOME/export-esp.sh'
