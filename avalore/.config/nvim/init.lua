@@ -519,4 +519,7 @@ require("lazy").setup({
 		opts = {},
 		cmd = { "Typr", "TyprStats" },
 	},
+	{
+		"tpope/vim-dispatch",
+	},
 })
