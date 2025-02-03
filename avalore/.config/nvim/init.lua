@@ -125,6 +125,8 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 -- RustLsp keybinds (need "mrcjkb/rustaceanvim")
 vim.keymap.set("n", "<leader>do", ":RustLsp openDocs<CR>")
+-- keybind to run Dispatch
+vim.keymap.set("n", "<leader>w", ":Dispatch ", { noremap = true, silent = true })
 
 -------------------------------------------------------------------------------
 --
@@ -512,13 +514,8 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- fun little things
-	{
-		"nvzone/typr",
-		dependencies = "nvzone/volt",
-		opts = {},
-		cmd = { "Typr", "TyprStats" },
-	},
+	-- vim-dispatch	for quick compiling
+	-- refer: https://github.com/tpope/vim-dispatch
 	{
 		"tpope/vim-dispatch",
 	},
