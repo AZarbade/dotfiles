@@ -274,6 +274,8 @@ require("lazy").setup({
 			{ "<C-p>", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
 			{ "<C-g>", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
 			{ "<leader>;", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+			{ "<A-x>", "<cmd>Telescope commands<cr>", desc = "Buffers" },
+			{ "<A-z>", "<cmd>Telescope man_pages<cr>", desc = "Buffers" },
 		},
 	},
 	-- LSP
