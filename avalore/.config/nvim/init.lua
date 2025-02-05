@@ -112,8 +112,6 @@ vim.keymap.set("n", "Q", ":bd<CR>")
 -- Move selected lines up
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
--- Unload current buffer
-vim.keymap.set("n", "Q", ":bd<CR>")
 -- manual format
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- substitute word under cursor (current buffer)
@@ -123,8 +121,6 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
--- RustLsp keybinds (need "mrcjkb/rustaceanvim")
-vim.keymap.set("n", "<leader>do", ":RustLsp openDocs<CR>")
 -- keybind to run Dispatch
 vim.keymap.set("n", "<leader>w", ":Dispatch ", { noremap = true, silent = true })
 
@@ -358,15 +354,13 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- Lua support
+	-- only here for Lua support for easier nvim configuration editing
 	{
 		{
 			"folke/lazydev.nvim",
 			ft = "lua", -- only load on lua files
 			opts = {
 				library = {
-					-- See the configuration section for more details
-					-- Load luvit types when the `vim.uv` word is found
 					{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				},
 			},
@@ -457,8 +451,7 @@ require("lazy").setup({
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
-					-- stylua should be installed manually to the system.
-					lua = { "stylua" },
+					lua = { "stylua" }, -- stylua install manually to the system.
 					rust = { "rustfmt" }, -- install rustfmt via `rustup`.
 				},
 				format_on_save = {
@@ -499,17 +492,7 @@ require("lazy").setup({
 					end)
 
 					-- Actions
-					map("n", "<leader>hs", gitsigns.stage_hunk)
-					map("n", "<leader>hr", gitsigns.reset_hunk)
-					map("v", "<leader>hs", function()
-						gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-					end)
-					map("v", "<leader>hr", function()
-						gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-					end)
-					map("n", "<leader>hp", gitsigns.preview_hunk)
-					map("n", "<leader>hd", gitsigns.diffthis)
-					map("n", "<leader>td", gitsigns.toggle_deleted)
+					map("n", "<leader>k", gitsigns.toggle_deleted)
 				end,
 			})
 		end,
