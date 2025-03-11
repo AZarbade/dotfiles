@@ -192,14 +192,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- coloscheme
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"morhetz/gruvbox",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				flavour = "mocha",
-			})
-			vim.cmd.colorscheme("catppuccin")
+			vim.cmd.colorscheme("gruvbox")
 		end,
 	},
 	-- nice bar at the bottom
