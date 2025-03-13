@@ -6,7 +6,7 @@ cache_file="$HOME/.dir_cache"
 update_cache() {
     printf "%s\n" "${dirs[@]}" > "$cache_file"
     fd --hidden --type d . "${dirs[@]}" 2>/dev/null | sort -u >> "$cache_file"
-	echo "Cache updated."
+    echo "Cache updated."
 }
 
 # Force update
@@ -15,10 +15,8 @@ if [[ "$1" == "--update" ]]; then
     exit 0
 fi
 
-# Check if cache exists and is less than 1 hour old
-if [[ ! -f "$cache_file" ]] || [[ $(find "$cache_file" -mmin +60) ]]; then
-    update_cache
-fi
+# Always update the cache
+update_cache
 
 # Use fzf to select from the cached list
 selected=$(cat "$cache_file" | fzf \
@@ -26,7 +24,7 @@ selected=$(cat "$cache_file" | fzf \
     --preview-window right:50%:wrap \
     --prompt "Select directory or session: " \
     --header "↑↓:Navigate │ Enter:Select │ Ctrl-C:Cancel " \
-	--border rounded
+    --border rounded
 )
 
 # Exit if nothing was selected
@@ -38,13 +36,11 @@ if [ -n "$TMUX" ]; then
     # Inside tmux
     tmux has-session -t "$selected_name" 2>/dev/null && \
         exec tmux switch-client -t "$selected_name"
-    
     tmux new-session -d -s "$selected_name" -c "$selected"
     exec tmux switch-client -t "$selected_name"
 else
     # Outside tmux
     tmux has-session -t "$selected_name" 2>/dev/null && \
         exec tmux attach-session -t "$selected_name"
-    
     exec tmux new-session -s "$selected_name" -c "$selected"
 fi

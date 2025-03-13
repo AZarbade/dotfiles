@@ -11,11 +11,8 @@ atuin init fish | source
 # Abbreviations
 abbr -a ls 'eza -l'
 abbr -a lsl 'eza -la'
-abbr -a tree 'eza --tree'
+abbr -a tree 'eza --tree -L 2'
 abbr -a tm 'tmux -u'
-abbr -a p 'sudo pacman -S'
-abbr -a up 'sudo pacman -Syu'
-abbr -a bkms 'nvim $HOME/.bookmarks'
 abbr -a sys 'sudo systemctl'
 
 # Git abbreviations
@@ -38,6 +35,7 @@ function fish_greeting
 	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uptime -p | sed 's/^up //' | awk '{print " \\\\e[1mUptime: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo -e (uname -n | awk '{print " \\\\e[1mHostname: \\\\e[0;32m"$0"\\\\e[0m"}')
+	echo -e (ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | grep -v '^127\.0\.0\.1$' | head -n 1 | awk '{print " \\\\e[1mIP Address: \\\\e[0;32m"$0"\\\\e[0m"}')
 	echo
 end
 
