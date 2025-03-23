@@ -5,11 +5,5 @@ avalore/.config/tmux/plugins/tmux-yank/
 
 # I do not know why after stow'ing the dotfiles these files
 # appered into my main (dotfiles) directory
-avalore/.local/share/atuin/history.db-shm
-avalore/.local/share/atuin/history.db-wal
-avalore/.local/share/atuin/records.db-shm
-avalore/.local/share/atuin/records.db-wal
-avalore/.local/share/fish/fish_history
-avalore/.local/state/nvim/shada/main.shada
-avalore/.local/state/nvim/undo/%home%noir%dotfiles%.git%COMMIT_EDITMSG
+avalore/.local/
 
