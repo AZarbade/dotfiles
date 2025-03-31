@@ -2,7 +2,7 @@
 # VERSION: 3.0
 SETUVAR __fish_initialized:3800
 SETUVAR _hydro_git_2005:master\u2022\x20
-SETUVAR _hydro_git_350:main\u2022\x20
+SETUVAR _hydro_git_396:main\u2022\x20
 SETUVAR _hydro_git_7038:master\u2022\x20
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
