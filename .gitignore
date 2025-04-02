@@ -2,7 +2,10 @@ avalore/.config/fish/fish_variables
 avalore/.config/nvim/lazy-lock.json
 avalore/.config/btop/btop.log
 avalore/.config/tmux/plugins/tmux-yank/
+avalore/.local/share
 
-# I do not know why after stow'ing the dotfiles these files
-# appered into my main (dotfiles) directory
-avalore/.local/
+wsl_arch/.config/fish/fish_variables
+wsl_arch/.config/nvim/lazy-lock.json
+wsl_arch/.config/btop/btop.log
+wsl_arch/.config/tmux/plugins/tmux-yank/
+wsl_arch/.local/share
