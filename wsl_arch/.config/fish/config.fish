@@ -3,15 +3,16 @@
 set -g fish_greeting
 set -g fish_user_key_bindings
 
+set -x DISPLAY 172.20.32.1:0
 set -x PATH $HOME/.local/bin $PATH
 fish_add_path /opt/nvim-linux64/bin
 fish_add_path /opt/asdf-vm/asdf.fish
 atuin init fish | source
 
 # Abbreviations
-abbr -a ls 'eza -l'
-abbr -a lsl 'eza -la'
-abbr -a tree 'eza --tree -L 2'
+abbr -a ls 'ls -l'
+abbr -a lsl 'ls -al'
+abbr -a tree 'tree -L 2'
 abbr -a tm 'tmux -u'
 abbr -a sys 'sudo systemctl'
 
