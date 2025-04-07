@@ -3,6 +3,7 @@
 set -g fish_greeting
 set -g fish_user_key_bindings
 
+set -x DISPLAY 172.20.32.1:0
 set -x PATH $HOME/.local/bin $PATH
 fish_add_path /opt/nvim-linux64/bin
 
