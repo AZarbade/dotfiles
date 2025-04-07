@@ -26,7 +26,7 @@ abbr -a get_idf '. $HOME/personal/esp_box/esp-idf/export.fish'
 abbr -a idf 'idf.py'
 
 # fzf binds
-bind -M insert \cp './../../.local/bin/fzf_tmux.sh'
+bind -M insert \cp '$HOME/dotfiles/wsl_ros/.local/bin/fzf_tmux.sh'
 
 # Greetings function
 function fish_greeting
