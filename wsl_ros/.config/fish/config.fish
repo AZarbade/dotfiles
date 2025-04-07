@@ -5,13 +5,11 @@ set -g fish_user_key_bindings
 
 set -x PATH $HOME/.local/bin $PATH
 fish_add_path /opt/nvim-linux64/bin
-fish_add_path /opt/asdf-vm/asdf.fish
-atuin init fish | source
 
 # Abbreviations
-abbr -a ls 'eza -l'
-abbr -a lsl 'eza -la'
-abbr -a tree 'eza --tree -L 2'
+abbr -a ls 'ls -l'
+abbr -a lsl 'ls -la'
+abbr -a tree 'tree -L 2'
 abbr -a tm 'tmux -u'
 abbr -a sys 'sudo systemctl'
 
@@ -28,7 +26,7 @@ abbr -a get_idf '. $HOME/personal/esp_box/esp-idf/export.fish'
 abbr -a idf 'idf.py'
 
 # fzf binds
-bind -M insert \cp '$HOME/dotfiles/avalore/.local/bin/fzf_tmux.sh'
+bind -M insert \cp './../../.local/bin/fzf_tmux.sh'
 
 # Greetings function
 function fish_greeting
