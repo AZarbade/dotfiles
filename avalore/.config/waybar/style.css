@@ -101,7 +101,7 @@ window#waybar {
 }
 
 #temperature {
-    background-color: #;
+    background-color: #8ec07c;
 }
 
 #temperature.critical {
