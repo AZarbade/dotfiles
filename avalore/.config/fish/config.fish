@@ -9,13 +9,10 @@ fish_add_path /opt/asdf-vm/asdf.fish
 atuin init fish | source
 
 # Abbreviations
-abbr -a ls 'eza -l'
-abbr -a lsl 'eza -la'
-abbr -a tree 'eza --tree'
+abbr -a ls 'ls -l'
+abbr -a lsl 'ls -la'
+abbr -a tree 'tree -L 2'
 abbr -a tm 'tmux -u'
-abbr -a p 'sudo pacman -S'
-abbr -a up 'sudo pacman -Syu'
-abbr -a bkms 'nvim $HOME/.bookmarks'
 abbr -a sys 'sudo systemctl'
 
 # Git abbreviations

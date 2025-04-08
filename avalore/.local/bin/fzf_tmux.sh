@@ -22,7 +22,7 @@ fi
 
 # Use fzf to select from the cached list
 selected=$(cat "$cache_file" | fzf \
-    --preview "eza --tree -L 2 {}" \
+    --preview "tree -L 2 {}" \
     --preview-window right:50%:wrap \
     --prompt "Select directory or session: " \
     --header "↑↓:Navigate │ Enter:Select │ Ctrl-C:Cancel " \
