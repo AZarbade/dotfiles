@@ -9,24 +9,24 @@
 }
 
 window#waybar {
-    background-color: @background;
+    background-color: #282828;
 }
 
 #workspaces button {
     background-color: transparent;
-    color: @foreground;
+    color: #fbf1c7;
 }
 
 #workspaces button.active {
-    color: @color9;
+    color: #fe8819;
 }
 
 #workspaces button.hover {
-    background-color: @foreground;
+    background-color: #fbf1c7;
 }
 
 #mode {
-    background-color: @foreground;
+    background-color: #fbf1c7;
 }
 
 #window {
@@ -36,7 +36,7 @@ window#waybar {
 }
 
 #clock {
-    color: @foreground;
+    color: #fbf1c7;
     padding: 0 10px;
 }
 
@@ -76,19 +76,19 @@ window#waybar {
 #network,
 #pulseaudio {
     background-color: transparent;
-    color: @foreground;
+    color: #fbf1c7;
 }
 
 #battery.charged {
-    background-color: @color12;
+    background-color: #8ec07c;
 }
 
 #battery.charging {
-    background-color: @color13;
+    background-color: #458588;
 }
 
 #battery.critical:not(.charging) {
-    background-color: @color8;
+    background-color: #fb4934;
     color: #ffffff;
     animation: blink 0.5s linear infinite alternate;
 }
@@ -96,24 +96,24 @@ window#waybar {
 @keyframes blink {
     to {
         background-color: #ffffff;
-        color: @foreground;
+        color: #fbf1c7;
     }
 }
 
 #temperature {
-    background-color: @color12;
+    background-color: #;
 }
 
 #temperature.critical {
-    background-color: @color8;
+    background-color: #fb4934;
 }
 
 #tray {
-    background-color: @color13;
+    background-color: #8ec07c;
 }
 
 #custom-scratchpad {
-    color: @foreground;
+    color: #fbf1c7;
     padding: 0 10px;
     margin: 0 5px;
 }
