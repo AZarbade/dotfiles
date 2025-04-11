@@ -14,6 +14,7 @@ abbr -a lsl 'ls -la'
 abbr -a tree 'tree -L 2'
 abbr -a tm 'tmux -u'
 abbr -a sys 'sudo systemctl'
+abbr -a untar 'tar -xvzf '
 
 # Git abbreviations
 abbr -a gs 'git status'
