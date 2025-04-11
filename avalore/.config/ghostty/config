@@ -1,0 +1,2 @@
+command = /usr/bin/fish --login --interactive
+theme = catppuccin-mocha

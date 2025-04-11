@@ -2,10 +2,8 @@ avalore/.config/fish/fish_variables
 avalore/.config/nvim/lazy-lock.json
 avalore/.config/btop/btop.log
 avalore/.config/tmux/plugins/tmux-yank/
-avalore/.local/share
 
-wsl_arch/.config/fish/fish_variables
-wsl_arch/.config/nvim/lazy-lock.json
-wsl_arch/.config/btop/btop.log
-wsl_arch/.config/tmux/plugins/tmux-yank/
-wsl_arch/.local/share
+server/.config/fish/fish_variables
+server/.config/atuin
+
+./bookmarks

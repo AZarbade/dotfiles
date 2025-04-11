@@ -1,0 +1,119 @@
+/* @import url("/home/noir/.cache/wal/colors-waybar.css"); */
+
+* {
+    border: none;
+    border-radius: 4px;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+    min-height: 2px;
+}
+
+window#waybar {
+    background-color: #282828;
+}
+
+#workspaces button {
+    background-color: transparent;
+    color: #fbf1c7;
+}
+
+#workspaces button.active {
+    color: #fe8819;
+}
+
+#workspaces button.hover {
+    background-color: #fbf1c7;
+}
+
+#mode {
+    background-color: #fbf1c7;
+}
+
+#window {
+    color: #fba922;
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+#clock {
+    color: #fbf1c7;
+    padding: 0 10px;
+}
+
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd {
+    padding: 0 10px;
+    margin: 6px 3px;
+    color: #ffffff;
+}
+
+#workspaces {
+    margin: 0 4px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#battery,
+#cpu,
+#memory,
+#backlight,
+#network,
+#pulseaudio {
+    background-color: transparent;
+    color: #fbf1c7;
+}
+
+#battery.charged {
+    background-color: #8ec07c;
+}
+
+#battery.charging {
+    background-color: #458588;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #fb4934;
+    color: #ffffff;
+    animation: blink 0.5s linear infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #fbf1c7;
+    }
+}
+
+#temperature {
+    background-color: #8ec07c;
+}
+
+#temperature.critical {
+    background-color: #fb4934;
+}
+
+#tray {
+    background-color: #8ec07c;
+}
+
+#custom-scratchpad {
+    color: #fbf1c7;
+    padding: 0 10px;
+    margin: 0 5px;
+}
