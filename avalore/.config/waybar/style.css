@@ -1,5 +1,4 @@
-/* @import url("/home/noir/.cache/wal/colors-waybar.css"); */
-
+/* Gruvbox Dark Mode Color Scheme */
 * {
     border: none;
     border-radius: 4px;
@@ -14,29 +13,30 @@ window#waybar {
 
 #workspaces button {
     background-color: transparent;
-    color: #fbf1c7;
+    color: #ebdbb2;
 }
 
 #workspaces button.active {
-    color: #fe8819;
+    color: #fe8019;
 }
 
 #workspaces button.hover {
-    background-color: #fbf1c7;
+    background-color: #3c3836;
 }
 
 #mode {
-    background-color: #fbf1c7;
+    background-color: #458588;
+    color: #ebdbb2;
 }
 
 #window {
-    color: #fba922;
+    color: #b8bb26;
     border-radius: 20px;
     padding: 0 10px;
 }
 
 #clock {
-    color: #fbf1c7;
+    color: #ebdbb2;
     padding: 0 10px;
 }
 
@@ -54,7 +54,7 @@ window#waybar {
 #mpd {
     padding: 0 10px;
     margin: 6px 3px;
-    color: #ffffff;
+    color: #ebdbb2;
 }
 
 #workspaces {
@@ -76,44 +76,53 @@ window#waybar {
 #network,
 #pulseaudio {
     background-color: transparent;
-    color: #fbf1c7;
+    color: #ebdbb2;
 }
 
 #battery.charged {
-    background-color: #8ec07c;
+    background-color: #98971a;
+    color: #282828;
 }
 
 #battery.charging {
     background-color: #458588;
+    color: #282828;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #fb4934;
-    color: #ffffff;
+    background-color: #cc241d;
+    color: #ebdbb2;
     animation: blink 0.5s linear infinite alternate;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #fbf1c7;
+        background-color: #ebdbb2;
+        color: #282828;
     }
 }
 
 #temperature {
-    background-color: #8ec07c;
+    background-color: #689d6a;
+    color: #282828;
 }
 
 #temperature.critical {
-    background-color: #fb4934;
+    background-color: #cc241d;
+    color: #ebdbb2;
 }
 
 #tray {
-    background-color: #8ec07c;
+    background-color: #98971a;
+    color: #282828;
 }
 
 #custom-scratchpad {
-    color: #fbf1c7;
+    color: #ebdbb2;
     padding: 0 10px;
     margin: 0 5px;
+}
+
+#privacy {
+    color: #ebdbb2;
 }
