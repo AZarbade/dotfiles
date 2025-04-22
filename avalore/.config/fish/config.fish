@@ -25,7 +25,7 @@ abbr -a gp 'git push'
 
 # Embedded bindings
 abbr -a get_esprs '. $HOME/export-esp.sh'
-abbr -a get_idf '. $HOME/personal/esp_box/esp-idf/export.fish'
+abbr -a get_idf '. $HOME/esp-idf/export.fish'
 abbr -a idf 'idf.py'
 
 # fzf binds

@@ -8,7 +8,8 @@ shell = "/usr/bin/fish"
 TERM = "tmux-256color"
 
 [font]
-normal = { family = "JetBrainsMono Nerd Font" }
+# normal = { family = "JetBrainsMono Nerd Font" }
+normal = { family = "BlexMono Nerd Font Mono" }
 size = 12
 
 [window]
