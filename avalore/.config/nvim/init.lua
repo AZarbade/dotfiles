@@ -122,7 +122,21 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 -- keybind to run Dispatch
-vim.keymap.set("n", "<leader>w", ":Dispatch ", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<leader>w", ":Dispatch ", { noremap = true, silent = false })
+vim.keymap.set("n", "<leader>]", ":cnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>[", ":cprev<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>w", function()
+  local ft = vim.bo.filetype
+  if ft == "rust" then
+    vim.cmd("Dispatch cargo build")
+  elseif ft == "c" then
+    vim.cmd("Dispatch make -j16")
+  else
+    print("No dispatch command configured for filetype: " .. ft)
+  end
+end, { noremap = true, silent = true })
+
 
 -------------------------------------------------------------------------------
 --
