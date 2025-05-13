@@ -44,13 +44,17 @@ function fish_user_key_bindings
   fish_vi_key_bindings
 end
 
-# Fish prompt
-function fish_prompt
-	# Ensure pywal colors are loaded
-    if test -e ~/.cache/wal/colors.fish
-        source ~/.cache/wal/colors.fish
-    end
+set -gx color1 "#b8b8b8"   # Dark Gray (Prompt) - Lighter Gray
+set -gx color4 "#ffcc80"   # Light Yellow (User)
+set -gx color15 "#ffcc80"  # Light Yellow (Current Directory)
+set -gx color11 "#ffcc80"  # Light Yellow (Git Branch/Commit)
+set -gx color8 "#d3d3d3"   # Light Gray (Git Info)
+set -gx color7 "#80cbc4"   # Light Teal (Branch Name/Status)
+set -gx color2 "#e0e0e0"   # Very Light Gray (Overall)
+set -gx color3 "#ffcc80"    # Light Yellow (Other Info)
 
+# Fish prompt
+function fish_prompt -d "Write out the prompt"
 	set_color $color1
 	echo -n "["(date "+%H:%M")"] "
 	set_color $color4

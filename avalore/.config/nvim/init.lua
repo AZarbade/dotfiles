@@ -463,8 +463,9 @@ require("lazy").setup({
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
-					lua = { "stylua" }, -- stylua install manually to the system.
+					lua = { "stylua" }, -- install stylua via pkg manager.
 					rust = { "rustfmt" }, -- install rustfmt via `rustup`.
+					zig = { "zigfmt" }, -- install zig via pkg manager.
 				},
 				format_on_save = {
 					lsp_format = "fallback",
