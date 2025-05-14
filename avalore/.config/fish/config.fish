@@ -4,6 +4,7 @@ set -g fish_greeting
 set -g fish_user_key_bindings
 
 set -x PATH $HOME/.local/bin $PATH
+set -x MANPAGER "nvim -c 'Man!' -o -"
 fish_add_path /opt/nvim-linux64/bin
 fish_add_path /opt/asdf-vm/asdf.fish
 atuin init fish | source
