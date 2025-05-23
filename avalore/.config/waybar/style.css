@@ -1,42 +1,42 @@
-/* Gruvbox Dark Mode Color Scheme */
+/* Mocha Green Color Scheme */
 * {
     border: none;
-    border-radius: 4px;
-    font-family: "JetBrainsMono Nerd Font";
+    border-radius: 6px;
+    font-family: "BlexMono Nerd Font";
     font-size: 14px;
     min-height: 2px;
 }
 
 window#waybar {
-    background-color: #282828;
+    background-color: #1e1e1e;
 }
 
 #workspaces button {
     background-color: transparent;
-    color: #ebdbb2;
+    color: #d0f0c0;
 }
 
 #workspaces button.active {
-    color: #fe8019;
+    color: #7dc982;
 }
 
 #workspaces button.hover {
-    background-color: #3c3836;
+    background-color: #2a2a2a;
 }
 
 #mode {
-    background-color: #458588;
-    color: #ebdbb2;
+    background-color: #61afef;
+    color: #1e1e1e;
 }
 
 #window {
-    color: #b8bb26;
+    color: #98c379;
     border-radius: 20px;
     padding: 0 10px;
 }
 
 #clock {
-    color: #ebdbb2;
+    color: #d0f0c0;
     padding: 0 10px;
 }
 
@@ -54,7 +54,7 @@ window#waybar {
 #mpd {
     padding: 0 10px;
     margin: 6px 3px;
-    color: #ebdbb2;
+    color: #d0f0c0;
 }
 
 #workspaces {
@@ -76,53 +76,53 @@ window#waybar {
 #network,
 #pulseaudio {
     background-color: transparent;
-    color: #ebdbb2;
+    color: #d0f0c0;
 }
 
 #battery.charged {
-    background-color: #98971a;
-    color: #282828;
+    background-color: #98c379;
+    color: #1e1e1e;
 }
 
 #battery.charging {
-    background-color: #458588;
-    color: #282828;
+    background-color: #7dc982;
+    color: #1e1e1e;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #cc241d;
-    color: #ebdbb2;
+    background-color: #ff6f6f;
+    color: #ffffff;
     animation: blink 0.5s linear infinite alternate;
 }
 
 @keyframes blink {
     to {
-        background-color: #ebdbb2;
-        color: #282828;
+        background-color: #ffffff;
+        color: #1e1e1e;
     }
 }
 
 #temperature {
-    background-color: #689d6a;
-    color: #282828;
+    background-color: #56b6c2;
+    color: #1e1e1e;
 }
 
 #temperature.critical {
-    background-color: #cc241d;
-    color: #ebdbb2;
+    background-color: #ff6f6f;
+    color: #ffffff;
 }
 
 #tray {
-    background-color: #98971a;
-    color: #282828;
+    background-color: #98c379;
+    color: #1e1e1e;
 }
 
 #custom-scratchpad {
-    color: #ebdbb2;
+    color: #d0f0c0;
     padding: 0 10px;
     margin: 0 5px;
 }
 
 #privacy {
-    color: #ebdbb2;
+    color: #d0f0c0;
 }

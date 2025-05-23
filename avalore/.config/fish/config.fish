@@ -45,34 +45,38 @@ function fish_user_key_bindings
   fish_vi_key_bindings
 end
 
-set -gx color1 "#b8b8b8"   # Dark Gray (Prompt) - Lighter Gray
-set -gx color4 "#ffcc80"   # Light Yellow (User)
-set -gx color15 "#ffcc80"  # Light Yellow (Current Directory)
-set -gx color11 "#ffcc80"  # Light Yellow (Git Branch/Commit)
-set -gx color8 "#d3d3d3"   # Light Gray (Git Info)
-set -gx color7 "#80cbc4"   # Light Teal (Branch Name/Status)
-set -gx color2 "#e0e0e0"   # Very Light Gray (Overall)
-set -gx color3 "#ffcc80"    # Light Yellow (Other Info)
+# Fish colors
+set -gx color1 "#7dc982"   # Soft Green (Prompt Time/User/Separator)
+set -gx color4 "#9ee0a6"   # Bright Green (User/Host)
+set -gx color15 "#98c379"  # Mocha Green (Current Directory)
+set -gx color11 "#61afef"  # Blue (Git branch info)
+set -gx color8 "#cdd6f4"   # Pale Gray (Git metadata)
+set -gx color7 "#56b6c2"   # Cyan (Branch status/extra info)
+set -gx color2 "#e0fbe3"   # Very Light Mint (Not used here, optional)
+set -gx color3 "#cba6f7"   # Lavender (Unused, optional)
 
 # Fish prompt
 function fish_prompt -d "Write out the prompt"
-	set_color $color1
-	echo -n "["(date "+%H:%M")"] "
-	set_color $color4
-	echo -n (whoami)
-	echo -n  "@"
-	echo -n (hostnamectl hostname)
-	if [ $PWD != $HOME ]
-		set_color $color4
-		echo -n ':'
-		set_color $color15
-		echo -n (basename $PWD)
-	end
-	set_color $color11
-	printf '%s ' (__fish_git_prompt)
-	set_color $color8
-	echo -n '| '
-	set_color $color7
+    set_color $color1
+    echo -n "["(date "+%H:%M")"] "
+
+    set_color $color4
+    echo -n (whoami)"@"(hostnamectl hostname)
+
+    if [ $PWD != $HOME ]
+        set_color $color4
+        echo -n ":"
+        set_color $color15
+        echo -n (basename $PWD)
+    end
+
+    set_color $color11
+    printf '%s ' (__fish_git_prompt)
+
+    set_color $color8
+    echo -n "| "
+
+    set_color $color7
 end
 
 # Fish git prompt
