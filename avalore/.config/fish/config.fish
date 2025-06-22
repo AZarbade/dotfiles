@@ -32,9 +32,11 @@ abbr -a idf 'idf.py'
 # Replace with your actual FQBN and port
 set -gx ARDUINO_FQBN esp32:esp32:esp32c6
 set -gx ARDUINO_PORT /dev/ttyACM0
+set -gx ARDUINO_BUADRATE 115200
 
 alias ardcompile='arduino-cli compile --fqbn $ARDUINO_FQBN'
 alias ardupload='arduino-cli upload -p $ARDUINO_PORT --fqbn $ARDUINO_FQBN'
+alias ardmonitor='arduino-cli monitor -p $ARDUINO_PORT --config $ARDUINO_BUADRATE'
 
 # fzf binds
 bind -M insert \cp '$HOME/dotfiles/avalore/.local/bin/fzf_tmux.sh'
