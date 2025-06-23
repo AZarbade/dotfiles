@@ -1,37 +1,23 @@
-# ███████╗ █████╗ ███╗   ██╗███████╗██╗   ██╗███████╗
-# ╚══███╔╝██╔══██╗████╗  ██║██╔════╝╚██╗ ██╔╝██╔════╝
-#   ███╔╝ ███████║██╔██╗ ██║█████╗   ╚████╔╝ ███████╗
-#  ███╔╝  ██╔══██║██║╚██╗██║██╔══╝    ╚██╔╝  ╚════██║
-# ███████╗██║  ██║██║ ╚████║███████╗   ██║   ███████║
-# ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝
-# Dotfiles circa 2023
+font = BlexMono Nerd Font
+font-size = 13
 
-# Font
-font = JetBrainsMono Nerd Font
-font-size = 10
+anchor = top-center
+width = 800
+height = 400
+corner-radius = 0
 
-# Text style
-prompt-text = "run: "
+horizontal = false
+padding-top = 4
+padding-bottom = 4
+padding-left = 12
+padding-right = 12
+min-input-width = 200
+result-spacing = 8
 
-# Window Style
-anchor = top-left
-margin-top = 8
-margin-left = 8
-margin-right = 8
-corner-radius = 4
-width = 1904
-height = 30
-horizontal = true
-background-color = #1D2021
-text-color = #D5C4A1
-input-color = #D65D0E
-selection-color = #83A598
+background-color = #282828cc
+text-color = #ebdbb2
+input-color = #83a598
+selection-color = #3c3836
 
 outline-width = 0
 border-width = 0
-min-input-width = 120
-result-spacing = 15
-padding-top = 5
-padding-bottom = 0
-padding-left = 8
-padding-right = 8

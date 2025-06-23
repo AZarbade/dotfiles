@@ -1,12 +1,11 @@
-[terminal]
+[terminal] 
 shell = "/usr/bin/fish"
 
 [env]
 TERM = "tmux-256color"
 
 [font]
-# normal = { family = "JetBrainsMono Nerd Font" }
-normal = { family = "BlexMono Nerd Font Mono" }
+normal = { family = "BlexMono Nerd Font", style = "Regular" }
 size = 12
 
 [window]
@@ -14,6 +13,10 @@ padding = { x = 25, y = 25 }
 dynamic_padding = false
 decorations = "None"
 opacity = 0.95
+startup_mode = "Windowed"
+
+[cursor]
+style = "Beam"
 
 [colors.primary]
 background = "#1e1e1e"

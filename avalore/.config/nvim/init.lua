@@ -6,6 +6,8 @@ vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
 -- preferences
 --
 -------------------------------------------------------------------------------
+vim.opt.termguicolors = true
+vim.opt.cursorline = true
 -- never ever folding
 vim.opt.foldenable = false
 vim.opt.foldmethod = "manual"
@@ -127,16 +129,15 @@ vim.keymap.set("n", "<leader>]", ":cnext<CR>", { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>[", ":cprev<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>w", function()
-  local ft = vim.bo.filetype
-  if ft == "rust" then
-    vim.cmd("Dispatch cargo build")
-  elseif ft == "c" then
-    vim.cmd("Dispatch make -j16")
-  else
-    print("No dispatch command configured for filetype: " .. ft)
-  end
+	local ft = vim.bo.filetype
+	if ft == "rust" then
+		vim.cmd("Dispatch cargo build")
+	elseif ft == "c" then
+		vim.cmd("Dispatch make -j16")
+	else
+		print("No dispatch command configured for filetype: " .. ft)
+	end
 end, { noremap = true, silent = true })
-
 
 -------------------------------------------------------------------------------
 --
@@ -206,10 +207,16 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- coloscheme
 	{
-		"morhetz/gruvbox",
+		-- "shaunsingh/nord.nvim",
+		"ellisonleao/gruvbox.nvim",
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme("gruvbox")
+			vim.cmd([[
+			  highlight Normal guibg=NONE ctermbg=NONE
+			  highlight NormalNC guibg=NONE ctermbg=NONE
+			  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+			]])
 		end,
 	},
 	-- nice bar at the bottom
@@ -218,64 +225,57 @@ require("lazy").setup({
 		dependencies = {
 			"meuter/lualine-so-fancy.nvim",
 		},
-		enabled = true,
-		lazy = false,
-		event = { "BufReadPost", "BufNewFile", "VeryLazy" },
 		config = function()
 			require("lualine").setup({
 				options = {
-					globalstatus = true,
+					theme = "gruvbox",
 					icons_enabled = true,
-					component_separators = { left = "|", right = "|" },
-					section_separators = { left = "", right = "" },
-					disabled_filetypes = {
-						statusline = {
-							"help",
-						},
-					},
+					globalstatus = true,
+					component_separators = { left = "", right = "" },
+					section_separators = { left = "", right = "" },
+					disabled_filetypes = { statusline = { "help", "startify" } },
 				},
 				sections = {
-					lualine_a = {
-						{ "fancy_branch" },
-					},
+					lualine_a = { { "mode", icon = "" } },
 					lualine_b = {
+						{ "branch", icon = "" },
+						{
+							"diff",
+							symbols = { added = " ", modified = " ", removed = " " },
+						},
+						{
+							"diagnostics",
+							sources = { "nvim_lsp" },
+							symbols = { error = " ", warn = " ", info = " ", hint = " " },
+						},
+					},
+					lualine_c = {
 						{
 							"filename",
 							path = 1,
 							symbols = {
-								modified = "  ",
-								readonly = "  ",
-								unnamed = "  ",
+								modified = " [+]",
+								readonly = " [RO]",
+								unnamed = "[No Name]",
 							},
 						},
-						{
-							"fancy_diagnostics",
-							sources = { "nvim_lsp" },
-							symbols = { error = " ", warn = " ", info = " " },
-						},
-						{ "fancy_searchcount" },
 					},
-					lualine_c = {},
 					lualine_x = {
-						"fancy_lsp_servers",
+						{ "encoding" },
+						{ "fileformat", icons_enabled = true },
+						{ "filetype" },
 					},
 					lualine_y = {
-						{ "fancy_filetype" },
+						{ "progress" },
 					},
-					lualine_z = {},
+					lualine_z = {
+						{ "location" },
+					},
 				},
-				extensions = { "lazy" },
+				extensions = { "lazy", "quickfix", "nvim-tree" },
 			})
 		end,
 	},
-	-- quick navigation
-	{
-		"ggandor/leap.nvim",
-		config = function()
-			require("leap").create_default_mappings()
-		end,
-	},
-	-- telescope for fzf utils
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
@@ -336,11 +336,15 @@ require("lazy").setup({
 			require("lspconfig").arduino_language_server.setup({
 				cmd = {
 					"arduino-language-server",
-					"-clangd", "/usr/bin/clangd",
-					"-cli", "/usr/bin/arduino-cli",
-					"-cli-config", vim.fn.expand("~/.arduino15/arduino-cli.yaml"),
-					"-fqbn", "esp32:esp32:esp32c6"
-				}
+					"-clangd",
+					"/usr/bin/clangd",
+					"-cli",
+					"/usr/bin/arduino-cli",
+					"-cli-config",
+					vim.fn.expand("~/.arduino15/arduino-cli.yaml"),
+					"-fqbn",
+					"esp32:esp32:esp32c6",
+				},
 			}) -- enable arduino_language_server (arduino ide)
 
 			-- Global mappings.
