@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# Get a list of PDFs using fd
 mapfile -t pdfs < <(fd . --extension pdf ~/Documents ~/Downloads ~/personal 2>/dev/null)
 
-# Map filenames to full paths, handle duplicates
 declare -A pdf_map
 choices=()
 
@@ -19,8 +17,5 @@ for path in "${pdfs[@]}"; do
     choices+=("$key")
 done
 
-# Launch tofi
 selection=$(printf '%s\n' "${choices[@]}" | tofi)
-
-# Open the selected file
-[[ -n "$selection" ]] && xdg-open "${pdf_map[$selection]}"
+zathura "${pdf_map[$selection]}" &
