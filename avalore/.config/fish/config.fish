@@ -15,15 +15,6 @@ abbr -a ls 'ls -l'
 abbr -a lsl 'ls -la'
 abbr -a tree 'tree -L 2'
 abbr -a tm 'tmux -u'
-abbr -a sys 'sudo systemctl'
-abbr -a untar 'tar -xvzf '
-
-# Git
-abbr -a gs 'git status'
-abbr -a gc 'git commit'
-abbr -a gm 'git merge --no-ff'
-abbr -a gg 'git-graph'
-abbr -a gp 'git push'
 
 # ESP/Embedded
 abbr -a get_esprs '. $HOME/export-esp.sh'
