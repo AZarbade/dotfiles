@@ -5,7 +5,7 @@
 
     "modules-left": ["hyprland/workspaces"],
 	"modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "temperature", "memory", "battery", "tray", "privacy"],
+    "modules-right": ["pulseaudio", "network", "temperature", "disk", "cpu", "memory", "battery", "tray", "privacy"],
 
     "hyprland/workspaces": {
       "format": "{icon}",
@@ -18,7 +18,8 @@
           "6": "VI",
           "7": "VII",
           "8": "VIII",
-          "9": "IX"
+          "9": "IX",
+          "10": "X"
       },
       "sort-by-number": true
     },
@@ -29,20 +30,39 @@
 	},
 
     "tray": {
-        "spacing": 10,
+        "spacing": 12,
     },
 
 	"clock": {
 		"interval": 60,
 		"tooltip": true,
-		"format": "  {:%H.%M %Y-%m-%d}",
+		"format": "{:%H.%M %d-%m-%Y}",
+	},
+
+	"disk": {
+		"interval": 120,
+		"path": "/",
+		"format": " {percentage_used}% Used",
+		"states": {
+			"good": 10,
+			"warning": 40,
+			"critical": 70
+		},
 	},
 
     "memory": {
-		"interval": 60,
-		"format": "{used:0.1f}G ",
-		"on-click": "alacritty -e htop",
+		"interval": 10,
+		"format": "{used:0.1f}G ",
+		"on-click": "alacritty -e btop",
+		"tooltip": true,
+		"tooltip-format": "Used: {used:0.1f}G\nFree: {free:0.1f}G\nTotal: {total:0.1f}G",
     },
+
+	"cpu": {
+		"interval": 10,
+		"format": "{}% ",
+		"on-click": "alacritty -e btop"
+	},
 
     "temperature": {
         "critical-threshold": 90,
@@ -61,17 +81,17 @@
         "format": " : {time}",
         "format-charging": " {capacity}%",
         "format-full": "{icon}",
-		"format-icons": [" ", " ", " ", " ", " "],
+		"format-icons": [" ", " ", " ", "󰂁", "󰁹"],
 		"tooltip-format": "{timeTo} | {capacity}% | {power} watts",
 		"tooltip": true,
     },
     
 	"network": {
-		"format-wifi": "{essid}  ",
-		"format-ethernet": "{ifname} ",
-		"format-disconnected": "Disconnected",
+		"format-wifi": " ",
+		"format-ethernet": "",
+		"format-disconnected": "󰌙",
 		"tooltip": true,
-		"tooltip-format": "IP: {ipaddr}\nInterface: {ifname}\nCIDR: {cidr}",
+		"tooltip-format": "Name: {essid}\nIP: {ipaddr}\nInterface: {ifname}\n",
 		"on-click": "alacritty -e nmtui"
 	},
 
