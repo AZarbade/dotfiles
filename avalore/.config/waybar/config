@@ -3,9 +3,9 @@
 	"spacing": 0,
 	"reload_style_on_change": true,
 
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["custom/updates", "hyprland/workspaces"],
 	"modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "temperature", "disk", "cpu", "memory", "battery", "tray", "privacy"],
+    "modules-right": ["backlight", "pulseaudio", "network", "temperature", "disk", "cpu", "memory", "battery", "tray", "privacy"],
 
     "hyprland/workspaces": {
       "format": "{icon}",
@@ -29,6 +29,15 @@
 		"separate-outputs": true
 	},
 
+	"backlight": {
+		"format": "{percent}% {icon}",
+		"format-icons": ["󰃞", "󰃟", "󰃠"],
+		"on-scroll-up": "brightnessctl set +5%",
+		"on-scroll-down": "brightnessctl set 5%-",
+		"tooltip": true,
+		"tooltip-format": "Brightness: {percent}%"
+	},
+
     "tray": {
         "spacing": 12,
     },
@@ -40,18 +49,23 @@
 	},
 
 	"disk": {
-		"interval": 120,
+		"interval": 3600,
 		"path": "/",
-		"format": " {percentage_used}% Used",
+		"format": "󰋊 {used}/{total}",
+		"format-alt": "󰋊 {percentage_used}% ({free})",
 		"states": {
-			"good": 10,
-			"warning": 40,
-			"critical": 70
+			"good": 0,
+			"warning": 70,
+			"critical": 85
 		},
+		"tooltip": true,
+		"tooltip-format": "Path: {path}\nUsed: {used} ({percentage_used}%)\nFree: {free} ({percentage_free}%)\nTotal: {total}",
+		"on-click": "alacritty -e df -h",
+		"on-click-right": "thunar /"
 	},
 
     "memory": {
-		"interval": 10,
+		"interval": 60,
 		"format": "{used:0.1f}G ",
 		"on-click": "alacritty -e btop",
 		"tooltip": true,
@@ -59,7 +73,7 @@
     },
 
 	"cpu": {
-		"interval": 10,
+		"interval": 60,
 		"format": "{}% ",
 		"on-click": "alacritty -e btop"
 	},
@@ -72,7 +86,7 @@
 
     "battery": {
         "bat": "BAT0",
-		"interval": 60,
+		"interval": 30,
         "states": {
             "good": 95,
             "warning": 50,
@@ -85,7 +99,7 @@
 		"tooltip-format": "{timeTo} | {capacity}% | {power} watts",
 		"tooltip": true,
     },
-    
+
 	"network": {
 		"format-wifi": " ",
 		"format-ethernet": "",
@@ -128,5 +142,15 @@
 				"tooltip-icon-size": 24
 			}
 		]
+	},
+
+	"custom/updates": {
+		"format": "{}",
+		"interval": 86400,
+		"exec": "yay -Qu &>/dev/null && echo '●' || echo '●'",
+		"exec-if": "exit 0",
+		"on-click": "alacritty -e yay -Syu",
+		"tooltip": true,
+		"tooltip-exec": "yay -Qu | wc -l | xargs -I {} echo '{} updates available'"
 	},
 }

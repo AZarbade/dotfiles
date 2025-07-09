@@ -61,7 +61,43 @@ window#waybar {
   border-radius: 6px;
 }
 
-/* Battery states */
+#backlight {
+    background-color: transparent;
+    color: #ebdbb2;
+    padding: 0 10px;
+    margin: 4px 3px;
+    border-radius: 6px;
+}
+
+#custom-updates {
+    background-color: transparent;
+    padding: 0 10px;
+    margin: 4px 3px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+#custom-updates {
+    color: #fb4934; /* Red for updates available */
+}
+
+#disk {
+    background-color: transparent;
+    color: #ebdbb2;
+    padding: 0 10px;
+    margin: 4px 3px;
+    border-radius: 6px;
+}
+
+#disk.warning {
+    color: #fabd2f;
+}
+
+#disk.critical {
+    color: #fb4934;
+    animation: blink 1s ease-in-out infinite alternate;
+}
+
 #battery.charged {
   background-color: #b8bb26;
   color: #282828;
