@@ -75,10 +75,7 @@ window#waybar {
     margin: 4px 3px;
     border-radius: 6px;
     font-size: 16px;
-}
-
-#custom-updates {
-    color: #fb4934; /* Red for updates available */
+    color: #B8BB26;
 }
 
 #disk {

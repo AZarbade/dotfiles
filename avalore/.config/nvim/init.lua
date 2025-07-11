@@ -333,6 +333,7 @@ require("lazy").setup({
 			require("lspconfig").clangd.setup({}) -- enable clangd (esp-idf)
 			require("lspconfig").ruff.setup({}) -- enable ruff (python)
 			require("lspconfig").rust_analyzer.setup({}) -- enable rust analyzer (rust)
+			require("lspconfig").tinymist.setup({}) -- enable tinymist (for typst)
 			require("lspconfig").arduino_language_server.setup({
 				cmd = {
 					"arduino-language-server",
@@ -527,5 +528,12 @@ require("lazy").setup({
 	-- refer: https://github.com/tpope/vim-dispatch
 	{
 		"tpope/vim-dispatch",
+	},
+
+	{
+		"chomosuke/typst-preview.nvim",
+		lazy = false, -- or ft = 'typst'
+		version = "1.*",
+		opts = {},
 	},
 })

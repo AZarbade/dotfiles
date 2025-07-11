@@ -5,7 +5,7 @@
 
     "modules-left": ["custom/updates", "hyprland/workspaces"],
 	"modules-center": ["clock"],
-    "modules-right": ["backlight", "pulseaudio", "network", "temperature", "disk", "cpu", "memory", "battery", "tray", "privacy"],
+    "modules-right": ["disk", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "network", "tray", "privacy"],
 
     "hyprland/workspaces": {
       "format": "{icon}",
@@ -95,7 +95,7 @@
         "format": " : {time}",
         "format-charging": " {capacity}%",
         "format-full": "{icon}",
-		"format-icons": [" ", " ", " ", "󰂁", "󰁹"],
+		"format-icons": ["", "", "", "󰂁", "󰁹"],
 		"tooltip-format": "{timeTo} | {capacity}% | {power} watts",
 		"tooltip": true,
     },
@@ -147,7 +147,7 @@
 	"custom/updates": {
 		"format": "{}",
 		"interval": 86400,
-		"exec": "yay -Qu &>/dev/null && echo '●' || echo '●'",
+		"exec": "yay -Qu &>/dev/null && echo '󰚰' || echo ''",
 		"exec-if": "exit 0",
 		"on-click": "alacritty -e yay -Syu",
 		"tooltip": true,
