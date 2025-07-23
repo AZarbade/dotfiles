@@ -1,6 +1,6 @@
 * {
   border: none;
-  border-radius: 6px;
+  border-radius: 0px;
   font-family: "BlexMono Nerd Font";
   font-size: 14px;
   min-height: 0;
@@ -58,7 +58,6 @@ window#waybar {
   color: #ebdbb2;
   padding: 0 10px;
   margin: 4px 3px;
-  border-radius: 6px;
 }
 
 #backlight {
@@ -66,14 +65,12 @@ window#waybar {
     color: #ebdbb2;
     padding: 0 10px;
     margin: 4px 3px;
-    border-radius: 6px;
 }
 
 #custom-updates {
     background-color: transparent;
     padding: 0 10px;
     margin: 4px 3px;
-    border-radius: 6px;
     font-size: 16px;
     color: #B8BB26;
 }
@@ -83,7 +80,6 @@ window#waybar {
     color: #ebdbb2;
     padding: 0 10px;
     margin: 4px 3px;
-    border-radius: 6px;
 }
 
 #disk.warning {
