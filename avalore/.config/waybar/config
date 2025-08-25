@@ -3,9 +3,11 @@
 	"spacing": 0,
 	"reload_style_on_change": true,
 
+	"output": ["eDP-1", "HDMI-A-1"],
     "modules-left": ["custom/updates", "hyprland/workspaces"],
 	"modules-center": ["clock"],
     "modules-right": ["disk", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "network", "tray", "privacy"],
+
 
     "hyprland/workspaces": {
       "format": "{icon}",
