@@ -334,19 +334,6 @@ require("lazy").setup({
 			require("lspconfig").ruff.setup({}) -- enable ruff (python)
 			require("lspconfig").rust_analyzer.setup({}) -- enable rust analyzer (rust)
 			require("lspconfig").tinymist.setup({}) -- enable tinymist (for typst)
-			require("lspconfig").arduino_language_server.setup({
-				cmd = {
-					"arduino-language-server",
-					"-clangd",
-					"/usr/bin/clangd",
-					"-cli",
-					"/usr/bin/arduino-cli",
-					"-cli-config",
-					vim.fn.expand("~/.arduino15/arduino-cli.yaml"),
-					"-fqbn",
-					"esp32:esp32:esp32c6",
-				},
-			}) -- enable arduino_language_server (arduino ide)
 
 			-- Global mappings.
 			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
