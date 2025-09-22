@@ -1,5 +1,4 @@
 #!/bin/bash
-
 dirs=("$HOME/personal" "$HOME/dotfiles")  # Default directories
 cache_file="$HOME/.dir_cache"
 log_file="$HOME/.dir_cache_log"
@@ -15,7 +14,6 @@ log_message() {
 }
 
 update_cache() {
-    # Log the cache update action
     log_message "Updating cache"
     
     printf "%s\n" "${dirs[@]}" > "$cache_file"
@@ -31,8 +29,10 @@ if [[ "$1" == "--update" ]]; then
     exit 0
 fi
 
-# Always update the cache before proceeding
-update_cache
+# Only update cache if it doesn't exist or is older than 1 hour
+if [[ ! -f "$cache_file" ]] || [[ $(find "$cache_file" -mmin +60 2>/dev/null) ]]; then
+    update_cache
+fi
 
 # Use fzf to select from the cached list
 selected=$(cat "$cache_file" | fzf \
@@ -50,16 +50,18 @@ echo "Selected directory: $selected"
 selected_name=$(basename "$selected" | tr . _)
 
 if [ -n "$TMUX" ]; then
-    # Inside tmux
-    tmux has-session -t "$selected_name" 2>/dev/null && \
-        exec tmux switch-client -t "$selected_name"
-    
-    tmux new-session -d -s "$selected_name" -c "$selected"
-    exec tmux switch-client -t "$selected_name"
+    # Inside tmux - fixed logic
+    if tmux has-session -t "$selected_name" 2>/dev/null; then
+        tmux switch-client -t "$selected_name"
+    else
+        tmux new-session -d -s "$selected_name" -c "$selected"
+        tmux switch-client -t "$selected_name"
+    fi
 else
     # Outside tmux
-    tmux has-session -t "$selected_name" 2>/dev/null && \
-        exec tmux attach-session -t "$selected_name"
-    
-    exec tmux new-session -s "$selected_name" -c "$selected"
+    if tmux has-session -t "$selected_name" 2>/dev/null; then
+        tmux attach-session -t "$selected_name"
+    else
+        tmux new-session -s "$selected_name" -c "$selected"
+    fi
 fi

@@ -1,5 +1,5 @@
 [terminal] 
-shell = "/usr/bin/fish"
+shell = "/usr/bin/bash"
 
 [env]
 TERM = "tmux-256color"
@@ -14,38 +14,3 @@ dynamic_padding = false
 decorations = "None"
 opacity = 0.95
 startup_mode = "Windowed"
-
-[cursor]
-style = "Beam"
-
-[colors.primary]
-background = "#1e1e1e"
-foreground = "#d0f0c0"
-
-[colors.normal]
-black   = "#141414"
-red     = "#b84a4a"
-green   = "#98c379"
-yellow  = "#e5c07b"
-blue    = "#61afef"
-magenta = "#c678dd"
-cyan    = "#56b6c2"
-white   = "#abb2bf"
-
-[colors.bright]
-black   = "#1a2d1e"
-red     = "#ff6f6f"
-green   = "#7dc982"
-yellow  = "#f0d799"
-blue    = "#80bfff"
-magenta = "#e299ff"
-cyan    = "#8be9fd"
-white   = "#ffffff"
-
-[colors.cursor]
-text   = "#1e1e1e"
-cursor = "#7dc982"
-
-[colors.selection]
-text       = "#1e1e1e"
-background = "#9ee0a6"
