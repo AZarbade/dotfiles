@@ -1,5 +1,5 @@
 [global]
-    font = BlexMono Nerd Font 10
+    font = Overpass 10
     format = "<b>%s</b>\n%b"
     origin = top-right
     offset = 20x20

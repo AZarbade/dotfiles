@@ -100,13 +100,14 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/sainnhe/gruvbox-material" },
+	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 })
 
-vim.cmd(":hi statusline guibg=NONE")
 vim.g.gruvbox_material_transparent_background = 1
 vim.cmd.colorscheme("gruvbox-material")
+vim.cmd(":hi statusline guibg=NONE")
 
-vim.lsp.enable({ "lua_ls", "ruff", "rust_analyzer", "clang" })
+vim.lsp.enable({ "lua_ls", "ruff", "rust_analyzer", "clang", "tinymist" })
 -- workaround for lua diagnostics
 vim.lsp.config("lua_ls", {
 	settings = {
