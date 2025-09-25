@@ -1,3 +1,6 @@
+# credits to chatgpt for this.
+# idea from Theprimegen and Sylvan Franklin
+
 #!/bin/bash
 dirs=("$HOME/personal" "$HOME/dotfiles")  # Default directories
 cache_file="$HOME/.dir_cache"
