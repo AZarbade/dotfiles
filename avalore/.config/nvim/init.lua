@@ -4,6 +4,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.g.netrw_liststyle = 3
+
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.foldenable = false
