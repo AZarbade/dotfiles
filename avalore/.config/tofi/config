@@ -1,18 +1,18 @@
-anchor = top
+anchor = center
 width = 35%
-height = 25%
+height = 15%
 margin-top = 15%
 
 border-width = 0
 outline-width = 0
-background-color = #282828
-text-color = #ebdbb2
-selection-color = #fe8019
-selection-text-color = #282828
+background-color = #000000
+text-color = #ffffff
+selection-color = #ffffff
+selection-text-color = #000000
 corner-radius = 8
 
 font = Overpass
-font-size = 12
+font-size = 14
 
 hide-cursor = true
 drun-launch = true
