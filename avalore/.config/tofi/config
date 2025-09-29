@@ -2,18 +2,16 @@ anchor = center
 width = 35%
 height = 15%
 margin-top = 15%
-
 border-width = 0
 outline-width = 0
-background-color = #000000
-text-color = #ffffff
-selection-color = #ffffff
-selection-text-color = #000000
+background-color = #1d2021
+text-color = #d4be98
+selection-color = #7daea3
+selection-background-color = #7daea3
+selection-text-color = #1d2021
 corner-radius = 8
-
 font = Overpass
 font-size = 14
-
 hide-cursor = true
 drun-launch = true
 prompt-text = ""
@@ -21,7 +19,6 @@ fuzzy-match = true
 require-match = false
 hide-input = false
 min-input-width = 0
-
 padding-top = 15
 padding-bottom = 15
 padding-left = 25

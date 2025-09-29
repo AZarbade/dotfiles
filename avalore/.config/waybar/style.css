@@ -7,8 +7,8 @@
 }
 
 window#waybar {
-  background-color: #282828;
-  color: #ebdbb2;
+  background-color: #1d2021;
+  color: #d4be98;
   padding: 4px 8px;
 }
 
@@ -18,7 +18,7 @@ window#waybar {
 }
 
 #workspaces button {
-  color: #b8bb26;
+  color: #a9b665;
   background-color: transparent;
   padding: 0 10px;
   margin: 4px 3px;
@@ -26,18 +26,18 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background-color: #83a598;
-  color: #282828;
+  background-color: #7daea3;
+  color: #1d2021;
 }
 
 #workspaces button:hover {
-  background-color: #3c3836;
+  background-color: #32302f;
 }
 
 /* Mode indicator */
 #mode {
-  background-color: #fabd2f;
-  color: #282828;
+  background-color: #d8a657;
+  color: #1d2021;
   font-weight: bold;
   padding: 0 10px;
   margin: 4px 3px;
@@ -45,7 +45,7 @@ window#waybar {
 
 /* Focused window title */
 #window {
-  color: #8ec07c;
+  color: #89b482;
   padding: 0 10px;
   background: transparent;
   margin: 4px 3px;
@@ -55,75 +55,75 @@ window#waybar {
 #clock, #battery, #cpu, #memory, #temperature,
 #network, #pulseaudio, #tray {
   background-color: transparent;
-  color: #ebdbb2;
+  color: #d4be98;
   padding: 0 10px;
   margin: 4px 3px;
   border-radius: 6px;
 }
 
 #backlight {
-    background-color: transparent;
-    color: #ebdbb2;
-    padding: 0 10px;
-    margin: 4px 3px;
-    border-radius: 6px;
+  background-color: transparent;
+  color: #d4be98;
+  padding: 0 10px;
+  margin: 4px 3px;
+  border-radius: 6px;
 }
 
 #custom-updates {
-    background-color: transparent;
-    padding: 0 10px;
-    margin: 4px 3px;
-    border-radius: 6px;
-    font-size: 16px;
-    color: #B8BB26;
+  background-color: transparent;
+  padding: 0 10px;
+  margin: 4px 3px;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #a9b665;
 }
 
 #disk {
-    background-color: transparent;
-    color: #ebdbb2;
-    padding: 0 10px;
-    margin: 4px 3px;
-    border-radius: 6px;
+  background-color: transparent;
+  color: #d4be98;
+  padding: 0 10px;
+  margin: 4px 3px;
+  border-radius: 6px;
 }
 
 #disk.warning {
-    color: #fabd2f;
+  color: #d8a657;
 }
 
 #disk.critical {
-    color: #fb4934;
-    animation: blink 1s ease-in-out infinite alternate;
+  color: #ea6962;
+  animation: blink 1s ease-in-out infinite alternate;
 }
 
 #battery.charged {
-  background-color: #b8bb26;
-  color: #282828;
+  background-color: #a9b665;
+  color: #1d2021;
 }
 
 #battery.charging {
-  background-color: #fabd2f;
-  color: #282828;
+  background-color: #d8a657;
+  color: #1d2021;
 }
 
 #battery.critical:not(.charging) {
-  background-color: #fb4934;
-  color: #ffffff;
+  background-color: #ea6962;
+  color: #1d2021;
   animation: blink 0.5s ease-in-out infinite alternate;
 }
 
 @keyframes blink {
-  0%   { background-color: #fb4934; }
-  100% { background-color: #cc241d; }
+  0%   { background-color: #ea6962; }
+  100% { background-color: #c14a4a; }
 }
 
 /* Temperature styling */
 #temperature {
-  background-color: #83a598;
-  color: #282828;
+  background-color: #7daea3;
+  color: #1d2021;
 }
 
 /* Tray styling */
 #tray {
-  background-color: #b8bb26;
-  color: #282828;
+  background-color: #a9b665;
+  color: #1d2021;
 }
