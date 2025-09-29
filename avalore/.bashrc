@@ -29,5 +29,4 @@ alias tm='tmux'
 alias install='$HOME/.scripts/install_packages.sh'
 
 # binds
-bind -x $'"\C-l":clear;'
 bind -x '"\C-p": "clear; $HOME/dotfiles/avalore/.scripts/tmux-session.sh"'

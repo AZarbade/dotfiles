@@ -103,13 +103,15 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/sainnhe/gruvbox-material" },
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
+	{ src = "https://github.com/Saghen/blink.cmp" },
+	{ src = "https://github.com/artempyanykh/marksman" },
 })
 
 vim.g.gruvbox_material_transparent_background = 1
 vim.cmd.colorscheme("gruvbox-material")
 vim.cmd(":hi statusline guibg=NONE")
 
-vim.lsp.enable({ "lua_ls", "ruff", "rust_analyzer", "clang", "tinymist" })
+vim.lsp.enable({ "lua_ls", "ruff", "rust_analyzer", "clang", "tinymist", "marksman"})
 
 -- workaround for lua diagnostics
 vim.lsp.config("lua_ls", {
@@ -133,10 +135,10 @@ vim.diagnostic.config({
 	},
 	signs = {
 		text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN]  = "",
-      [vim.diagnostic.severity.HINT]  = "󰌵",
-      [vim.diagnostic.severity.INFO]  = "",
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN]  = "",
+			[vim.diagnostic.severity.HINT]  = "󰌵",
+			[vim.diagnostic.severity.INFO]  = "",
 		},
 		numhl = {
 			[vim.diagnostic.severity.ERROR] = "ErrorMsg",
@@ -146,3 +148,8 @@ vim.diagnostic.config({
 })
 
 require 'mini.pick'.setup()
+require 'blink.cmp'.setup({
+	fuzzy = {
+		implementation = "rust",
+	},
+})
