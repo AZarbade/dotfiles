@@ -6,7 +6,7 @@ TERM = "tmux-256color"
 
 [font]
 normal = { family = "Overpass Mono", style = "Regular" }
-size = 12
+size = 16
 
 [window]
 padding = { x = 25, y = 25 }

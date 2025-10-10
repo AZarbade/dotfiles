@@ -4,6 +4,8 @@ set scrolloff=10
 set signcolumn=yes
 set number
 set relativenumber
+set autoindent
+set smartindent
 set undofile
 set shiftwidth=4
 set softtabstop=4
@@ -13,6 +15,8 @@ set termguicolors
 set diffopt+=iwhite
 set diffopt+=algorithm:histogram
 set diffopt+=indent-heuristic
+set timeoutlen=300
+set ttimeoutlen=0
 let g:netrw_liststyle = 3
 
 colorscheme habamax
@@ -23,7 +27,8 @@ syntax on
 let mapleader=" "
 nnoremap <leader>e :Ex<CR>
 nnoremap <C-p> :Files<CR>
-nnoremap <C-o> :Buffers<CR>
+nnoremap <C-u> :Buffer<CR>
+nnoremap <C-o> :e#<CR>
 
 " special yank
 vnoremap <silent> <leader>y :w !wl-copy<CR><CR>
@@ -65,6 +70,7 @@ augroup END
 let lspOpts = #{autoHighlightDiags: v:true}
 autocmd User LspSetup call LspOptionsSet(lspOpts)
 let lspServers = [
+      \ #{name: 'clangd', filetype: ['c', 'cpp'], path: 'clangd', args: []},
       \ #{name: 'rust-analyzer', filetype: ['rust'], path: 'rust-analyzer', args: []},
       \ #{name: 'ruff', filetype: ['python'], path: 'ruff', args: ['server']},
       \ ]
@@ -73,3 +79,8 @@ autocmd User LspSetup call LspAddServer(lspServers)
 " Key mappings
 nnoremap gd :LspGotoDefinition<CR>
 nnoremap gr :LspShowReferences<CR>
+
+" Format visually selected area for different file types
+autocmd FileType c,cpp vnoremap <buffer> <leader>f :!clang-format<CR>
+autocmd FileType rust vnoremap <buffer> <leader>f :!rustfmt<CR>
+autocmd FileType python vnoremap <buffer> <leader>f :!black -<CR>
