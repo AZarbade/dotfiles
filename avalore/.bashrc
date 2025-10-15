@@ -13,7 +13,8 @@ git_branch() {
   branch=$(git branch 2>/dev/null | grep '^*' | cut -d' ' -f2-)
   [[ -n "$branch" ]] && echo " ($branch)"
 }
-PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\u@\h'; else echo '\[\033[01;32m\]\u@\h'; fi)$(if [[ -n "$SSH_CLIENT" ]]; then echo '\[\033[01;33m\][SSH]\[\033[00m\]'; fi)\[\033[01;34m\] \w\[\033[01;35m\]\$(git_branch)\[\033[00m\]\n\$([[ \$? != 0 ]] && echo \"\")\\$ "
+
+PS1='\[\e[38;5;240m\][\t]\[\e[0m\] \[\e[97m\]\u@\h\[\e[0m\] \[\e[38;5;208m\]|\[\e[0m\]\[\e[38;5;141m\]$(git_branch)\[\e[0m\] '
 
 # settings
 set -o vi
@@ -25,3 +26,6 @@ alias tm='tmux'
 
 # binds
 bind -x '"\C-p": "clear; $HOME/dotfiles/avalore/.scripts/tmux-session.sh"'
+
+# opencode
+export PATH=/home/noir/.opencode/bin:$PATH
