@@ -18,10 +18,11 @@ set diffopt+=indent-heuristic
 set timeoutlen=300
 set ttimeoutlen=0
 let g:netrw_liststyle = 3
+syntax on
 
 colorscheme habamax
+hi Normal guibg=NONE 
 hi statusline guibg=NONE
-syntax on
 
 " keymaps
 let mapleader=" "

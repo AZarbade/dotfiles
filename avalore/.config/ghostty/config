@@ -1,0 +1,8 @@
+font-family = "GeistMonoNerdFont"
+font-style = "Regular"
+font-size = 16
+background = #0D1003
+background-opacity = 0.95
+cursor-style = "block"
+window-padding-x = 25
+window-padding-y = 25
