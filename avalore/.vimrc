@@ -28,7 +28,6 @@ hi statusline guibg=NONE
 let mapleader=" "
 nnoremap <leader>e :Ex<CR>
 nnoremap <C-p> :Files<CR>
-nnoremap <C-u> :Buffer<CR>
 nnoremap <C-o> :e#<CR>
 
 " special yank
