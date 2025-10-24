@@ -29,3 +29,4 @@ bind -x '"\C-p": "clear; $HOME/dotfiles/avalore/.scripts/tmux-session.sh"'
 
 # opencode
 export PATH=/home/noir/.opencode/bin:$PATH
+. "$HOME/.cargo/env"
