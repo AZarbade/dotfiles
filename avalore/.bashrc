@@ -16,14 +16,20 @@ git_branch() {
   if [ -n "$branch" ]; then
     status=$(git status --porcelain 2>/dev/null)
     if [ -n "$status" ]; then
-      echo "${branch}*"
+      echo "± ${branch}"
     else
-      echo "$branch"
+      echo "✓ ${branch}"
     fi
   fi
 }
 
-PS1='\[\e[97m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;141m\] $(git_branch)\[\e[0m\] \[\e[38;5;208m\]|\[\e[0m\] '
+is_ssh() {
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo "\[\e[38;5;208m\][SSH]\[\e[0m\] "
+  fi
+}
+
+PS1='$(is_ssh)\[\e[97m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;141m\]$(git_branch)\[\e[0m\] \[\e[38;5;208m\]|\[\e[0m\]\n\$ '
 
 # aliases
 alias ls='ls -al --color=auto'
