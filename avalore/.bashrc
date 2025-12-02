@@ -34,3 +34,4 @@ alias tm='tmux'
 bind -x '"\C-p": "clear; $HOME/dotfiles/avalore/.scripts/tmux-session.sh"'
 
 . "$HOME/.cargo/env"
+. "$HOME/.local/bin/env"
