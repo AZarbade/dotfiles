@@ -2,11 +2,6 @@
 # ~/.bashrc
 #
 
-# Start hyprland through UWSM
-if uwsm check may-start; then
-    exec uwsm start hyprland-uwsm.desktop
-fi
-
 # settings
 set -o vi
 
@@ -40,4 +35,3 @@ alias tm='tmux'
 bind -x '"\C-p": "clear; $HOME/dotfiles/avalore/.scripts/tmux-session.sh"'
 
 . "$HOME/.cargo/env"
-. "$HOME/.local/bin/env"
