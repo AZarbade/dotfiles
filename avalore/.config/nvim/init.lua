@@ -165,22 +165,12 @@ require("lazy").setup({
 		lazy = false, -- load at start
 		priority = 1000, -- load first
 		config = function()
-			vim.cmd([[colorscheme gruvbox-dark-hard]])
+			vim.cmd([[colorscheme gruvbox-material-dark-hard]])
 			vim.o.background = 'dark'
-			vim.cmd([[hi Normal ctermbg=NONE]])
-			-- Less visible window separator
-			vim.api.nvim_set_hl(0, "WinSeparator", { fg = 1250067 })
-			-- Make comments more prominent -- they are important.
+			vim.cmd([[hi Normal ctermbg=NONE guibg=NONE]])
+			-- Make comments more prominent (if that's still your goal)
 			local bools = vim.api.nvim_get_hl(0, { name = 'Boolean' })
 			vim.api.nvim_set_hl(0, 'Comment', bools)
-			-- Make it clearly visible which argument we're at.
-			local marked = vim.api.nvim_get_hl(0, { name = 'PMenu' })
-			vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = marked.fg, bg = marked.bg, ctermfg = marked.ctermfg, ctermbg = marked.ctermbg, bold = true })
-			-- XXX
-			-- Would be nice to customize the highlighting of warnings and the like to make
-			-- them less glaring. But alas
-			-- https://github.com/nvim-lua/lsp_extensions.nvim/issues/21
-			-- call Base16hi("CocHintSign", g:base16_gui03, "", g:base16_cterm03, "", "", "")
 		end
 	},
 	-- nice bar at the bottom
@@ -229,6 +219,7 @@ require("lazy").setup({
 		'ggandor/leap.nvim',
 		config = function()
 			vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+			vim.keymap.set({'n', 'x', 'o'}, 'S', '<Plug>(leap-backward)')
 		end
 	},
 	-- fzf support for ^p
@@ -284,11 +275,6 @@ require("lazy").setup({
 			-- Bash LSP
 			if vim.fn.executable('bash-language-server') == 1 then
 				vim.lsp.enable('bashls')
-			end
-
-			-- texlab for LaTeX
-			if vim.fn.executable('texlab') == 1 then
-				vim.lsp.enable('texlab')
 			end
 
 			-- Ruff for Python

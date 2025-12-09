@@ -11,6 +11,3 @@ size = 16
 [window]
 padding = { x = 25, y = 25 }
 dynamic_padding = false
-decorations = "None"
-opacity = 0.95
-startup_mode = "Windowed"

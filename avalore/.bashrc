@@ -18,13 +18,13 @@ git_branch() {
   fi
 }
 
-is_ssh() {
-  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    echo "\[\e[38;5;208m\][SSH]\[\e[0m\] "
-  fi
-}
-
-PS1='$(is_ssh)\[\e[97m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;141m\]$(git_branch)\[\e[0m\] \[\e[38;5;208m\]|\[\e[0m\]\n\$ '
+if [ -n "$CONTAINER_ID" ]; then
+    # inside distrobox; distrobox stupid design
+    PS1="($CONTAINER_ID) \[\e[97m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;141m\]\$(git_branch)\[\e[0m\] \[\e[38;5;208m\]|\[\e[0m\]\n\$ "
+else
+    # host machine
+    PS1="\[\e[97m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;141m\]\$(git_branch)\[\e[0m\] \[\e[38;5;208m\]|\[\e[0m\]\n\$ "
+fi
 
 # aliases
 alias ls='ls -al --color=auto'
