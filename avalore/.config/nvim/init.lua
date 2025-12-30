@@ -114,29 +114,6 @@ vim.api.nvim_create_autocmd('BufRead', { pattern = '*.pacnew', command = 'set re
 vim.api.nvim_create_autocmd('InsertLeave', { pattern = '*', command = 'set nopaste' })
 -- help filetype detection (add as needed)
 --vim.api.nvim_create_autocmd('BufRead', { pattern = '*.ext', command = 'set filetype=someft' })
--- correctly classify mutt buffers
-local email = vim.api.nvim_create_augroup('email', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-	pattern = '/tmp/mutt*',
-	group = email,
-	command = 'setfiletype mail',
-})
--- also, produce "flowed text" wrapping
--- https://brianbuccola.com/line-breaks-in-mutt-and-vim/
-vim.api.nvim_create_autocmd('Filetype', {
-  pattern = 'mail',
-  group = email,
-  command = 'setlocal formatoptions+=w',
-})
--- shorter columns in text because it reads better that way
-local text = vim.api.nvim_create_augroup('text', { clear = true })
-for _, pat in ipairs({'text', 'markdown', 'mail', 'gitcommit'}) do
-	vim.api.nvim_create_autocmd('Filetype', {
-		pattern = pat,
-		group = text,
-		command = 'setlocal spell tw=72 colorcolumn=73',
-	})
-end
 
 -------------------------------------------------------------------------------
 --
@@ -405,36 +382,6 @@ require("lazy").setup({
 					border = "none"
 				},
 			})
-		end
-	},
-	-- language support
-	-- latex
-	{
-		"lervag/vimtex",
-		ft = { "tex" },
-		lazy = false,     -- we don't want to lazy load VimTeX
-		init = function()
-			vim.g.vimtex_view_method = "zathura"
-			vim.g.vimtex_mappings_enabled = false
-		end
-	},
-	-- markdown
-	{
-		'plasticboy/vim-markdown',
-		ft = { "markdown" },
-		dependencies = {
-			'godlygeek/tabular',
-		},
-		config = function()
-			-- never ever fold!
-			vim.g.vim_markdown_folding_disabled = 1
-			-- support front-matter in .md files
-			vim.g.vim_markdown_frontmatter = 1
-			-- 'o' on a list item should insert at same level
-			vim.g.vim_markdown_new_list_item_indent = 0
-			-- don't add bullets when wrapping:
-			-- https://github.com/preservim/vim-markdown/issues/232
-			vim.g.vim_markdown_auto_insert_bullets = 0
 		end
 	},
 })
