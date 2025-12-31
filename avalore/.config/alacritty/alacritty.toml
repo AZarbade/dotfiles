@@ -9,5 +9,5 @@ normal = { family = "Overpass Mono", style = "Regular" }
 size = 12
 
 [window]
-padding = { x = 25, y = 25 }
-dynamic_padding = false
+padding = { x = 4, y = 4 }
+dynamic_padding = true

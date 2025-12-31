@@ -30,8 +30,11 @@ fi
 alias ls='ls -al --color=auto'
 alias sys='sudo systemctl '
 alias tm='tmux'
+alias ncs='nrfutil toolchain-manager launch --ncs-version v3.2.1 --shell'
 
 # binds
 bind -x '"\C-p": "clear; $HOME/dotfiles/avalore/.scripts/tmux-session.sh"'
 
 . "$HOME/.cargo/env"
+
+

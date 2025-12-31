@@ -2,10 +2,16 @@ picom &
 xset r rate 200 35 &
 setxkbmap -option caps:escape
 
-xwallpaper --zoom ./dotfiles/wallpapers/wallheaven-win.png
+xwallpaper --zoom ./dotfiles/wallpapers/wallhaven-building.png
 
-xrandr \
-  --output eDP-1 --mode 1920x1080 --primary \
-  --output HDMI-1 --mode 1920x1080 --right-of eDP-1
+# Automatically detect connected monitors and configure them
+for output in $(xrandr | grep " connected" | cut -d" " -f1); do
+    if [[ $output != "eDP-1" ]]; then
+        xrandr --output $output --auto --right-of eDP-1
+    fi
+done
+
+# Set the primary monitor to eDP-1 (laptop display)
+xrandr --output eDP-1 --primary --auto
 
 exec i3;

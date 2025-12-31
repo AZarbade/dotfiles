@@ -6,7 +6,7 @@ exec --no-startup-id nm-applet
 
 # Personals
 default_border none
-bindsym $mod+s exec --no-startup-id flameshot gui
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui -r | xclip -selection clipboard -t image/png
 bindsym $mod+f exec firefox
 bindsym $mod+e exec nemo
 
