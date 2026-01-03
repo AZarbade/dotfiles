@@ -2,7 +2,7 @@ picom &
 xset r rate 200 35 &
 setxkbmap -option caps:escape
 
-xwallpaper --zoom ./dotfiles/wallpapers/wallhaven-building.png
+xwallpaper --zoom ./dotfiles/wallpapers/wallhaven-v93jql_3840x2160.png
 
 # Automatically detect connected monitors and configure them
 for output in $(xrandr | grep " connected" | cut -d" " -f1); do
