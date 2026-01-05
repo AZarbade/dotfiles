@@ -38,6 +38,26 @@ vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 -- copy to clipboard
 vim.keymap.set({ "n", "v", "o" }, "<leader>y", '"+y')
+-- file picker using fzf
+vim.keymap.set('n', '<C-p>', function()
+    local temp = os.tmpname()
+    vim.cmd('new') 
+    vim.fn.termopen('fzf > ' .. temp, {
+        on_exit = function()
+            vim.cmd('bdelete!')
+            local f = io.open(temp, 'r')
+            if f then
+                local file = f:read('*all'):gsub('\n', '')
+                f:close()
+                os.remove(temp)
+                if file ~= '' then
+                    vim.cmd('edit ' .. file)
+                end
+            end
+        end
+    })
+    vim.cmd('startinsert')
+end, { desc = 'fzf file picker' })
 
 -------------------------------------------------------------------------------
 --
@@ -85,9 +105,6 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.orig', command = 'set readonly' })
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.pacnew', command = 'set readonly' })
 
--- leave paste mode when leaving insert mode (if it was on)
-vim.api.nvim_create_autocmd('InsertLeave', { pattern = '*', command = 'set nopaste' })
-
 -------------------------------------------------------------------------------
 --
 -- plugin configuration
@@ -123,98 +140,44 @@ require("lazy").setup({
 			vim.api.nvim_set_hl(0, 'Comment', bools)
 		end
 	},
-	-- fzf support for ^p
-	{
-	'ibhagwan/fzf-lua',
-		config = function()
-			require('fzf-lua').setup({
-				'default',
-			})
-			vim.keymap.set('n', '<C-p>', require('fzf-lua').files, {})
-		end
-	},
 	-- LSP
 	{
 		'neovim/nvim-lspconfig',
 		config = function()
-			-- Setup language servers.
-
-			-- Rust
+			-- 1. Configure and Enable Servers
 			vim.lsp.config('rust_analyzer', {
-				-- Server-specific settings. See `:help lspconfig-setup`
 				settings = {
-					["rust-analyzer"] = {
-						cargo = {
-							features = "all",
-						},
-						checkOnSave = {
-							enable = true,
-						},
-						check = {
-							command = "clippy",
-						},
-						imports = {
-							group = {
-								enable = false,
-							},
-						},
-						completion = {
-							postfix = {
-								enable = false,
-							},
-						},
+					['rust-analyzer'] = {
+						cargo = { features = 'all' },
+						check = { command = 'clippy' },
 					},
 				},
 			})
-			vim.lsp.enable('rust_analyzer')
-			
-			-- Ruff for Python
-			if vim.fn.executable('ruff') == 1 then
-				vim.lsp.enable('ruff')
-			end
-			
-			-- Clangd for C/C++
-			if vim.fn.executable('clangd') == 1 then
-				vim.lsp.enable('clangd')
-			end
 
-			-- Global mappings.
+			-- Enable servers
+			vim.lsp.enable({ 'rust_analyzer', 'ruff', 'clangd' })
+
+			-- 2. Global Mappings
 			vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-			-- remember to use Ctrl-w + h j k l to move within panes
 
-			-- Use LspAttach autocommand to only map the following keys
-			-- after the language server attaches to the current buffer
+			-- 3. Buffer-local Mappings & Format on Save
 			vim.api.nvim_create_autocmd('LspAttach', {
-				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
 				callback = function(ev)
-					-- Enable completion triggered by <c-x><c-o>
-					vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-					-- Buffer local mappings.
-					-- See `:help vim.lsp.*` for documentation on any of the below functions
 					local opts = { buffer = ev.buf }
-					vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
 					vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-					vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+					vim.keymap.set('n', 'K',  vim.lsp.buf.hover, opts)
 					vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-					vim.keymap.set({ 'n', 'v' }, '<leader>a', vim.lsp.buf.code_action, opts)
 					vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-					vim.keymap.set('n', '<leader>f', function()
-						vim.lsp.buf.format { async = true }
-					end, opts)
+					vim.keymap.set({ 'n', 'v' }, '<leader>a', vim.lsp.buf.code_action, opts)
+					vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end, opts)
 
-					local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
-					-- format on save for Rust
-					if client.server_capabilities.documentFormattingProvider then
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = vim.api.nvim_create_augroup("RustFormat", { clear = true }),
-							buffer = bufnr,
-							callback = function()
-								vim.lsp.buf.format({ bufnr = bufnr })
-							end,
-						})
-					end
+					-- Format on save
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = ev.buf,
+						callback = function() 
+							vim.lsp.buf.format({ bufnr = ev.buf, async = false }) 
+						end,
+					})
 				end,
 			})
 		end

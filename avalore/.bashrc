@@ -18,23 +18,14 @@ git_branch() {
   fi
 }
 
-if [ -n "$CONTAINER_ID" ]; then
-    # inside distrobox; distrobox stupid design
-    PS1="($CONTAINER_ID) \[\e[97m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;141m\]\$(git_branch)\[\e[0m\] \[\e[38;5;208m\]|\[\e[0m\]\n\$ "
-else
-    # host machine
-    PS1="\[\e[97m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;141m\]\$(git_branch)\[\e[0m\] \[\e[38;5;208m\]|\[\e[0m\]\n\$ "
-fi
+PS1="\[\e[97m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \[\e[38;5;141m\]\$(git_branch)\[\e[0m\] \[\e[38;5;208m\]|\[\e[0m\]\n\$ "
 
 # aliases
-alias ls='ls -al --color=auto'
+alias ls='ls -l --color=auto'
+alias lsl='ls -al --color=auto'
 alias sys='sudo systemctl '
 alias tm='tmux'
 alias ncs='nrfutil toolchain-manager launch --ncs-version v3.2.1 --shell'
 
 # binds
 bind -x '"\C-p": "clear; $HOME/dotfiles/avalore/.scripts/tmux-session.sh"'
-
-. "$HOME/.cargo/env"
-
-
