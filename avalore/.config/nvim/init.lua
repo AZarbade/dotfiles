@@ -156,6 +156,7 @@ require("lazy").setup({
 
 			-- Enable servers
 			vim.lsp.enable({ 'rust_analyzer', 'ruff', 'clangd' })
+			vim.lsp.enable('rust_analyzer')
 
 			-- 2. Global Mappings
 			vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
@@ -245,5 +246,12 @@ require("lazy").setup({
 				},
 			})
 		end
+	},
+	-- nvim line inside tmux line
+	{
+		"vimpostor/vim-tpipeline",
+		init = function()
+			vim.g.tpipeline_clear_colors = 1
+		end,
 	},
 })
