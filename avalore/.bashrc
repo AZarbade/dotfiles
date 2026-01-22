@@ -29,3 +29,6 @@ alias ncs='nrfutil toolchain-manager launch --ncs-version v3.2.1 --shell'
 
 # binds
 bind -x '"\C-p": "clear; $HOME/dotfiles/avalore/.scripts/tmux-session.sh"'
+
+# opencode
+export PATH=/home/noir/.opencode/bin:$PATH
