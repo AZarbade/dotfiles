@@ -25,10 +25,8 @@ alias ls='ls -l --color=auto'
 alias lsl='ls -al --color=auto'
 alias sys='sudo systemctl '
 alias tm='tmux'
+alias nm='neomutt'
 alias ncs='nrfutil toolchain-manager launch --ncs-version v3.2.1 --shell'
 
 # binds
 bind -x '"\C-p": "clear; $HOME/dotfiles/avalore/.scripts/tmux-session.sh"'
-
-# opencode
-export PATH=/home/noir/.opencode/bin:$PATH
