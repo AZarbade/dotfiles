@@ -134,33 +134,28 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- then, setup!
 require("lazy").setup({
+	{ 
+		'nvim-mini/mini.nvim',
+		version = '*',
+		config = function()
+			require('mini.completion').setup()
+			require('mini.diff').setup()
+			vim.keymap.set('n', '<leader>g', MiniDiff.toggle_overlay)
+			require('mini.notify').setup({
+				window = {
+					config = {
+						border = 'rounded',
+						winhighlight = 'Normal:MiniNotifyNormal',
+					},
+				},
+			})
+		end,
+	},
 	-- LSP
 	{
 	  'neovim/nvim-lspconfig',
-	  dependencies = {
-		{
-		  'saghen/blink.cmp',
-		  version = '*',
-		  opts = {
-			keymap = {
-			  preset = 'default',
-			},
-			appearance = {
-			  nerd_font_variant = 'mono',
-			},
-			sources = {
-			  default = { 'lsp', 'path', 'snippets', 'buffer' },
-			},
-		  },
-		},
-	  },
 	  config = function()
-		-- 1. Capabilities (blink.cmp -> LSP)
-		local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-		-- 2. Configure Servers
 		vim.lsp.config('rust_analyzer', {
-		  capabilities = capabilities,
 		  settings = {
 			['rust-analyzer'] = {
 			  cargo = { features = 'all' },
@@ -168,36 +163,10 @@ require("lazy").setup({
 			},
 		  },
 		})
-
-		vim.lsp.config('ruff', {
-		  capabilities = capabilities,
-		})
-
-		vim.lsp.config('clangd', {
-		  capabilities = capabilities,
-		})
-
-		-- Enable servers
 		vim.lsp.enable({ 'rust_analyzer', 'ruff', 'clangd' })
 
-		-- 3. Global Mappings
-		vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
-		-- 4. Buffer-local Mappings & Format on Save
 		vim.api.nvim_create_autocmd('LspAttach', {
 		  callback = function(ev)
-			local opts = { buffer = ev.buf }
-
-			vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-			vim.keymap.set('n', 'K',  vim.lsp.buf.hover, opts)
-			vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-			vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-			vim.keymap.set({ 'n', 'v' }, '<leader>a', vim.lsp.buf.code_action, opts)
-			vim.keymap.set('n', '<leader>f', function()
-			  vim.lsp.buf.format({ async = true })
-			end, opts)
-
-			-- Format on save
 			vim.api.nvim_create_autocmd('BufWritePre', {
 			  buffer = ev.buf,
 			  callback = function()
@@ -207,21 +176,6 @@ require("lazy").setup({
 		  end,
 		})
 	  end,
-	},
-	-- inline function signatures
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "VeryLazy",
-		opts = {},
-		config = function(_, opts)
-			-- Get signatures (and _only_ signatures) when in argument lists.
-			require "lsp_signature".setup({
-				doc_lines = 0,
-				handler_opts = {
-					border = "none"
-				},
-			})
-		end
 	},
 	{
 	  'stevearc/oil.nvim',
@@ -241,10 +195,5 @@ require("lazy").setup({
 		  vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 	  },
 	  lazy = false,
-	},
-	{
-	  "sotte/presenting.nvim",
-	  opts = {},
-	  cmd = { "Presenting" },
 	},
 })
