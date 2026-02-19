@@ -1,0 +1,4 @@
+font-size = 18
+background = #212121
+background-blur-radius = 20
+mouse-hide-while-typing = true
