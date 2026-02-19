@@ -7,9 +7,10 @@ setopt prompt_subst
 
 export EDITOR=/opt/homebrew/bin/nvim
 
-# prompt
-PROMPT='%n@%m:%1~
-$ '
+# Prompt
+autoload -U colors && colors
+PROMPT='%F{green}%n@%m%f:%F{blue}%1~%f
+%(?.%F{yellow}.%F{red})$%f '
 
 # aliases
 # alias ls='ls -l --color=auto'
