@@ -41,11 +41,20 @@ vim.keymap.set('n', '<left>', ':bp<cr>')
 vim.keymap.set('n', '<right>', ':bn<cr>')
 -- copy to clipboard
 vim.keymap.set({ "n", "v", "o" }, "<leader>y", '"+y')
+-- switch to Normal mode from Terminal mode
+vim.keymap.set('t', '<C-o>', [[<C-\><C-n>]])
+-- closes current buffer
+vim.keymap.set('n', 'Q', ':bd<CR>', { silent = true })
+vim.keymap.set('n', '<C-q>', ':bd!<CR>', { silent = true })
+-- quickly switch to previous buffer
+vim.keymap.set('n', '<leader><leader>', ':b#<CR>', { silent = true })
 -- move across nvim panes
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move to left pane' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to bottom pane' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to top pane' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right pane' })
+-- search and repalce current word
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 -- file picker using fzf
 vim.keymap.set('n', '<C-p>', function()
     local temp = os.tmpname()
@@ -145,7 +154,6 @@ require("lazy").setup({
 				window = {
 					config = {
 						border = 'rounded',
-						winhighlight = 'Normal:MiniNotifyNormal',
 					},
 				},
 			})
