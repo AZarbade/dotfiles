@@ -40,7 +40,7 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "NONE" })
 vim.keymap.set('n', '<left>', ':bp<cr>')
 vim.keymap.set('n', '<right>', ':bn<cr>')
 -- copy to clipboard
-vim.keymap.set({ "n", "v", "o" }, "<leader>y", '"+y')
+vim.keymap.set({ 'n', 'v', 'o' }, "<leader>y", '"+y')
 -- switch to Normal mode from Terminal mode
 vim.keymap.set('t', '<C-o>', [[<C-\><C-n>]])
 -- closes current buffer
@@ -54,26 +54,26 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to bottom pane' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to top pane' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right pane' })
 -- search and repalce current word
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
+vim.keymap.set('n', "<leader>s", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 -- file picker using fzf
 vim.keymap.set('n', '<C-p>', function()
-    local temp = os.tmpname()
-    vim.cmd('new') 
-    vim.fn.termopen('fzf > ' .. temp, {
-        on_exit = function()
-            vim.cmd('bdelete!')
-            local f = io.open(temp, 'r')
-            if f then
-                local file = f:read('*all'):gsub('\n', '')
-                f:close()
-                os.remove(temp)
-                if file ~= '' then
-                    vim.cmd('edit ' .. file)
-                end
-            end
-        end
-    })
-    vim.cmd('startinsert')
+	local temp = os.tmpname()
+	vim.cmd('new')
+	vim.fn.termopen('fzf > ' .. temp, {
+		on_exit = function()
+			vim.cmd('bdelete!')
+			local f = io.open(temp, 'r')
+			if f then
+				local file = f:read('*all'):gsub('\n', '')
+				f:close()
+				os.remove(temp)
+				if file ~= '' then
+					vim.cmd('edit ' .. file)
+				end
+			end
+		end
+	})
+	vim.cmd('startinsert')
 end, { desc = 'fzf file picker' })
 
 -------------------------------------------------------------------------------
@@ -82,26 +82,26 @@ end, { desc = 'fzf file picker' })
 --
 -------------------------------------------------------------------------------
 -- Allow virtual text
+vim.opt.winborder = 'rounded'
 vim.diagnostic.config({
-  signs = true,
-  underline = true,
-  severity_sort = true,
-  virtual_lines = false,
-  virtual_text = {
-    spacing = 4,
-    source = "if_many",
-    prefix = '●', -- A small dot is less distracting than text
-    severity = { min = vim.diagnostic.severity.WARN },
-  },
-  float = {
-    focused = false,
-    style = "minimal",
-    border = "rounded",
-    source = "always",
-    header = { "󰒋 Diagnostics", "DiagnosticFloatingHeader" },
-    prefix = "",
-  },
-  update_in_insert = false,
+	signs = true,
+	underline = true,
+	severity_sort = true,
+	virtual_lines = false,
+	virtual_text = {
+		spacing = 4,
+		source = "if_many",
+		prefix = '●', -- A small dot is less distracting than text
+		severity = { min = vim.diagnostic.severity.WARN },
+	},
+	float = {
+		focus  = true,
+		border = "rounded",
+		source = "always",
+		header = { "󰒋 Diagnostics", "DiagnosticFloatingHeader" },
+		prefix = "",
+	},
+	update_in_insert = false,
 })
 
 -------------------------------------------------------------------------------
@@ -127,81 +127,42 @@ vim.api.nvim_create_autocmd('BufRead', { pattern = '*.pacnew', command = 'set re
 -- plugin configuration
 --
 -------------------------------------------------------------------------------
--- first, grab the manager
--- https://github.com/folke/lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
-end
-vim.opt.rtp:prepend(lazypath)
--- then, setup!
-require("lazy").setup({
-	{ 
-		'nvim-mini/mini.nvim',
-		version = '*',
-		config = function()
-			require('mini.completion').setup()
-			require('mini.diff').setup()
-			vim.keymap.set('n', '<leader>g', MiniDiff.toggle_overlay)
-			require('mini.notify').setup({
-				window = {
-					config = {
-						border = 'rounded',
-					},
-				},
-			})
-		end,
-	},
-	-- LSP
-	{
-	  'neovim/nvim-lspconfig',
-	  config = function()
-		vim.lsp.config('rust_analyzer', {
-		  settings = {
-			['rust-analyzer'] = {
-			  cargo = { features = 'all' },
-			  check = { command = 'clippy' },
-			},
-		  },
-		})
-		vim.lsp.enable({ 'rust_analyzer', 'ruff', 'clangd' })
+vim.pack.add({
+	{ src = 'https://github.com/neovim/nvim-lspconfig' },
+	{ src = 'https://github.com/stevearc/oil.nvim' },
+})
 
-		vim.api.nvim_create_autocmd('LspAttach', {
-		  callback = function(ev)
-			vim.api.nvim_create_autocmd('BufWritePre', {
-			  buffer = ev.buf,
-			  callback = function()
-				vim.lsp.buf.format({ bufnr = ev.buf, async = false })
-			  end,
-			})
-		  end,
-		})
-	  end,
+-- lsp enables
+vim.lsp.config('rust_analyzer', {
+	workspace_required = true,
+	settings = {
+		['rust-analyzer'] = {
+			cargo = { allFeatures = true },
+			check = { command = 'clippy' },
+		},
 	},
-	{
-	  'stevearc/oil.nvim',
-	  opts = {
-		  view_options = {
-			  show_hidden = true,
-		  },
-		  columns = {
+})
+
+vim.lsp.enable({
+	'rust_analyzer',
+	'ruff',
+	'clangd',
+	'lua_ls',
+})
+
+vim.keymap.set({ 'n', 'v' }, '<leader>f', vim.lsp.buf.format)
+
+-- oil.nvim
+require("oil").setup({
+	opts = {
+		view_options = {
+			show_hidden = true,
+		},
+		columns = {
 			"permissions",
 			"size",
 			"mtime",
-		  },
-		  keymaps = {
-			["<CR>"] = "actions.select",
-			["<C-c>"] = { "actions.close", mode = "n" },
-		  },
-		  vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-	  },
-	  lazy = false,
+		},
+		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 	},
 })
