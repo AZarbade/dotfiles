@@ -26,6 +26,7 @@ vim.cmd("colorscheme retrobox")
 -- Remove background everywhere
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#555555", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
 vim.api.nvim_set_hl(0, "LineNr", { bg = "NONE" })
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "NONE" })
@@ -41,11 +42,8 @@ vim.keymap.set('n', '<left>', ':bp<cr>')
 vim.keymap.set('n', '<right>', ':bn<cr>')
 -- copy to clipboard
 vim.keymap.set({ 'n', 'v', 'o' }, "<leader>y", '"+y')
--- switch to Normal mode from Terminal mode
-vim.keymap.set('t', '<C-o>', [[<C-\><C-n>]])
 -- closes current buffer
 vim.keymap.set('n', 'Q', ':bd<CR>', { silent = true })
-vim.keymap.set('n', '<C-q>', ':bd!<CR>', { silent = true })
 -- quickly switch to previous buffer
 vim.keymap.set('n', '<leader><leader>', ':b#<CR>', { silent = true })
 -- move across nvim panes
@@ -54,7 +52,7 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to bottom pane' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to top pane' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right pane' })
 -- search and repalce current word
-vim.keymap.set('n', "<leader>s", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
+vim.keymap.set('n', "<C-s>", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 -- file picker using fzf
 vim.keymap.set('n', '<C-p>', function()
 	local temp = os.tmpname()
@@ -81,28 +79,27 @@ end, { desc = 'fzf file picker' })
 -- configuring diagnostics
 --
 -------------------------------------------------------------------------------
--- Allow virtual text
-vim.opt.winborder = 'rounded'
+-- disable virtual text
 vim.diagnostic.config({
-	signs = true,
-	underline = true,
-	severity_sort = true,
-	virtual_lines = false,
 	virtual_text = {
 		spacing = 4,
-		source = "if_many",
-		prefix = '●', -- A small dot is less distracting than text
-		severity = { min = vim.diagnostic.severity.WARN },
+		prefix = '·',
+		source = 'if_many',
 	},
-	float = {
-		focus  = true,
-		border = "rounded",
-		source = "always",
-		header = { "󰒋 Diagnostics", "DiagnosticFloatingHeader" },
-		prefix = "",
-	},
+	signs = false,
+	underline = true,
 	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		border = 'rounded',
+		source = 'if_many',
+		header = '',
+		prefix = '',
+	},
 })
+
+-- open diagnostics
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 
 -------------------------------------------------------------------------------
 --
@@ -121,6 +118,15 @@ vim.api.nvim_create_autocmd(
 -- prevent accidental writes to buffers that shouldn't be edited
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.orig', command = 'set readonly' })
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.pacnew', command = 'set readonly' })
+
+-- rounded boarders to information floats
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(args)
+		vim.keymap.set('n', 'K', function()
+			vim.lsp.buf.hover({ border = 'rounded' })
+		end, { buffer = args.buf })
+	end,
+})
 
 -------------------------------------------------------------------------------
 --
@@ -154,15 +160,14 @@ vim.keymap.set({ 'n', 'v' }, '<leader>f', vim.lsp.buf.format)
 
 -- oil.nvim
 require("oil").setup({
-	opts = {
-		view_options = {
-			show_hidden = true,
-		},
-		columns = {
-			"permissions",
-			"size",
-			"mtime",
-		},
-		vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+	view_options = {
+		show_hidden = true,
+	},
+	columns = {
+		"permissions",
+		"size",
+		"mtime",
 	},
 })
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
