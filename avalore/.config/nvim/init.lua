@@ -25,7 +25,7 @@ vim.cmd("colorscheme retrobox")
 
 -- Remove background everywhere
 vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "NormalFloat", { fg = "#555555", bg = "NONE" })
 vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#555555", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
 vim.api.nvim_set_hl(0, "LineNr", { bg = "NONE" })
@@ -122,11 +122,17 @@ vim.api.nvim_create_autocmd('BufRead', { pattern = '*.pacnew', command = 'set re
 -- rounded boarders to information floats
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
+		vim.lsp.completion.enable(true, args.data.client_id, args.buf, {
+			autotrigger = true,
+		})
 		vim.keymap.set('n', 'K', function()
 			vim.lsp.buf.hover({ border = 'rounded' })
 		end, { buffer = args.buf })
 	end,
 })
+
+-- stops auto-completion to fill the first choice automatically
+vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
 
 -------------------------------------------------------------------------------
 --
