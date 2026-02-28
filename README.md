@@ -154,4 +154,4 @@ A minimal, plugin-light Neovim setup using Neovim's built-in `vim.pack` for plug
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+GLWTS — see [LICENSE](LICENSE).
