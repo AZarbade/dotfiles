@@ -16,9 +16,9 @@ PROMPT='%F{green}%n@%m%f:%F{blue}%1~%f
 # alias ls='ls -l --color=auto'
 # alias lsl='ls -al --color=auto'
 # alias lat='tree -L 2 -a'
-alias ls="eza -l --icons --git"
-alias lsl="eza -l --icons --git -a"
-alias lt="eza --tree --level=2 --long --icons --git"
+alias ls="eza -l --git"
+alias lsl="eza -l --git -a"
+alias lt="eza --tree --level=2 --long --git"
 alias tm='tmux'
 
 . "$HOME/.local/bin/env"
