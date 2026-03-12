@@ -7,8 +7,8 @@
 vim.g.mapleader = " "
 
 -- main colorscheme
-vim.cmd("colorscheme retrobox")
 vim.opt.termguicolors = true
+vim.cmd("colorscheme retrobox")
 
 local function set_transparent() -- set UI component to transparent
     local groups = {
@@ -28,7 +28,6 @@ local function set_transparent() -- set UI component to transparent
     for _, g in ipairs(groups) do
         vim.api.nvim_set_hl(0, g, { bg = "none" })
     end
-    vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none", fg = "#767676" })
 end
 
 set_transparent()
@@ -53,7 +52,6 @@ vim.opt.diffopt:append('indent-heuristic')
 vim.opt.showmode = false
 vim.opt.conceallevel = 2
 vim.opt.concealcursor = "n"
-vim.opt.lazyredraw = true
 vim.opt.clipboard:append("unnamedplus")
 
 -------------------------------------------------------------------------------
@@ -61,67 +59,17 @@ vim.opt.clipboard:append("unnamedplus")
 -- statusline
 --
 -------------------------------------------------------------------------------
--- Git branch function with caching and Nerd Font icon
-local cached_branch = ""
-local last_check = 0
-local function git_branch()
-    local now = vim.loop.now()
-    if now - last_check > 5000 then -- Check every 5 seconds
-        cached_branch = vim.fn.system("git branch --show-current 2>/dev/null | tr -d '\n'")
-        last_check = now
-    end
-    if cached_branch ~= "" then
-        return " \u{e725} " .. cached_branch .. " " -- nf-dev-git_branch
-    end
-    return ""
-end
-
 -- File type with Nerd Font icon
 local function file_type()
     local ft = vim.bo.filetype
     local icons = {
-        lua = "\u{e620} ",  -- nf-dev-lua
-        python = "\u{e73c} ", -- nf-dev-python
-        javascript = "\u{e74e} ", -- nf-dev-javascript
-        typescript = "\u{e628} ", -- nf-dev-typescript
-        javascriptreact = "\u{e7ba} ",
-        typescriptreact = "\u{e7ba} ",
-        html = "\u{e736} ", -- nf-dev-html5
-        css = "\u{e749} ", -- nf-dev-css3
-        scss = "\u{e749} ",
-        json = "\u{e60b} ", -- nf-dev-json
+        lua = "\u{e620} ",      -- nf-dev-lua
+        python = "\u{e73c} ",   -- nf-dev-python
         markdown = "\u{e73e} ", -- nf-dev-markdown
-        vim = "\u{e62b} ", -- nf-dev-vim
-        sh = "\u{f489} ", -- nf-oct-terminal
-        bash = "\u{f489} ",
-        zsh = "\u{f489} ",
-        rust = "\u{e7a8} ", -- nf-dev-rust
-        go = "\u{e724} ", -- nf-dev-go
-        c = "\u{e61e} ", -- nf-dev-c
-        cpp = "\u{e61d} ", -- nf-dev-cplusplus
-        java = "\u{e738} ", -- nf-dev-java
-        php = "\u{e73d} ", -- nf-dev-php
-        ruby = "\u{e739} ", -- nf-dev-ruby
-        swift = "\u{e755} ", -- nf-dev-swift
-        kotlin = "\u{e634} ",
-        dart = "\u{e798} ",
-        elixir = "\u{e62d} ",
-        haskell = "\u{e777} ",
-        sql = "\u{e706} ",
-        yaml = "\u{f481} ",
-        toml = "\u{e615} ",
-        xml = "\u{f05c} ",
-        dockerfile = "\u{f308} ", -- nf-linux-docker
-        gitcommit = "\u{f418} ", -- nf-oct-git_commit
-        gitconfig = "\u{f1d3} ", -- nf-fa-git
-        vue = "\u{fd42} ",  -- nf-md-vuejs
-        svelte = "\u{e697} ",
-        astro = "\u{e628} ",
+        sh = "\u{f489} ",       -- nf-oct-terminal
+        rust = "\u{e7a8} ",     -- nf-dev-rust
+        c = "\u{e61e} ",        -- nf-dev-c
     }
-
-    if ft == "" then
-        return " \u{f15b} " -- nf-fa-file_o
-    end
 
     return ((icons[ft] or " \u{f15b} ") .. ft)
 end
@@ -148,12 +96,9 @@ local function mode_icon()
 end
 
 _G.mode_icon = mode_icon
-_G.git_branch = git_branch
 _G.file_type = file_type
 
-vim.cmd([[
-  highlight StatusLineBold gui=bold cterm=bold
-]])
+vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true })
 
 -- Function to change statusline based on window focus
 local function setup_dynamic_statusline()
@@ -164,15 +109,12 @@ local function setup_dynamic_statusline()
                 "%#StatusLineBold#",
                 "%{v:lua.mode_icon()}",
                 "%#StatusLine#",
-                " \u{f444} %f %h%m%r", -- nf-pl-left_hard_divider
-                "%{v:lua.git_branch()}",
-                "\u{f444} ", -- nf-oct-dot_fill
-                "%=",      -- Right-align everything after this
+                " \u{f444} %f %h%m%r",
+                "%=",
                 "%{v:lua.file_type()}",
             })
         end,
     })
-    vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true })
 
     vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
         callback = function()
@@ -199,9 +141,10 @@ vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to top pane' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right pane' })
 -- search and repalce current word
 vim.keymap.set('n', "<C-s>", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
+
 -- file picker using fzf
 vim.keymap.set('n', '<C-p>', function()
-    local temp = os.tmpname()
+    local temp = vim.fn.tempname()
     vim.cmd('new')
     vim.fn.termopen('fzf > ' .. temp, {
         on_exit = function()
@@ -219,6 +162,7 @@ vim.keymap.set('n', '<C-p>', function()
     })
     vim.cmd('startinsert')
 end, { desc = 'fzf file picker' })
+
 -- toggle diagnostics
 vim.keymap.set('n', '<leader>td', function()
     vim.diagnostic.enable(not vim.diagnostic.is_enabled())
