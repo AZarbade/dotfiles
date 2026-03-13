@@ -148,18 +148,25 @@ vim.keymap.set({ "n", "v" }, "<leader>x", '"_d', { desc = "Delete without yankin
 -- file picker using fzf
 vim.keymap.set('n', '<C-p>', function()
     local temp = vim.fn.tempname()
-    vim.cmd('new')
+    local buf = vim.api.nvim_create_buf(false, true)
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = 'editor',
+        width = math.floor(vim.o.columns * 0.8),
+        height = math.floor(vim.o.lines * 0.8),
+        row = math.floor(vim.o.lines * 0.1),
+        col = math.floor(vim.o.columns * 0.1),
+        style = 'minimal',
+        border = 'rounded',
+    })
     vim.fn.termopen('fzf > ' .. temp, {
         on_exit = function()
-            vim.cmd('bdelete!')
+            vim.api.nvim_win_close(win, true)
             local f = io.open(temp, 'r')
             if f then
                 local file = f:read('*all'):gsub('\n', '')
                 f:close()
                 os.remove(temp)
-                if file ~= '' then
-                    vim.cmd('edit ' .. file)
-                end
+                if file ~= '' then vim.cmd('edit ' .. file) end
             end
         end
     })
@@ -249,6 +256,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/stevearc/oil.nvim' },
+    {
+        src = 'https://github.com/nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate',
+    },
+})
+
+-- treesitter settings
+require("nvim-treesitter").install({
+    'c', 'rust', 'lua', 'python', 'markdown', 'markdown_inline', 'bash', 'toml', 'json', 'yaml', 'vim', 'vimdoc'
+}):wait(300000) -- ensures parsers install on first run
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'c', 'rust', 'lua', 'python', 'markdown', 'markdown_inline', 'bash', 'toml', 'json', 'yaml', 'vim', 'vimdoc' },
+    callback = function() vim.treesitter.start() end,
 })
 
 -- lsp settings
