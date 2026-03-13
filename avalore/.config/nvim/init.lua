@@ -141,6 +141,9 @@ vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to top pane' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right pane' })
 -- search and repalce current word
 vim.keymap.set('n', "<C-s>", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
+-- better cut/paste
+vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
+vim.keymap.set({ "n", "v" }, "<leader>x", '"_d', { desc = "Delete without yanking" })
 
 -- file picker using fzf
 vim.keymap.set('n', '<C-p>', function()
@@ -175,8 +178,8 @@ end, { desc = 'Toggle diagnostics' })
 -------------------------------------------------------------------------------
 vim.diagnostic.config({
     virtual_text = {
-        spacing = 4,
-        prefix = '·',
+        spacing = 8,
+        prefix = '●',
         source = 'if_many',
     },
     signs = false,
@@ -212,24 +215,35 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.orig', command = 'set readonly' })
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.pacnew', command = 'set readonly' })
 
--- rounded boarders to information floats
+-- stops auto-completion to fill the first choice automatically
+vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
+
+-- LSP keymaps
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         vim.lsp.completion.enable(true, args.data.client_id, args.buf, {
             autotrigger = true,
         })
-        vim.keymap.set('n', 'K', function()
-            vim.lsp.buf.hover({ border = 'rounded' })
-        end, { buffer = args.buf })
+
+        local map = function(keys, fn, desc)
+            vim.keymap.set('n', keys, fn, { buffer = args.buf, desc = desc })
+        end
+
+        map('K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, 'Hover docs')
+        map('gd', vim.lsp.buf.definition, 'Go to definition')
+        map('gD', vim.lsp.buf.declaration, 'Go to declaration')
+        map('gi', vim.lsp.buf.implementation, 'Go to implementation')
+        map('gr', vim.lsp.buf.references, 'Find references')
+        map('<leader>r', vim.lsp.buf.rename, 'Rename symbol')
+        map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
+        map('[d', function() vim.diagnostic.jump({ count = -1 }) end, 'Prev diagnostic')
+        map(']d', function() vim.diagnostic.jump({ count = 1 }) end, 'Next diagnostic')
     end,
 })
 
--- stops auto-completion to fill the first choice automatically
-vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
-
 -------------------------------------------------------------------------------
 --
--- plugin configuration
+-- plugin configurations
 --
 -------------------------------------------------------------------------------
 vim.pack.add({
