@@ -131,7 +131,7 @@ setup_dynamic_statusline()
 --
 -------------------------------------------------------------------------------
 -- closes current buffer
-vim.keymap.set('n', 'Q', ':bd<CR>', { silent = true })
+vim.keymap.set('n', 'Q', ':bd!<CR>', { silent = true })
 -- quickly switch to previous buffer
 vim.keymap.set('n', '<leader><leader>', ':b#<CR>', { silent = true })
 -- move across nvim panes
@@ -144,6 +144,20 @@ vim.keymap.set('n', "<C-s>", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 -- better cut/paste
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 vim.keymap.set({ "n", "v" }, "<leader>x", '"_d', { desc = "Delete without yanking" })
+
+-- terminal
+local term_buf = nil
+vim.keymap.set("n", "<leader>n", function()
+    if term_buf and vim.api.nvim_buf_is_valid(term_buf) then
+        vim.api.nvim_set_current_buf(term_buf)
+    else
+        vim.cmd("terminal")
+        term_buf = vim.api.nvim_get_current_buf()
+        vim.bo[term_buf].buflisted = true
+    end
+    vim.cmd("startinsert")
+end, { desc = "Open terminal buffer" })
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal insert mode" })
 
 -- file picker using fzf
 vim.keymap.set('n', '<C-p>', function()
@@ -173,11 +187,6 @@ vim.keymap.set('n', '<C-p>', function()
     vim.cmd('startinsert')
 end, { desc = 'fzf file picker' })
 
--- toggle diagnostics
-vim.keymap.set('n', '<leader>td', function()
-    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, { desc = 'Toggle diagnostics' })
-
 -------------------------------------------------------------------------------
 --
 -- configuring diagnostics
@@ -201,8 +210,11 @@ vim.diagnostic.config({
     },
 })
 
--- open diagnostics
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>td', function()
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = 'Toggle diagnostics' })
+
 
 -------------------------------------------------------------------------------
 --
