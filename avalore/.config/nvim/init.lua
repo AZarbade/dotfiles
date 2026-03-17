@@ -49,10 +49,6 @@ vim.opt.smartcase = true
 vim.opt.diffopt:append('iwhite')
 vim.opt.diffopt:append('algorithm:histogram')
 vim.opt.diffopt:append('indent-heuristic')
-vim.opt.showmode = false
-vim.opt.conceallevel = 2
-vim.opt.concealcursor = "n"
-vim.opt.clipboard:append("unnamedplus")
 
 -------------------------------------------------------------------------------
 --

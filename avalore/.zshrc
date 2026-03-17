@@ -6,6 +6,7 @@ bindkey -v
 setopt prompt_subst
 
 export EDITOR=/opt/homebrew/bin/nvim
+export LEDGER_FILE=~/personal/notes/finance/main.journal
 
 # Prompt
 autoload -U colors && colors
@@ -20,6 +21,7 @@ alias ls="eza -l --git"
 alias lsl="eza -l --git -a"
 alias lt="eza --tree --level=2 --long --git"
 alias tm='tmux'
+alias hl='hledger'
 
 . "$HOME/.local/bin/env"
 
