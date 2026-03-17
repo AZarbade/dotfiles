@@ -33,6 +33,7 @@ end
 set_transparent()
 
 vim.opt.wrap = false
+vim.o.timeoutlen = 100
 vim.opt.signcolumn = 'yes'
 vim.opt.relativenumber = true
 vim.opt.number = true
@@ -128,6 +129,8 @@ setup_dynamic_statusline()
 -------------------------------------------------------------------------------
 -- closes current buffer
 vim.keymap.set('n', 'Q', ':bd!<CR>', { silent = true })
+-- yank to clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 -- quickly switch to previous buffer
 vim.keymap.set('n', '<leader><leader>', ':b#<CR>', { silent = true })
 -- move across nvim panes
@@ -268,6 +271,8 @@ vim.pack.add({
         src = 'https://github.com/nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
     },
+    { src = 'https://github.com/nvim-lua/plenary.nvim' },
+    { src = 'https://github.com/ej-shafran/compile-mode.nvim' }
 })
 
 -- treesitter settings
@@ -313,3 +318,12 @@ require("oil").setup({
 })
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+-- compile mode
+---@type CompileModeOpts
+vim.g.compile_mode = {
+    default_command = "",
+    focus_compilation_buffer = true,
+}
+
+vim.keymap.set("n", "<leader>c", "<cmd>Compile<cr>", { desc = "Compile" })
