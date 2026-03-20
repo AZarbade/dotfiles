@@ -33,7 +33,7 @@ end
 set_transparent()
 
 vim.opt.wrap = false
-vim.o.timeoutlen = 100
+vim.o.timeoutlen = 300
 vim.opt.signcolumn = 'yes'
 vim.opt.relativenumber = true
 vim.opt.number = true
@@ -140,9 +140,6 @@ vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to top pane' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right pane' })
 -- search and repalce current word
 vim.keymap.set('n', "<C-s>", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
--- better cut/paste
-vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
-vim.keymap.set({ "n", "v" }, "<leader>x", '"_d', { desc = "Delete without yanking" })
 
 -- terminal
 local term_buf = nil
@@ -214,12 +211,6 @@ vim.keymap.set('n', '<leader>td', function()
     vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = 'Toggle diagnostics' })
 
-
--------------------------------------------------------------------------------
---
--- autocommands
---
--------------------------------------------------------------------------------
 -- highlight yanked text
 vim.api.nvim_create_autocmd(
     'TextYankPost',
@@ -236,27 +227,13 @@ vim.api.nvim_create_autocmd('BufRead', { pattern = '*.pacnew', command = 'set re
 -- stops auto-completion to fill the first choice automatically
 vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
 
--- LSP keymaps
-vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(args)
-        vim.lsp.completion.enable(true, args.data.client_id, args.buf, {
-            autotrigger = true,
-        })
-
-        local map = function(keys, fn, desc)
-            vim.keymap.set('n', keys, fn, { buffer = args.buf, desc = desc })
-        end
-
-        map('K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, 'Hover docs')
-        map('gd', vim.lsp.buf.definition, 'Go to definition')
-        map('gD', vim.lsp.buf.declaration, 'Go to declaration')
-        map('gi', vim.lsp.buf.implementation, 'Go to implementation')
-        map('gr', vim.lsp.buf.references, 'Find references')
-        map('<leader>r', vim.lsp.buf.rename, 'Rename symbol')
-        map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
-        map('[d', function() vim.diagnostic.jump({ count = -1 }) end, 'Prev diagnostic')
-        map(']d', function() vim.diagnostic.jump({ count = 1 }) end, 'Next diagnostic')
-    end,
+vim.treesitter.language.register("c", "cpp")
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "c", "h", "cpp",
+        "lua"
+    },
+    callback = function() vim.treesitter.start() end,
 })
 
 -------------------------------------------------------------------------------
@@ -267,22 +244,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/stevearc/oil.nvim' },
-    {
-        src = 'https://github.com/nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
-    },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
     { src = 'https://github.com/ej-shafran/compile-mode.nvim' }
-})
-
--- treesitter settings
-require("nvim-treesitter").install({
-    'c', 'rust', 'lua', 'python', 'markdown', 'markdown_inline', 'bash', 'toml', 'json', 'yaml', 'vim', 'vimdoc'
-}):wait(300000) -- ensures parsers install on first run
-
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'c', 'rust', 'lua', 'python', 'markdown', 'markdown_inline', 'bash', 'toml', 'json', 'yaml', 'vim', 'vimdoc' },
-    callback = function() vim.treesitter.start() end,
 })
 
 -- lsp settings
