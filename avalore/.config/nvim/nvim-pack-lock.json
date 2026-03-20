@@ -1,5 +1,10 @@
 {
   "plugins": {
+    "blink.cmp": {
+      "rev": "612f4bd2bc29d9e7dc7be1dde960908951bedad1",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "'1.*'"
+    },
     "compile-mode.nvim": {
       "rev": "6b41499bd782be2c213011072ce0f0eb9f7b78a2",
       "src": "https://github.com/ej-shafran/compile-mode.nvim"

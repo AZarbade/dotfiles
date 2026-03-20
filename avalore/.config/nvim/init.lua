@@ -245,10 +245,21 @@ vim.pack.add({
     { src = 'https://github.com/stevearc/oil.nvim' },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
     { src = 'https://github.com/ej-shafran/compile-mode.nvim' },
-    { src = 'https://github.com/saghen/blink.cmp', version = '1.*' },
+    {
+        src = 'https://github.com/saghen/blink.cmp',
+        version = '1.*'
+    },
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
 })
 
 -- lsp settings
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'rust', 'python', 'c', 'lua' },
+    callback = function()
+        vim.treesitter.start()
+    end,
+})
+
 vim.lsp.config('rust_analyzer', {
     workspace_required = true,
     settings = {
@@ -275,6 +286,9 @@ require('blink.cmp').setup({
         documentation = {
             auto_show = true,
         },
+    },
+    fuzzy = {
+        implementation = 'lua',
     },
 })
 
