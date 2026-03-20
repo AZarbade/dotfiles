@@ -223,18 +223,6 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.orig', command = 'set readonly' })
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.pacnew', command = 'set readonly' })
 
--- stops auto-completion to fill the first choice automatically
-vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
-
-vim.treesitter.language.register("c", "cpp")
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = {
-        "c", "h", "cpp",
-        "lua"
-    },
-    callback = function() vim.treesitter.start() end,
-})
-
 -------------------------------------------------------------------------------
 --
 -- plugin configurations
