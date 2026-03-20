@@ -64,7 +64,6 @@ local function file_type()
         python = "\u{e73c} ",   -- nf-dev-python
         markdown = "\u{e73e} ", -- nf-dev-markdown
         sh = "\u{f489} ",       -- nf-oct-terminal
-        rust = "\u{e7a8} ",     -- nf-dev-rust
         c = "\u{e61e} ",        -- nf-dev-c
     }
 
@@ -245,7 +244,8 @@ vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/stevearc/oil.nvim' },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
-    { src = 'https://github.com/ej-shafran/compile-mode.nvim' }
+    { src = 'https://github.com/ej-shafran/compile-mode.nvim' },
+    { src = 'https://github.com/saghen/blink.cmp', version = '1.*' },
 })
 
 -- lsp settings
@@ -267,6 +267,16 @@ vim.lsp.enable({
 })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>f', vim.lsp.buf.format)
+
+-- completion settings
+require('blink.cmp').setup({
+    keymap = { preset = 'default' },
+    completion = {
+        documentation = {
+            auto_show = true,
+        },
+    },
+})
 
 -- oil.nvim
 require("oil").setup({
