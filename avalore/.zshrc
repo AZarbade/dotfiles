@@ -22,6 +22,7 @@ alias lsl="eza -l --git -a"
 alias lt="eza --tree --level=2 --long --git"
 alias tm='tmux'
 alias hl='hledger'
+alias nv='nvim'
 
 . "$HOME/.local/bin/env"
 

@@ -50,6 +50,7 @@ vim.opt.smartcase = true
 vim.opt.diffopt:append('iwhite')
 vim.opt.diffopt:append('algorithm:histogram')
 vim.opt.diffopt:append('indent-heuristic')
+vim.opt.formatoptions:remove({ "c", "r", "o" })
 
 -------------------------------------------------------------------------------
 --
