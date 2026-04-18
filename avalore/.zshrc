@@ -7,6 +7,7 @@ setopt prompt_subst
 
 export EDITOR=/opt/homebrew/bin/nvim
 export LEDGER_FILE=~/personal/notes/finance/main.journal
+export MANPAGER='nvim +Man!'
 
 # Prompt
 autoload -U colors && colors
