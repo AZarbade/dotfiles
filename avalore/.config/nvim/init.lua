@@ -1,16 +1,8 @@
--------------------------------------------------------------------------------
---
--- options
---
--------------------------------------------------------------------------------
--- always set leader first!
 vim.g.mapleader = " "
-
--- main colorscheme
 vim.opt.termguicolors = true
 vim.cmd("colorscheme retrobox")
 
-local function set_transparent() -- set UI component to transparent
+local function set_transparent()
     local groups = {
         "Normal",
         "NormalNC",
@@ -32,7 +24,7 @@ end
 
 set_transparent()
 
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.o.timeoutlen = 300
 vim.opt.signcolumn = 'yes'
 vim.opt.relativenumber = true
@@ -262,7 +254,7 @@ vim.lsp.config('rust_analyzer', {
 vim.lsp.enable({
     'rust_analyzer', -- Rust
     'ruff',          -- Python
-    'clangd',        -- C lang
+    'clangd',        -- C/C++
     'lua_ls',        -- Lua
 })
 
