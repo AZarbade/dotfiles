@@ -29,3 +29,7 @@ alias nv='nvim'
 
 # enable fzf in zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Qwen Code PATH block begin
+export PATH='/Users/noir/.local/bin':$PATH
+# Qwen Code PATH block end

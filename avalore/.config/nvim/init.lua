@@ -254,7 +254,7 @@ vim.lsp.config('rust_analyzer', {
 vim.lsp.enable({
     'rust_analyzer', -- Rust
     'ruff',          -- Python
-    'clangd',        -- C/C++
+    'clangd',        -- C/C++ 
     'lua_ls',        -- Lua
 })
 
