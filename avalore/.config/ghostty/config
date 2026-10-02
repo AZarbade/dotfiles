@@ -1,4 +1,5 @@
-font-size = 14
+font-size = 16
 background = #282828
+background-opacity = 0.95
 mouse-hide-while-typing = true
 window-padding-x = 16
